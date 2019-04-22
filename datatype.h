@@ -50,7 +50,7 @@ typedef struct _plane
 
 typedef struct _planenode
     {
-    struct _plane * data;			/* pointer to stucture of plane information*/
+    struct _plane * data;		/* pointer to stucture of plane information*/
     struct _planenode * left;	/* left child of a focused plane */
     struct _planenode * right;	/* right child of a focused plane */
     }PLANENODE_T;
