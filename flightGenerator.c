@@ -36,7 +36,7 @@ void generateNumber(char flightCode[])
  * return direction of the plane */
 int generatePosition(int* x, int* y,int* z)
  	{
- 	int side = 0;
+ 	int side = 0; /* side of the plane arrive information */
  	*x = (rand() % 100 + 1);
  	*y = (rand() % 100 + 1);
 	*z = (rand() % (6 - 3 +1) + 3) * 1000;
@@ -65,8 +65,9 @@ int generatePosition(int* x, int* y,int* z)
  * and return as PLANE_T structure */
 PLANE_T* generateFlight()
 {
-	PLANE_T* plane = NULL;
+	PLANE_T* plane = NULL; 
 	plane = (PLANE_T*) calloc(1,sizeof(PLANE_T));
+	/* This condition is use to check that plane generator work ok or not */
 	if (plane == NULL)
 		{
 		printf("Calloc generated flight error!\n");
