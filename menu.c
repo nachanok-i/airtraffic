@@ -3,8 +3,8 @@
  */
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
 #include<time.h>
-#include"flightGenerator.h"
 #include"planeInformation.h"
 
 int main()
@@ -37,8 +37,12 @@ int main()
 				//
 				break;
 			case 2:
-				//
+				{
+				PLANE_T* plane;
+				plane = addAirPlane();
+				printPlane(plane);
 				break;
+				}
 			case 3:
 				//
 				break;
