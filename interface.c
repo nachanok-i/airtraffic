@@ -49,6 +49,7 @@ void displayColumnDetail()
 		}
 	printf("\n");
 	}
+
 int main()
 	{
 	displayColumnDetail();
