@@ -4,7 +4,9 @@
 #include<time.h>
 #include"flightGenerator.h"
 #include"planeInformation.h"
-/*This function is use to display menu and allow user to choose menu they want to do*/
+/*This function is use to display menu and allow user to choose menu they want to do*
+ * Created by: Sahachok Prachaporn ID:3436 (Lion)
+ */
 int main()
 	{
 	char stringInput[128];
