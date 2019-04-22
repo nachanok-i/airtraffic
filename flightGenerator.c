@@ -4,6 +4,7 @@
  * incoming to the airport using random funtion to generate values
  *
  * Created by Nachanok Issarapruk (Tap) ID 61070503410
+ * Edited by Sahachok Prachaporn (Lion) ID 61070503436
  * 26 Mar 2019 */
 
 #include<stdio.h>
@@ -21,7 +22,7 @@ void generateNumber(char flightCode[])
 							"LH", "MH", "OM", "NW", "KZ", "PR", "PK", "PO", "QF", "RA", "SK", "UL", "SQ", 
 							"LX", "FM", "TG", "TK", "UA", "HY", "5X", "VN", "VS"};
 	char flightNumber[5] = {0};
-	int temp = 0;
+	int temp = 0; 
 	int i=0;
 	time_t random = 0;
 	random = rand()%100;
