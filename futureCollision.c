@@ -42,9 +42,9 @@ void movePlane(PLANE_T* plane);
 int getCommand();
 void cleanTable()
 {
-	int i=0;
-	int j=0;
-	int k=0;
+	int i=0; /* loop varialbe */
+	int j=0; /* loop varialbe */
+	int k=0; /* loop varialbe */
 	for(k=0;k<MAXHIGH;k++)
 		{
 		for(j=0;j<MAXAREA;j++)
@@ -58,9 +58,9 @@ void cleanTable()
 }
 void printTable()
 {
-	int i=0;
-	int j=0;
-	int k=0;
+	int i=0; /* loop varialbe */
+	int j=0; /* loop varialbe */
+	int k=0; /* loop varialbe */
 	// for(k=0;k<MAXHIGH;k++)
 	// 	{
 	// 	printf("Table #%d\n", k);
@@ -87,12 +87,12 @@ void setPosition(PLANE_T* data)
 }
 void setRadius(POSITION_T data)
 {
-	int i=0;
-	int j=0;
-	int startX;
-	int startY;
-	int endX;
-	int endY;
+	int i=0;    /* loop varialbe */
+	int j=0;    /* loop varialbe */
+	int startX; /* start point at x axis */
+	int startY; /* start point at y axis */
+	int endX;   /* end point at x axis */
+	int endY;   /* end point at y axis */
 	startX = data.x - SAFEAREA;
 	startY = data.y - SAFEAREA;
 	endX = data.x + SAFEAREA;
@@ -139,10 +139,10 @@ void movePlane(PLANE_T* plane)
 }
 int checkCollision()
 {
-	int bColli = 0;
-	int i=0;
-	int j=0;
-	int k=0;
+	int bColli = 0; /* return value */ 
+	int i=0; /* loop variable */
+	int j=0; /* loop variable */
+	int k=0; /* loop variable */
 	for(k=0;k<MAXHIGH;k++)
 		{
 		for(j=0;j<MAXAREA;j++)
@@ -152,10 +152,11 @@ int checkCollision()
 				if (edges[i][j][k] == 2)
 					{
 					printf("Collide!!!\n");
-					return 0;
+					bColli = 0;
 					}
 				}
 			}
 		}
-	return 1;
+	bColli = 1;
+	return bColli;
 }
