@@ -21,11 +21,14 @@ flightGenerator.o : flightGenerator.c datatype.h
 planeInformation.o : planeInformation.c flightGenerator.h
 	gcc -c planeInformation.c
 
-menu.o : menu.c flightGenerator.h planeInformation.h
-	gcc -c menu.c flightGenerator.c planeInformation.c
+futureCollision.o : futureCollision.c datatype.h
+	gcc -c futureCollision.c
 
-menu$(EXECEXT) : menu.o flightGenerator.o planeInformation.o
-	gcc -o menu$(EXECEXT) menu.o flightGenerator.o planeInformation.o
+menu.o : menu.c flightGenerator.h planeInformation.h futureCollision.h
+	gcc -c menu.c flightGenerator.c planeInformation.c futureCollision.h
+
+menu$(EXECEXT) : menu.o flightGenerator.o planeInformation.o futureCollision.o
+	gcc -o menu$(EXECEXT) menu.o flightGenerator.o planeInformation.o futureCollision.o
 
 
 clean : 

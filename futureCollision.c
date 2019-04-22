@@ -7,6 +7,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+#include"datatype.h"
 
 #define WHITE 0
 #define GRAY  1
@@ -33,10 +34,11 @@ int edges[MAXAREA][MAXAREA][MAXHIGH];
 								/* the location of the plane and safty area
 								 * will be 1, blank space will be 0 */
 								/* 100 x 100 x 4(3000-6000) */
-int setPosition();
-void setRadius();
+
+void setPosition(PLANE_T* data);
+void setRadius(POSITION_T data);
 int checkCollision();
-void movePlane();
+void movePlane(PLANE_T* plane);
 int getCommand();
 void cleanTable()
 {
@@ -73,38 +75,8 @@ void printTable()
 		printf("\n");
 		//}
 }
-// int main()
-// {
-// 	int i=0;
-// 	PLANE_T plane;
-// 	PLANE_T plane2;
-// 	cleanTable();
-// 	plane.ID = 9;
-// 	strcpy(plane.flight,"AA1234");
-// 	plane.order = LANDING;
-// 	plane.heading = E;
-// 	plane.position.x = 0;
-// 	plane.position.y = 50;
-// 	plane.position.z = 0;
-// 	plane2.ID = 9;
-// 	strcpy(plane2.flight,"AA2345");
-// 	plane2.order = LANDING;
-// 	plane2.heading = W;
-// 	plane2.position.x = 10;
-// 	plane2.position.y = 50;
-// 	plane2.position.z = 0;
-// 	for (i=0;i<5;i++)
-// 		{
-// 		setPosition(&plane);
-// 		setPosition(&plane2);
-// 		printTable();
-// 		checkCollision();
-// 		movePlane(&plane);
-// 		movePlane(&plane2);
-// 		cleanTable();
-// 		}
-// }
-int setPosition(PLANE_T* data)
+
+void setPosition(PLANE_T* data)
 {
 	int x = data->position.x;
 	int y = data->position.y;
