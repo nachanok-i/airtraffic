@@ -7,7 +7,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-#include "datatype.h"
+#include"datatype.h"
 
 #define WHITE 0
 #define GRAY  1
