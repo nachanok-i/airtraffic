@@ -6,6 +6,7 @@
  *
 */
 
+#include"datatype.h"
 /* This function use to check input from menu
  * return 1 - if input is correct
  * return 0 - if input is invalid
