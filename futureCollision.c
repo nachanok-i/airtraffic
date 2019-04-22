@@ -153,6 +153,7 @@ int checkCollision()
 					{
 					printf("Collide!!!\n");
 					bColli = 0;
+					return bColli;
 					}
 				}
 			}

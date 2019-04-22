@@ -24,8 +24,8 @@ int main()
 		printf("\t[1] – Information and status of available runway\n");
 		printf("\t[2] – Plane information generator\n");
 		printf("\t[3] – Plane movement simulator (Testing)\n");
-		printf("\t[4] – Display information of currenly active planes\n");
-		printf("\t[5] – Potential future plane collision detector (Testing)\n");
+		printf("\t[4] – Display information of currenly active planes (functional)\n");
+		printf("\t[5] – Potential future plane collision detector display (Testing)\n");
 		printf("\t[6] – Send command to specific plane\n");
 		printf("\t[7] – Exit the program\n");
 		choice = 0;
@@ -76,18 +76,23 @@ int main()
 					setPosition(&plane);
 					setPosition(&plane2);
 					printTable();
-					checkCollision();
+					if (checkCollision() == 0)
+						break;
 					movePlane(&plane);
 					movePlane(&plane2);
 					cleanTable();
 					}
+				break;
 				}
 			case 6:
 				printf("This function is currently unavailable\n");
+				//
+				break;
 			case 7:
 				return 0;
 			default:
-			printf("\n\tInvalid - The program doesn't have this menu\n");
+				printf("\n\tInvalid - The program doesn't have this menu\n");
+				break;
 			}
 		}	
 	}
