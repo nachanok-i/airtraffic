@@ -11,27 +11,24 @@ else
 	PLATFORM	=linux
 endif
 
-EXECUTABLES= menu$(EXECEXT) index$(EXECEXT) 
+EXECUTABLES= index$(EXECEXT)
 
 all : $(EXECUTABLES)
 
-futureCollision.o :	futureCollision.c
-	gcc -c futureCollision.c
+flightGenerator.o : flightGenerator.c datatype.h
+	gcc -c flightGenerator.c 
 
-flightGenerator.o : flightGenerator.c
-	gcc -c flightGenerator.c
-
-planeInformation.o : planeInformation.c
+planeInformation.o : planeInformation.c flightGenerator.h
 	gcc -c planeInformation.c
 
-#index.o : index.c flightGenerator.h planeInformation.h
-#	gcc -c index.c flightGenerator.o planeInformation.o
+index.o : index.c planeInformation.h flightGenerator.h
+	gcc -c index.c
 
 menu.o : menu.c flightGenerator.h planeInformation.h
-	gcc -c menu.c flightGenerator.o planeInformation.o
+	gcc -c menu.c flightGenerator.c planeInformation.c
 
-#index$(EXECEXT) : index.o flightGenerator.o planeInformation.o
-#	gcc -o index$(EXECEXT) index.o flightGenerator.o planeInformation.o
+index$(EXECEXT) : index.o planeInformation.o flightGenerator.o
+	gcc -o index$(EXECEXT) index.o planeInformation.o flightGenerator.o
 
 menu$(EXECEXT) : menu.o flightGenerator.o planeInformation.o
 	gcc -o menu$(EXECEXT) menu.o flightGenerator.o planeInformation.o
