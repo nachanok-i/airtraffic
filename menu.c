@@ -6,6 +6,7 @@
 #include<string.h>
 #include<time.h>
 #include"planeInformation.h"
+#include"futureCollision.h"
 
 int main()
 	{
@@ -50,7 +51,7 @@ int main()
 				//
 				break;
 			case 5:
-				//
+				cleanTable();
 			case 6:
 				//
 			case 7:
