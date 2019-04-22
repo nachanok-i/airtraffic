@@ -10,6 +10,7 @@
 #include<time.h>
 #include<stdlib.h>
 #include<string.h>
+#include"datatype.h"
 /* This function will generate flight code in form AA1234 2 alphabets and 4 digits
  * refer to real airline code input flightCode char array of length 7 */
 void generateNumber(char flightCode[])
