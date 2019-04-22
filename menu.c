@@ -24,9 +24,9 @@ int main()
 		printf("\t[1] – Information and status of available runway\n");
 		printf("\t[2] – Plane information generator\n");
 		printf("\t[3] – Plane movement simulator (Testing)\n");
-		printf("\t[4] – Display information of currenly active planes (functional)\n");
+		printf("\t[4] – Display information of currenly active planes (functional\n");
 		printf("\t[5] – Potential future plane collision detector display (Testing)\n");
-		printf("\t[6] – Send command to specific plane\n");
+		printf("\t[6] – Send command to specific plane (not yet)\n");
 		printf("\t[7] – Exit the program\n");
 		choice = 0;
 		printf("\nWhat do you want to do? ");
