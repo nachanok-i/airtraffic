@@ -46,7 +46,16 @@ int main()
 				break;
 				}
 			case 3:
-				//
+				{
+				PLANE_T* plane;
+				int i=0;
+				plane = addAirPlane();
+				for (i=0;i<5;i++)
+					{
+					printPlane(plane);
+					movePlane(plane);
+					}
+				}
 				break;
 			case 4:
 				//
