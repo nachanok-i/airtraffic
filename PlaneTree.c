@@ -11,6 +11,7 @@
 PLANETREE_T * pTree;
 PLANE_T * planeArray[10];
 
+/* This function use to print planes 10 in 10 columns */
 void displayColumnDetail()
 	{
 	int i = 0;
