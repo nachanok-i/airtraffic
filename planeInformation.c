@@ -1,18 +1,19 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+#include"flightGenerator.h"
 
 PLANE_T* addAirPlane()
 	{
 	int x=0;
 	int y=0;
 	int z=0;
-	PLANE_T airPlane;
+	PLANE_T* airPlane;
 	generateFlight(airPlane->flight);
 	generatePosition(&x,&y,&z);
-	airPlane->position->x = x;
-	airPlane->position->y = y;
-	airPlane->position->z = z;
+	airPlane->position.x = x;
+	airPlane->position.y = y;
+	airPlane->position.z = z;
 	if (x == 0)
 		{
 		if (y < 20)
@@ -56,11 +57,11 @@ PLANE_T* addAirPlane()
 void printPlane(PLANE_T* input)
 	{
 	printf("Flight: %s\n", input->flight);
-	printf("Position: x %d y %d z %d\n", input->position->x, input->position->y, input->position->z);
+	printf("Position: x %d y %d z %d\n", input->position.x, input->position.y, input->position.z);
 	printf("Direction: %d\n", input->heading);
-	printf("Heading: %s\n", input->heading);
+	printf("Heading: %d\n", input->heading);
 	}
-int addGroundPlane()
-	{
+// int addGroundPlane()
+// 	{
 
-	}
+// 	}

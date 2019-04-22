@@ -1,11 +1,12 @@
 /*This function is use to display menu and allow user to choose menu they want to do*
- * Created by: Sahachok Prachaporn ID:3436 (Lion)
+ * Created by Sahachok Prachaporn (Lion) ID 61070503436
  */
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
 #include<time.h>
 #include"planeInformation.h"
+#include"futureCollision.h"
 
 int main()
 	{
@@ -50,7 +51,36 @@ int main()
 				//
 				break;
 			case 5:
-				//
+				{
+				int i=0;
+				PLANE_T plane;
+				PLANE_T plane2;
+				cleanTable();
+				plane.ID = 9;
+				strcpy(plane.flight,"AA1234");
+				plane.order = LANDING;
+				plane.heading = E;
+				plane.position.x = 0;
+				plane.position.y = 50;
+				plane.position.z = 0;
+				plane2.ID = 9;
+				strcpy(plane2.flight,"AA2345");
+				plane2.order = LANDING;
+				plane2.heading = W;
+				plane2.position.x = 10;
+				plane2.position.y = 50;
+				plane2.position.z = 0;
+				for (i=0;i<5;i++)
+					{
+					setPosition(&plane);
+					setPosition(&plane2);
+					printTable();
+					checkCollision();
+					movePlane(&plane);
+					movePlane(&plane2);
+					cleanTable();
+					}
+				}
 			case 6:
 				//
 			case 7:

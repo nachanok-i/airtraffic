@@ -5,7 +5,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-#include "datatype.h"
+#include<time.h>
 #include "flightGenerator.h"
 
 PLANETREE_T * pTree;
@@ -21,13 +21,13 @@ void doesExist(PLANENODE_T * pCurrent, char * flightName, PLANENODE_T * foundFli
 	{
 	if(pCurrent->left != NULL)
 		{
-		if(strcmp(pCurrent->left->flight, flightName) == 0)
+		if(strcmp(pCurrent->left->data->flight, flightName) == 0)
 			foundFlight = pCurrent->left;
 		doesExist(pCurrent->left, flightName, foundFlight);
 		}
 	if(pCurrent->right != NULL)
 		{
-		if(strcmp(pCurrent->right->flight, flightName) == 0)
+		if(strcmp(pCurrent->right->data->flight, flightName) == 0)
 			foundFlight = pCurrent->right;
 		doesExist(pCurrent->right, flightName, foundFlight);
 		}
@@ -37,7 +37,7 @@ void doesExist(PLANENODE_T * pCurrent, char * flightName, PLANENODE_T * foundFli
  * @param	- flightName : Name of flight user type in
  * return found flight (can be NULL if not found)
  */
-PLANE_T * searchPlane(char * flightName)
+PLANENODE_T * searchPlane(char * flightName)
 	{
 	PLANENODE_T * foundFlight = NULL;
 	doesExist(pTree->root, flightName, foundFlight);
@@ -53,10 +53,11 @@ void printTree(PLANENODE_T * pCurrent)
 	{
 	if(pCurrent->left != NULL)
 		printTree(pCurrent->left);
-	printf("\tFlight Code : '%s'\n", pCurrent->plane->flight);
-	printf("\tposition %d %d %d\n", pCurrent->plane->position.x,pCurrent->plane->position.y,pCurrent->plane->position.z);
+	printf("\tFlight Code : '%s'\n", pCurrent->data->flight);
+	printf("\tposition %d %d %d\n", pCurrent->data->position.x,pCurrent->data->position.y,pCurrent->data->position.z);
 	if(pCurrent->right != NULL)
 		printTree(pCurrent->right);
+	printf("lol\n");
 	}
 
 /* insert each plane in the tree
@@ -66,17 +67,31 @@ void printTree(PLANENODE_T * pCurrent)
  */
 void insertChild(PLANENODE_T * pCurrent, PLANE_T * pAPlane, int * sortStatus)
 	{
-	if(strcmp(pCurrent->plane->flight,pAPlane->flight) > 0)
+	if(strcmp(pCurrent->data->flight,pAPlane->flight) > 0)
 		{
+		printf("\tat insert left\n");
 		if(pCurrent->left != NULL)
+			{
+			printf("\tat insert left 2\n");
 			insertChild(pCurrent->left, pAPlane, sortStatus);
-		pCurrent->left->plane = pAPlane;
+			}
+		printf("\tat insert left 2.1\n");
+		printf("\tnew node is :%s\n", pAPlane->flight);
+		pCurrent->left->data = pAPlane;
+		printf("\tinsert complete\n");
 		}
-	else if(strcmp(pCurrent->plane->flight,pAPlane->flight) < 0)
+	else if(strcmp(pCurrent->data->flight,pAPlane->flight) < 0)
 		{
+		printf("\tat insert right\n");
 		if(pCurrent->right != NULL)
+			{
+			printf("\tat insert right 2\n");
 			insertChild(pCurrent->right, pAPlane, sortStatus);
-		pCurrent->right->plane = pAPlane;
+			}
+		printf("\tat insert right 2.1\n");
+		printf("\tnew node is :%s\n", pAPlane->flight);
+		pCurrent->right->data = pAPlane;
+		printf("\tinsert complete\n");
 		}
 	else
 		*sortStatus = 3;
@@ -95,16 +110,25 @@ int insertNode(PLANE_T * pAPlane)
 	pNode = (PLANENODE_T*) calloc(1, sizeof(PLANENODE_T));
 	if(pNode == NULL)
 		return 0;
-	pNode->plane = pAPlane;
+	pNode->data = pAPlane;
 	
 	if(pTree == NULL)
 		{
+		printf("at Tree root\n");
 		pTree = (PLANETREE_T*) calloc(1, sizeof(PLANETREE_T));
 		pTree->root = pNode;
 		}
 	else
 		{
-		insertChild(pTree->root, pAPlane, &sortStatus);
+		printf("at add node : %s\n", pAPlane->flight);
+		if(pTree->root == NULL)
+			printf("root is NULL\n");
+		else
+			{
+			// printf("ad here\n");
+			printf("\t root id :%s\n", pTree->root->data->flight);
+			insertChild(pTree->root, pAPlane, &sortStatus);
+			}
 		}
 	if(sortStatus == 3)
 		{
@@ -121,12 +145,15 @@ int main()
 {
 	int i=0;
 	int buildStatus = 0;
+	srand(time(NULL));
 	PLANE_T* pAPlane = NULL;
 	for (i=0;i<10;i++)
 		{
 		pAPlane = generateFlight();
-		// printf("|%s| pos: %d,%d,%d\n",pAPlane->flight, pAPlane->position.x, pAPlane->position.y, pAPlane->position.z);
+		printf("%d\n", i);
+		printf("|%s| pos: %d,%d,%d\n",pAPlane->flight, pAPlane->position.x, pAPlane->position.y, pAPlane->position.z);
 		buildStatus = insertNode(pAPlane);
+		printf("in\n");
 		switch(buildStatus)
 			{
 		case 0:
@@ -144,6 +171,7 @@ int main()
 			break;	
 			}
 		}
+	printf("test\n");
 	printTree(pTree->root);
 }
 

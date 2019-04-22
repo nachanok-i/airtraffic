@@ -1,5 +1,5 @@
 /*This function is use to display plane information
- * Created by: Sahachok Prachaporn ID:3436 (Lion)
+ * Created by: Sahachok Prachaporn (Lion) ID:61070503436
  */
 #include<stdio.h>
 #include<stdlib.h>

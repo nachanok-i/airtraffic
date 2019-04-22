@@ -4,12 +4,14 @@
  * incoming to the airport using random funtion to generate values
  *
  * Created by Nachanok Issarapruk (Tap) ID 61070503410
+ * Edited by Sahachok Prachaporn (Lion) ID 61070503436
  * 26 Mar 2019 */
 
 #include<stdio.h>
 #include<time.h>
 #include<stdlib.h>
 #include<string.h>
+#include"datatype.h"
 /* This function will generate flight code in form AA1234 2 alphabets and 4 digits
  * refer to real airline code input flightCode char array of length 7 */
 void generateNumber(char flightCode[])
@@ -20,7 +22,7 @@ void generateNumber(char flightCode[])
 							"LH", "MH", "OM", "NW", "KZ", "PR", "PK", "PO", "QF", "RA", "SK", "UL", "SQ", 
 							"LX", "FM", "TG", "TK", "UA", "HY", "5X", "VN", "VS"};
 	char flightNumber[5] = {0};
-	int temp = 0;
+	int temp = 0; 
 	int i=0;
 	time_t random = 0;
 	random = rand()%100;
@@ -35,7 +37,7 @@ void generateNumber(char flightCode[])
  * return direction of the plane */
 int generatePosition(int* x, int* y,int* z)
  	{
- 	int side = 0;
+ 	int side = 0; /* side of the plane arrive information */
  	*x = (rand() % 100 + 1);
  	*y = (rand() % 100 + 1);
 	*z = (rand() % (6 - 3 +1) + 3) * 1000;
@@ -64,8 +66,9 @@ int generatePosition(int* x, int* y,int* z)
  * and return as PLANE_T structure */
 PLANE_T* generateFlight()
 {
-	PLANE_T* plane = NULL;
+	PLANE_T* plane = NULL; 
 	plane = (PLANE_T*) calloc(1,sizeof(PLANE_T));
+	/* This condition is use to check that plane generator work ok or not */
 	if (plane == NULL)
 		{
 		printf("Calloc generated flight error!\n");
