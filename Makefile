@@ -1,6 +1,6 @@
 # Makefile for airtraffic project
 # Created by Nachanok Issarapruk (Tap) ID 61070503410
-
+# update
 ifeq ($(OSTYPE),WINDOWS)
 	EXECEXT =.exe
 	COMP	=__MINGCC__
