@@ -24,11 +24,17 @@ flightGenerator.o : flightGenerator.c
 planeInformation.o : planeInformation.c
 	gcc -c planeInformation.c
 
-index.o : index.c flightGenerator.h planeInformation.h
-	gcc -c index.c flightGenerator.o planeInformation.o
+#index.o : index.c flightGenerator.h planeInformation.h
+#	gcc -c index.c flightGenerator.o planeInformation.o
 
-index$(EXECEXT) : index.o flightGenerator.o planeInformation.o
-	gcc -o index$(EXECEXT) index.o flightGenerator.o planeInformation.o
+menu.o : menu.c flightGenerator.h planeInformation.h
+	gcc -c menu.c flightGenerator.o planeInformation.o
+
+#index$(EXECEXT) : index.o flightGenerator.o planeInformation.o
+#	gcc -o index$(EXECEXT) index.o flightGenerator.o planeInformation.o
+
+menu$(EXECEXT) : menu.o flightGenerator.o planeInformation.o
+	gcc -o menu$(EXECEXT) menu.o flightGenerator.o planeInformation.o
 
 
 clean : 
