@@ -65,33 +65,45 @@ void printTree(PLANENODE_T * pCurrent)
  *			- pAPlane 	 : a plane that wanted to insert
  *			- sortStatus : status of inserting(fail for find duplicated plane) 
  */
-void insertChild(PLANENODE_T * pCurrent, PLANE_T * pAPlane, int * sortStatus)
+void insertChild(PLANENODE_T * pCurrent, PLANENODE_T * pNode, int * sortStatus)
 	{
-	if(strcmp(pCurrent->data->flight,pAPlane->flight) > 0)
+	if(strcmp(pCurrent->data->flight,pNode->data->flight) > 0)
 		{
 		printf("\tat insert left\n");
 		if(pCurrent->left != NULL)
 			{
 			printf("\tat insert left 2\n");
-			insertChild(pCurrent->left, pAPlane, sortStatus);
+			insertChild(pCurrent->left, pNode, sortStatus);
 			}
 		printf("\tat insert left 2.1\n");
-		printf("\tnew node is :%s\n", pAPlane->flight);
-		pCurrent->left->data = pAPlane;
-		printf("\tinsert complete\n");
+		printf("\tnew node is :%s\n", pNode->data->flight);
+		if(pCurrent->left == NULL)
+			{
+			printf("left child is NULL\n");
+			pCurrent->left = pNode;
+			printf("\tinsert complete\n");
+			}
+		else
+			printf("insert fail\n");
 		}
-	else if(strcmp(pCurrent->data->flight,pAPlane->flight) < 0)
+	else if(strcmp(pCurrent->data->flight,pNode->data->flight) < 0)
 		{
 		printf("\tat insert right\n");
 		if(pCurrent->right != NULL)
 			{
 			printf("\tat insert right 2\n");
-			insertChild(pCurrent->right, pAPlane, sortStatus);
+			insertChild(pCurrent->right, pNode, sortStatus);
 			}
 		printf("\tat insert right 2.1\n");
-		printf("\tnew node is :%s\n", pAPlane->flight);
-		pCurrent->right->data = pAPlane;
-		printf("\tinsert complete\n");
+		printf("\tnew node is :%s\n", pNode->data->flight);
+		if(pCurrent->right == NULL)
+			{
+			printf("right child is NULL\n");
+			pCurrent->right = pNode;
+			printf("\tinsert complete\n");
+			}
+		else
+			printf("insert fail\n");
 		}
 	else
 		*sortStatus = 3;
@@ -127,7 +139,7 @@ int insertNode(PLANE_T * pAPlane)
 			{
 			// printf("ad here\n");
 			printf("\t root id :%s\n", pTree->root->data->flight);
-			insertChild(pTree->root, pAPlane, &sortStatus);
+			insertChild(pTree->root, pNode, &sortStatus);
 			}
 		}
 	if(sortStatus == 3)
