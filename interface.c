@@ -1,6 +1,8 @@
 #include<stdio.h>
 #include<stdlib.h>
-
+ /*This function is use to display plane information
+ * Created by: Sahachok Prachaporn ID:3436 (Lion)
+ */
 void displayMatrixPlane()
 	{
 
