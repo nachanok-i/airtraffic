@@ -95,7 +95,6 @@ int main()
 				}
 			case 6:
 				printf("This function is currently unavailable\n");
-				//
 				break;
 			case 7:
 				return 0;

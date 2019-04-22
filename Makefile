@@ -15,20 +15,20 @@ EXECUTABLES= menu$(EXECEXT)
 
 all : $(EXECUTABLES)
 
-flightGenerator.o : flightGenerator.c datatype.h
+flightGenerator.o : flightGenerator.c flightGenerator.h
 	gcc -c flightGenerator.c 
 
-planeInformation.o : planeInformation.c flightGenerator.h
-	gcc -c planeInformation.c
+planeInformation.o : planeInformation.c planeInformation.h flightGenerator.h
+	gcc -c planeInformation.c flightGenerator.c
 
-futureCollision.o : futureCollision.c datatype.h
-	gcc -c futureCollision.c
+futureCollision.o : futureCollision.c futureCollision.h flightGenerator.h
+	gcc -c futureCollision.c flightGenerator.c
 
-menu.o : menu.c flightGenerator.h planeInformation.h futureCollision.h
-	gcc -c menu.c flightGenerator.c planeInformation.c futureCollision.h
+menu.o : menu.c planeInformation.h futureCollision.h flightGenerator.h datatype.h
+	gcc -c menu.c planeInformation.c futureCollision.c flightGenerator.c
 
-menu$(EXECEXT) : menu.o flightGenerator.o planeInformation.o futureCollision.o
-	gcc -o menu$(EXECEXT) menu.o flightGenerator.o planeInformation.o futureCollision.o
+menu$(EXECEXT) : menu.o planeInformation.o futureCollision.o flightGenerator.o
+	gcc -o menu$(EXECEXT) menu.o planeInformation.o futureCollision.o flightGenerator.o
 
 
 clean : 
