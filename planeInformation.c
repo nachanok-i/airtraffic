@@ -1,7 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-#include"flightGenerator.h"
 
 PLANE_T* addAirPlane()
 	{
