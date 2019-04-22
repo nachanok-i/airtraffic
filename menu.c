@@ -8,6 +8,47 @@
 #include"planeInformation.h"
 #include"futureCollision.h"
 
+void displayColumnDetail()
+	{
+	int i = 0;
+	printf("\n");
+	for(i = 0; i < 10; i++)
+		{
+		printf("%5s%2d|", "PLANE", i+1);
+		}
+	printf("\n");
+
+	for(i = 0; i < 10; i++)
+		{
+		printf("%8s", "IDEX00|");
+		}
+	printf("\n");
+	
+	for(i = 0; i < 10; i++)
+		{
+		printf("%8s", "AADDDD|");
+		}
+	printf("\n");
+
+	for(i = 0; i < 10; i++)
+		{
+		printf("%8s", "X000FT|");
+		}
+	printf("\n");
+
+	for(i = 0; i < 10; i++)
+		{
+		printf("%8s", "LANDING|");
+		}
+	printf("\n");
+
+	for(i = 0; i < 10; i++)
+		{
+		printf("%8s", "(X,Y)|");
+		}
+	printf("\n");
+	}
+
 int main()
 	{
 	char stringInput[128];
@@ -23,8 +64,8 @@ int main()
 		printf("\t[1] – Information and status of available runway (not yet)\n");
 		printf("\t[2] – Plane information generator (functional)\n");
 		printf("\t[3] – Plane movement simulator (Testing)\n");
-		printf("\t[4] – Display information of currenly active planes\n");
-		printf("\t[5] – Potential future plane collision detector (Testing)\n");
+		printf("\t[4] – Display information of currenly active planes (functional)\n");
+		printf("\t[5] – Potential future plane collision detector display (Testing)\n");
 		printf("\t[6] – Send command to specific plane\n");
 		printf("\t[7] – Exit the program\n");
 		choice = 0;
@@ -75,18 +116,22 @@ int main()
 					setPosition(&plane);
 					setPosition(&plane2);
 					printTable();
-					checkCollision();
+					if (checkCollision() == 0)
+						break;
 					movePlane(&plane);
 					movePlane(&plane2);
 					cleanTable();
 					}
+				break;
 				}
 			case 6:
 				//
+				break;
 			case 7:
 				return 0;
 			default:
-			printf("\n\tInvalid - The program doesn't have this menu\n");
+				printf("\n\tInvalid - The program doesn't have this menu\n");
+				break;
 			}
 		}	
 	}

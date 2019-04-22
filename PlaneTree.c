@@ -44,7 +44,7 @@ PLANENODE_T * searchPlane(char * flightName)
 	return foundFlight;
 	}
 
-
+int count = 0;
 /* Printing all plane in the tree
  * using in-order traversal
  * @param	- pCurrent : refer to a current plane
@@ -53,11 +53,11 @@ void printTree(PLANENODE_T * pCurrent)
 	{
 	if(pCurrent->left != NULL)
 		printTree(pCurrent->left);
-	printf("\tFlight Code : '%s'\n", pCurrent->data->flight);
-	printf("\tposition %d %d %d\n", pCurrent->data->position.x,pCurrent->data->position.y,pCurrent->data->position.z);
 	if(pCurrent->right != NULL)
 		printTree(pCurrent->right);
-	printf("lol\n");
+	count++;
+	printf("\t#%d Flight Code : '%s'\n", count,pCurrent->data->flight);
+	printf("\tposition %d %d %d\n\n", pCurrent->data->position.x,pCurrent->data->position.y,pCurrent->data->position.z);
 	}
 
 /* insert each plane in the tree
@@ -69,41 +69,19 @@ void insertChild(PLANENODE_T * pCurrent, PLANENODE_T * pNode, int * sortStatus)
 	{
 	if(strcmp(pCurrent->data->flight,pNode->data->flight) > 0)
 		{
-		printf("\tat insert left\n");
 		if(pCurrent->left != NULL)
 			{
-			printf("\tat insert left 2\n");
 			insertChild(pCurrent->left, pNode, sortStatus);
 			}
-		printf("\tat insert left 2.1\n");
-		printf("\tnew node is :%s\n", pNode->data->flight);
-		if(pCurrent->left == NULL)
-			{
-			printf("left child is NULL\n");
-			pCurrent->left = pNode;
-			printf("\tinsert complete\n");
-			}
-		else
-			printf("insert fail\n");
+		pCurrent->left = pNode;
 		}
 	else if(strcmp(pCurrent->data->flight,pNode->data->flight) < 0)
 		{
-		printf("\tat insert right\n");
 		if(pCurrent->right != NULL)
 			{
-			printf("\tat insert right 2\n");
 			insertChild(pCurrent->right, pNode, sortStatus);
 			}
-		printf("\tat insert right 2.1\n");
-		printf("\tnew node is :%s\n", pNode->data->flight);
-		if(pCurrent->right == NULL)
-			{
-			printf("right child is NULL\n");
-			pCurrent->right = pNode;
-			printf("\tinsert complete\n");
-			}
-		else
-			printf("insert fail\n");
+		pCurrent->right = pNode;
 		}
 	else
 		*sortStatus = 3;
@@ -126,13 +104,11 @@ int insertNode(PLANE_T * pAPlane)
 	
 	if(pTree == NULL)
 		{
-		printf("at Tree root\n");
 		pTree = (PLANETREE_T*) calloc(1, sizeof(PLANETREE_T));
 		pTree->root = pNode;
 		}
 	else
 		{
-		printf("at add node : %s\n", pAPlane->flight);
 		if(pTree->root == NULL)
 			printf("root is NULL\n");
 		else
@@ -162,10 +138,8 @@ int main()
 	for (i=0;i<10;i++)
 		{
 		pAPlane = generateFlight();
-		printf("%d\n", i);
-		printf("|%s| pos: %d,%d,%d\n",pAPlane->flight, pAPlane->position.x, pAPlane->position.y, pAPlane->position.z);
+		//printf("|%s| pos: %d,%d,%d\n",pAPlane->flight, pAPlane->position.x, pAPlane->position.y, pAPlane->position.z);
 		buildStatus = insertNode(pAPlane);
-		printf("in\n");
 		switch(buildStatus)
 			{
 		case 0:
@@ -173,7 +147,7 @@ int main()
 			break;
 		case 1:
 			//wait for next progressing
-			printTree(pTree->root);
+			printf("Success add %s\n", pAPlane->flight);
 			break;
 		case 2:
 			printf("dynamic allocate error\n");
@@ -183,7 +157,6 @@ int main()
 			break;	
 			}
 		}
-	printf("test\n");
 	printTree(pTree->root);
 }
 
