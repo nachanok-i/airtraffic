@@ -11,25 +11,25 @@
  * return 1 - if input is correct
  * return 0 - if input is invalid
 */
-int checkNumber(int choice)
+int checkNumber(int choice);
 
 /* This function use to check flight code if it is valid code 
  * return 1 - if flight code is correct
  * return 0 - if flight is unvalid
 */
-int checkCode(void* flight)
+int checkCode(void* flight);
 
 /* This function use to check flight number if it is number or not
  * return 1 - if flight number is in correct form
  * return 0 - if flight number is invalid
 */
-int checkNumberFlight(void* flight)
+int checkNumberFlight(void* flight);
 
 /* This fucntion use to check flight code if it is correct
  * return 1 - if code is valid
  * return 0 - if code is invalid
 */
-int checkFlightCode(void* flight)
+int checkFlightCode(void* flight);
 
 
 /* This function use to check direction from user
@@ -37,7 +37,7 @@ int checkFlightCode(void* flight)
  * return 1 - if it is valid
  * return 0 - if it is invalid
 */
-int checkDirection(int direction)
+int checkDirection(int direction);
 
 
 /* This functionuse to check if user give the correct height
@@ -45,7 +45,7 @@ int checkDirection(int direction)
  * return 1 - if input is valid
  * return 0 - if input is invalid
 */
-int checkAltitude(int height)
+int checkAltitude(int height);
 
 
 /* This function use to check if user give valid command for
@@ -54,7 +54,7 @@ int checkAltitude(int height)
  * return 1 - if it is valid
  * return 0 - if it is invalid
 */
-int checkOrder(char command[])
+int checkOrder(char command[]);
 
 
 /* This function use to check command from user
@@ -62,7 +62,7 @@ int checkOrder(char command[])
  * return 1 - if command is correct
  * return 0 - if command is invalid
 */
-int checkCommand(char input[])
+int checkCommand(char input[]);
 
 
 /* This function use to check command from user
@@ -70,5 +70,5 @@ int checkCommand(char input[])
  * return 2 - if it is "command"
  * return 0 - if it is no match
 */
-int checkAgru(char input[])
+int checkAgru(char input[]);
 	
