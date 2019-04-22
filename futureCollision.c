@@ -139,7 +139,7 @@ void movePlane(PLANE_T* plane)
 }
 int checkCollision()
 {
-	int bColli = 0; 
+	int bColli = 0; /* return value */ 
 	int i=0; /* loop variable */
 	int j=0; /* loop variable */
 	int k=0; /* loop variable */
@@ -152,10 +152,11 @@ int checkCollision()
 				if (edges[i][j][k] == 2)
 					{
 					printf("Collide!!!\n");
-					return 0;
+					bColli = 0;
 					}
 				}
 			}
 		}
-	return 1;
+	bColli = 1;
+	return bColli;
 }
