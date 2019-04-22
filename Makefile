@@ -28,7 +28,7 @@ index.o : index.c flightGenerator.h planeInformation.h
 	gcc -c index.c flightGenerator.o planeInformation.o
 
 index$(EXECEXT) : index.o flightGenerator.o planeInformation.o
-	gcc -o index$(EXECEXT) flightGenerator.o planeInformation.o
+	gcc -o index$(EXECEXT) index.o flightGenerator.o planeInformation.o
 
 
 clean : 
