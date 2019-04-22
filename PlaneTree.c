@@ -9,6 +9,41 @@
 #include "flightGenerator.h"
 
 PLANETREE_T * pTree;
+PLANE_T * planeArray[10];
+
+void displayColumnDetail()
+	{
+	int i = 0;
+	printf("\n");
+	/* sequence of plane */
+	printf("%10s :","SEQUENCE");
+	for(i = 0; i < 10; i++)
+		{
+		printf("%5s%2d|", "PLANE", i+1);
+		}
+	printf("\n");
+	/* plane's flight */
+	printf("%10s :","FLIGHT");
+	for(i = 0; i < 10; i++)
+		{
+		printf("%7s|", planeArray[i]->flight);
+		}
+	printf("\n");
+	/* plane's altitude */
+	printf("%10s :","ALTITUDE");
+	for(i = 0; i < 10; i++)
+		{
+		printf("%5d%2s|", planeArray[i]->position.z, "ft");
+		}
+	printf("\n");
+	/* plane's coordinate */
+	printf("%10s :","X-Y COOR");
+	for(i = 0; i < 10; i++)
+		{
+		printf("%3d,%3d|", planeArray[i]->position.x, planeArray[i]->position.y);
+		}
+	printf("\n");
+	}
 
 /* Traverse a tree (pre order traversal)
  * for find(Plane) and comparing the node
@@ -53,11 +88,13 @@ void printTree(PLANENODE_T * pCurrent)
 	{
 	if(pCurrent->left != NULL)
 		printTree(pCurrent->left);
+	// count++;
+	// printf("\t#%d Flight Code : '%s'\n", count,pCurrent->data->flight);
+	// printf("\tposition %d %d %d\n\n", pCurrent->data->position.x,pCurrent->data->position.y,pCurrent->data->position.z);
+	planeArray[count] = pCurrent->data;
+	count++;
 	if(pCurrent->right != NULL)
 		printTree(pCurrent->right);
-	count++;
-	printf("\t#%d Flight Code : '%s'\n", count,pCurrent->data->flight);
-	printf("\tposition %d %d %d\n\n", pCurrent->data->position.x,pCurrent->data->position.y,pCurrent->data->position.z);
 	}
 
 /* insert each plane in the tree
@@ -69,21 +106,25 @@ void insertChild(PLANENODE_T * pCurrent, PLANENODE_T * pNode, int * sortStatus)
 	{
 	if(strcmp(pCurrent->data->flight,pNode->data->flight) > 0)
 		{
-		if(pCurrent->left != NULL)
+		if(pCurrent->left == NULL)
 			{
-			insertChild(pCurrent->left, pNode, sortStatus);
+			printf("1add |%s| to left child of |%s|\n", pNode->data->flight, pCurrent->data->flight);
+			pCurrent->left = pNode;
 			}
-		pCurrent->left = pNode;
+		else
+			insertChild(pCurrent->left, pNode, sortStatus);
 		}
 	else if(strcmp(pCurrent->data->flight,pNode->data->flight) < 0)
 		{
-		if(pCurrent->right != NULL)
+		if(pCurrent->right == NULL)
 			{
-			insertChild(pCurrent->right, pNode, sortStatus);
+			printf("2add |%s| to right child of |%s|\n", pNode->data->flight, pCurrent->data->flight);
+			pCurrent->right = pNode;
 			}
-		pCurrent->right = pNode;
+		else
+			insertChild(pCurrent->right, pNode, sortStatus);
 		}
-	else
+	if(strcmp(pCurrent->data->flight,pNode->data->flight) == 0)
 		*sortStatus = 3;
 	}
 
@@ -157,7 +198,9 @@ int main()
 			break;	
 			}
 		}
+	count = 0;
 	printTree(pTree->root);
+	displayColumnDetail();
 }
 
 // int readFile(char * filename)
