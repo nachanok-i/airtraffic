@@ -1,5 +1,6 @@
 /*This function is use to display menu and allow user to choose menu they want to do*
  * Created by Sahachok Prachaporn (Lion) ID 61070503436
+ * Modified by Sutinan Tadalimavad (Lion) ID 61070503443 on 22/04/2019
  */
 #include<stdio.h>
 #include<stdlib.h>
@@ -22,9 +23,9 @@ int main()
 		printf("[MENU]\n");
 		printf("\t[1] – Information and status of available runway\n");
 		printf("\t[2] – Plane information generator\n");
-		printf("\t[3] – Plane movement simulator\n");
+		printf("\t[3] – Plane movement simulator (Testing)\n");
 		printf("\t[4] – Display information of currenly active planes\n");
-		printf("\t[5] – Potential future plane collision detector\n");
+		printf("\t[5] – Potential future plane collision detector (Testing)\n");
 		printf("\t[6] – Send command to specific plane\n");
 		printf("\t[7] – Exit the program\n");
 		choice = 0;
@@ -35,7 +36,7 @@ int main()
 		switch (choice)
 			{
 			case 1:
-				printf("This section is not currently available\n");
+				printf("This function is currently unavailable\n");
 				break;
 			case 2:
 				{
@@ -82,7 +83,7 @@ int main()
 					}
 				}
 			case 6:
-				printf("This fuction is not currently available\n");
+				printf("This function is currently unavailable\n");
 			case 7:
 				return 0;
 			default:
