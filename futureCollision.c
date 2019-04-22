@@ -152,7 +152,7 @@ int checkCollision()
 				if (edges[i][j][k] == 2)
 					{
 					printf("Collide!!!\n");
-					exit(1);
+					return 0;
 					}
 				}
 			}
