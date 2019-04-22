@@ -36,9 +36,9 @@ int checkCode(void* flight)
 								"FX", "AY", "GA", "KA", "IR", "JL", "EG", "KL", "KE", "LH",
 								"MH", "OM", "NW", "KZ", "PR", "PK", "PO", "QF", "RA", "SK",
 								"UL", "SQ", "LX", "FM", "TG", "TK", "UA", "HY", "5X", "VN", "VS"};
-	char flightCode[7];
+	char flightCode[7];			/*flight code from user*/
 	int i = 0;
-	PLANE_T* input = (PLANE_T*) flight;
+	PLANE_T* input = (PLANE_T*) flight;	/*store flight information*/
 
 	strcpy(input->ID,flightCode);
 	for (i = 0; i < 61; i++)
@@ -67,8 +67,8 @@ int checkCode(void* flight)
 */
 int checkNumberFlight(void* flight)
 	{
-	char flightCode[7];
-	PLANE_T* input = (PLANE_T*) flight;
+	char flightCode[7];				/*flight code from user*/
+	PLANE_T* input = (PLANE_T*) flight;	/*store flight information*/
 
 	strcpy(input->ID,flightCode);
 	if (isdigit(flightCode[2]) == 1)
@@ -98,7 +98,7 @@ int checkNumberFlight(void* flight)
 */
 int checkFlightCode(void* flight)
 	{
-	PLANE_T* input = (PLANE_T*) flight;
+	PLANE_T* input = (PLANE_T*) flight;	/*store flight information*/
 	if ((checkCode(input) == 1) && (checkNumber(input) == 1))
 		return 1;
 	else
@@ -112,7 +112,6 @@ int checkFlightCode(void* flight)
 */
 int checkDirection(int direction)
 	{
-	int direction = 0;
 	if ((direction >= 1) && (direction <=8))
 		return 1;
 	else
@@ -126,7 +125,7 @@ int checkDirection(int direction)
 */
 int checkAltitude(int height)
 	{
-	int height = 0;
+	int height = 0;	/*height of plane*/
 	if ((height >= 3000) && (height <= 6000))
 		return 1;
 	else 
@@ -158,8 +157,6 @@ int checkOrder(char command[])
 */
 int checkCommand(char input[])
 	{
-	char input[32];
-
 	if (strcmp(input,"direction") == 1)
 		return 1;
 	else if (strcmp(input,"altitude") == 1)
@@ -177,8 +174,6 @@ int checkCommand(char input[])
 */
 int checkAgru(char input[])
 	{
-	char input[32];
-
 	if (strcmp(input,"status") == 0)
 		return 1;
 	else if (strcmp(input,"command") == 0)
