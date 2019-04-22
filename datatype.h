@@ -50,13 +50,13 @@ typedef struct _plane
 
 typedef struct _planenode
     {
-    PLANE_T * plane;			/* pointer to stucture of plane information*/
+    struct _plane * data;			/* pointer to stucture of plane information*/
     struct _planenode * left;	/* left child of a focused plane */
     struct _planenode * right;	/* right child of a focused plane */
     }PLANENODE_T;
 
 typedef struct
     {
-    PLANENODE_T * root;			/* a root plane of a tree */
+    struct _planenode * root;			/* a root plane of a tree */
     int planeCount;				/* counting number of plane in the tree */
     }PLANETREE_T;

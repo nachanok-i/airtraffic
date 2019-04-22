@@ -21,13 +21,13 @@ void doesExist(PLANENODE_T * pCurrent, char * flightName, PLANENODE_T * foundFli
 	{
 	if(pCurrent->left != NULL)
 		{
-		if(strcmp(pCurrent->left->plane->flight, flightName) == 0)
+		if(strcmp(pCurrent->left->data->flight, flightName) == 0)
 			foundFlight = pCurrent->left;
 		doesExist(pCurrent->left, flightName, foundFlight);
 		}
 	if(pCurrent->right != NULL)
 		{
-		if(strcmp(pCurrent->right->plane->flight, flightName) == 0)
+		if(strcmp(pCurrent->right->data->flight, flightName) == 0)
 			foundFlight = pCurrent->right;
 		doesExist(pCurrent->right, flightName, foundFlight);
 		}
@@ -53,8 +53,8 @@ void printTree(PLANENODE_T * pCurrent)
 	{
 	if(pCurrent->left != NULL)
 		printTree(pCurrent->left);
-	printf("\tFlight Code : '%s'\n", pCurrent->plane->flight);
-	printf("\tposition %d %d %d\n", pCurrent->plane->position.x,pCurrent->plane->position.y,pCurrent->plane->position.z);
+	printf("\tFlight Code : '%s'\n", pCurrent->data->flight);
+	printf("\tposition %d %d %d\n", pCurrent->data->position.x,pCurrent->data->position.y,pCurrent->data->position.z);
 	if(pCurrent->right != NULL)
 		printTree(pCurrent->right);
 	printf("lol\n");
@@ -67,7 +67,7 @@ void printTree(PLANENODE_T * pCurrent)
  */
 void insertChild(PLANENODE_T * pCurrent, PLANE_T * pAPlane, int * sortStatus)
 	{
-	if(strcmp(pCurrent->plane->flight,pAPlane->flight) > 0)
+	if(strcmp(pCurrent->data->flight,pAPlane->flight) > 0)
 		{
 		printf("\tat insert left\n");
 		if(pCurrent->left != NULL)
@@ -77,10 +77,10 @@ void insertChild(PLANENODE_T * pCurrent, PLANE_T * pAPlane, int * sortStatus)
 			}
 		printf("\tat insert left 2.1\n");
 		printf("\tnew node is :%s\n", pAPlane->flight);
-		pCurrent->left->plane = pAPlane;
+		pCurrent->left->data = pAPlane;
 		printf("\tinsert complete\n");
 		}
-	else if(strcmp(pCurrent->plane->flight,pAPlane->flight) < 0)
+	else if(strcmp(pCurrent->data->flight,pAPlane->flight) < 0)
 		{
 		printf("\tat insert right\n");
 		if(pCurrent->right != NULL)
@@ -90,7 +90,7 @@ void insertChild(PLANENODE_T * pCurrent, PLANE_T * pAPlane, int * sortStatus)
 			}
 		printf("\tat insert right 2.1\n");
 		printf("\tnew node is :%s\n", pAPlane->flight);
-		pCurrent->right->plane = pAPlane;
+		pCurrent->right->data = pAPlane;
 		printf("\tinsert complete\n");
 		}
 	else
@@ -110,7 +110,7 @@ int insertNode(PLANE_T * pAPlane)
 	pNode = (PLANENODE_T*) calloc(1, sizeof(PLANENODE_T));
 	if(pNode == NULL)
 		return 0;
-	pNode->plane = pAPlane;
+	pNode->data = pAPlane;
 	
 	if(pTree == NULL)
 		{
@@ -120,13 +120,13 @@ int insertNode(PLANE_T * pAPlane)
 		}
 	else
 		{
-		printf("at add node\n");
+		printf("at add node : %s\n", pAPlane->flight);
 		if(pTree->root == NULL)
 			printf("root is NULL\n");
 		else
 			{
 			// printf("ad here\n");
-			printf("\t root id :%s\n", pTree->root->plane->flight);
+			printf("\t root id :%s\n", pTree->root->data->flight);
 			insertChild(pTree->root, pAPlane, &sortStatus);
 			}
 		}
