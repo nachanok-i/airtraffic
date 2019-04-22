@@ -25,7 +25,7 @@ void test1()
 	}
 void test2()
 	{
-	PLANE_T test;
+	PLANE_T* test;
 	test = addAirPlane();
 	printPlane(test);
 	}
