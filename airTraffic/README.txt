@@ -25,10 +25,8 @@ But we have not connect every functions from each choices together so each one o
 and we have not use "validate.c" yet because we still working on choice 6 which is recieving command from user.
 
 Troubleshoot
-	1."generteFlight.c" - random function did not work well because it did not random at all. it keep printing the same plane information. We got a solution from but we still figure it and finally we solve it by using sran() in "menu.c".
-	2."Makefile" - we have too much file when we creating it so we have a problem of combining it together because we include header file multiple times.
-	Solved using #ifndef from your lab.
-	3. We can't combine every function together because we have not enought time and we have not finish all of the choices so we test it by using "menu.c".
-	4. But from all we have now we can combine it when we create "planeControl.c" function and control all the function in every file.
-
-
+	1."generteFlight.c" - random function did not work well because it did not random at all. it keep printing the same
+plane information. We got a solution from but we still figure it and finally we solve it by using sran() in "menu.c".
+	2."Makefile" - we have too much file when we creating it so we have a problem of combining it together.
+	3. We can't combine every function together because we have not enought time and we have not finish all of the 
+choices so we test it by using "menu.c".
