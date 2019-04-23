@@ -1,4 +1,4 @@
-/* planeTree.c was made for gathering each plane
+/* planeUtility.c was made for gathering each plane
  * in binary tree and printing them out
  * Made by Siradanai Sutin (Cartoon) ID 3437 
  */
@@ -98,6 +98,12 @@ void printTree(PLANENODE_T * pCurrent)
 		printTree(pCurrent->right);
 	}
 
+/* use to call printTree function from outside */
+void callPrintTree()
+	{
+	printTree(pTree->root);
+	}
+
 /* insert each plane in the tree
  * @param	- pCurrent	 : refer to a current plane
  *			- pAPlane 	 : a plane that wanted to insert
@@ -109,7 +115,7 @@ void insertChild(PLANENODE_T * pCurrent, PLANENODE_T * pNode, int * sortStatus)
 		{
 		if(pCurrent->left == NULL)
 			{
-			printf("1add |%s| to left child of |%s|\n", pNode->data->flight, pCurrent->data->flight);
+			//printf("1add |%s| to left child of |%s|\n", pNode->data->flight, pCurrent->data->flight);
 			pCurrent->left = pNode;
 			}
 		else
@@ -119,7 +125,7 @@ void insertChild(PLANENODE_T * pCurrent, PLANENODE_T * pNode, int * sortStatus)
 		{
 		if(pCurrent->right == NULL)
 			{
-			printf("2add |%s| to right child of |%s|\n", pNode->data->flight, pCurrent->data->flight);
+			//printf("2add |%s| to right child of |%s|\n", pNode->data->flight, pCurrent->data->flight);
 			pCurrent->right = pNode;
 			}
 		else
@@ -156,7 +162,7 @@ int insertNode(PLANE_T * pAPlane)
 		else
 			{
 			// printf("ad here\n");
-			printf("\t root id :%s\n", pTree->root->data->flight);
+			//printf("\t root id :%s\n", pTree->root->data->flight);
 			insertChild(pTree->root, pNode, &sortStatus);
 			}
 		}
@@ -167,42 +173,47 @@ int insertNode(PLANE_T * pAPlane)
 	return 1;
 	}
 
+void resetCount()
+	{
+	count = 0;
+	}
+
 /* Temporary main function
  * Use for testing running flight number air planes
  * Tree management, etc.
  */
-int main()
-{
-	int i=0;
-	int buildStatus = 0;
-	srand(time(NULL));
-	PLANE_T* pAPlane = NULL;
-	for (i=0;i<10;i++)
-		{
-		pAPlane = generateFlight();
-		//printf("|%s| pos: %d,%d,%d\n",pAPlane->flight, pAPlane->position.x, pAPlane->position.y, pAPlane->position.z);
-		buildStatus = insertNode(pAPlane);
-		switch(buildStatus)
-			{
-		case 0:
-			printf("Error to access file\n");
-			break;
-		case 1:
-			//wait for next progressing
-			printf("Success add %s\n", pAPlane->flight);
-			break;
-		case 2:
-			printf("dynamic allocate error\n");
-			break;
-		case 3:
-			printf("Found the duplicated flight\n");
-			break;	
-			}
-		}
-	count = 0;
-	printTree(pTree->root);
-	displayColumnDetail();
-}
+// int main()
+// {
+// 	int i=0;
+// 	int buildStatus = 0;
+// 	srand(time(NULL));
+// 	PLANE_T* pAPlane = NULL;
+// 	for (i=0;i<10;i++)
+// 		{
+// 		pAPlane = generateFlight();
+// 		//printf("|%s| pos: %d,%d,%d\n",pAPlane->flight, pAPlane->position.x, pAPlane->position.y, pAPlane->position.z);
+// 		buildStatus = insertNode(pAPlane);
+// 		switch(buildStatus)
+// 			{
+// 		case 0:
+// 			printf("Error to access file\n");
+// 			break;
+// 		case 1:
+// 			//wait for next progressing
+// 			printf("Success add %s\n", pAPlane->flight);
+// 			break;
+// 		case 2:
+// 			printf("dynamic allocate error\n");
+// 			break;
+// 		case 3:
+// 			printf("Found the duplicated flight\n");
+// 			break;	
+// 			}
+// 		}
+// 	count = 0;
+// 	printTree(pTree->root);
+// 	displayColumnDetail();
+// }
 
 // int readFile(char * filename)
 // 	{
