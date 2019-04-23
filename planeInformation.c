@@ -1,3 +1,9 @@
+/* planeInformation.c
+ * This file is part of airtraffic control. This file is about controling
+ * airplane structure from main file
+ * Created by Nachanok Issarapruk (Tap) ID 61070503410
+ */
+
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
