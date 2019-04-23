@@ -1,6 +1,6 @@
 /* planeTree.c was made for gathering each plane
  * in binary tree and printing them out
- * Made by Siradanai Sutin (Cartoon) ID 3437
+ * Made by Siradanai Sutin (Cartoon) ID 3437 
  */
 #include<stdio.h>
 #include<stdlib.h>

@@ -18,6 +18,9 @@
 	SW	S 	SE 		6	5	4
 */
 
+#ifndef DATATYPE_H
+#define DATATYPE_H
+
 #define AIRSPEED 500	/* 500 knots = 926 km/h */
 #define N 1
 #define NE 2
@@ -60,3 +63,4 @@ typedef struct
     struct _planenode * root;			/* a root plane of a tree */
     int planeCount;				/* counting number of plane in the tree */
     }PLANETREE_T;
+ #endif
