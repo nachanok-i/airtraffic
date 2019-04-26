@@ -14,10 +14,10 @@ void generateNumber(char flightCode[]);
 
 /* This function will generate position on x,y cordinate
  * return in function argument */
-void generatePosition(int* x, int* y,int* z);
+int generatePosition(int* x, int* y,int* z);
 
 /* This function will generate all require data of the plane
  * and return as PLANE_T structure */
-PLANE_T* generateFlight();
+PLANE_T* generateFlight(int genSpeed);
 
 #endif

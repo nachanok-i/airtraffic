@@ -120,6 +120,8 @@ void setRadius(POSITION_T data)
 			}
 		}
 }
+/* this function will move all the plane in continuously to the direction
+ * that the plane is heading to */
 void movePlane(PLANE_T* airPlane)
 {
 	switch (airPlane->heading)

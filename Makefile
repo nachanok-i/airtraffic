@@ -16,7 +16,7 @@ EXECUTABLES= menu$(EXECEXT)
 all : $(EXECUTABLES)
 
 flightGenerator.o : flightGenerator.c flightGenerator.h
-	gcc -c flightGenerator.c 
+	gcc -c flightGenerator.c
 
 planeInformation.o : planeInformation.c planeInformation.h flightGenerator.h
 	gcc -c planeInformation.c flightGenerator.c
