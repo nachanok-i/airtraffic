@@ -5,6 +5,8 @@
  * ID 61070503443
  *
 */
+#ifndef VALIDATE_H
+#define VALIDATE_H
 
 #include"datatype.h"
 /* This function use to check input from menu
@@ -13,24 +15,11 @@
 */
 int checkNumber(int choice);
 
-/* This function use to check flight code if it is valid code 
- * return 1 - if flight code is correct
- * return 0 - if flight is unvalid
-*/
-int checkCode(void* flight);
-
-/* This function use to check flight number if it is number or not
- * return 1 - if flight number is in correct form
- * return 0 - if flight number is invalid
-*/
-int checkNumberFlight(void* flight);
-
 /* This fucntion use to check flight code if it is correct
  * return 1 - if code is valid
  * return 0 - if code is invalid
 */
-int checkFlightCode(void* flight);
-
+int checkFlightCode(char input[]);
 
 /* This function use to check direction from user
  * direction must be N,NE,E,SE,S,SW,W,NW
@@ -72,3 +61,4 @@ int checkCommand(char input[]);
 */
 int checkAgru(char input[]);
 	
+#endif

@@ -28,7 +28,7 @@ int checkNumber(int choice)
  * return 1 - if flight code is correct
  * return 0 - if flight is unvalid
 */
-int checkCode(void* flight)
+int checkFlightCode(char input[])
 	{
 	char flightSource[61][3] = {"AA", "AC", "AZ", "AF", "SB", "NZ", "AI", "AM", "NH", "TN",
 								"OS", "FJ", "LD", "SU", "PX", "EL", "OZ", "CA", "BA", "CO",
@@ -36,73 +36,31 @@ int checkCode(void* flight)
 								"FX", "AY", "GA", "KA", "IR", "JL", "EG", "KL", "KE", "LH",
 								"MH", "OM", "NW", "KZ", "PR", "PK", "PO", "QF", "RA", "SK",
 								"UL", "SQ", "LX", "FM", "TG", "TK", "UA", "HY", "5X", "VN", "VS"};
-	char flightCode[7];			/*flight code from user*/
+	int returnVal = 0;
 	int i = 0;
-	PLANE_T* input = (PLANE_T*) flight;	/*store flight information*/
-
-	strcpy(input->ID,flightCode);
 	for (i = 0; i < 61; i++)
 		{
-		if (flightCode[0] == flightSource[i][0])
+		if (strncmp(input,flightSource[i],2) == 0)
 			{
-			if (flightCode[1] == flightSource[i][1])
-				return 1;
-			else
-				{
-				printf("ERROR - unknown flight code\n");
-				exit (0);
-				}
-			}
-		else
-			{
-			printf("ERROR - unknown flight code\n");
-			exit (1);
+			returnVal = 1;
+			break;
 			}
 		}
-	}
-
-/* This function use to check flight number if it is number or not
- * return 1 - if flight number is in correct form
- * return 0 - if flight number is invalid
-*/
-int checkNumberFlight(void* flight)
-	{
-	char flightCode[7];				/*flight code from user*/
-	PLANE_T* input = (PLANE_T*) flight;	/*store flight information*/
-
-	strcpy(input->ID,flightCode);
-	if (isdigit(flightCode[2]) == 1)
+	if (returnVal == 1)
 		{
-		if (isdigit(flightCode[3]) == 1)
+		for (i = 2; i < 6; i++)
 			{
-			if (isdigit(flightCode[4]) == 1)
+			if (isdigit(input[i]) == 0)
 				{
-				if (isdigit(flightCode[5]) == 1)
-					return 1;
-				else 
-					return 0;
+				returnVal = 0;
+				printf("number %c\n",input[i]);
+				break;
 				}
-			else
-				return 0;
 			}
-		else
-			return 0;
 		}
-	else 
-		return 0;
-	}
-
-/* This fucntion use to check flight code if it is correct
- * return 1 - if code is valid
- * return 0 - if code is invalid
-*/
-int checkFlightCode(void* flight)
-	{
-	PLANE_T* input = (PLANE_T*) flight;	/*store flight information*/
-	if ((checkCode(input) == 1) && (checkNumber(input) == 1))
-		return 1;
 	else
-		return 0;
+		printf("code not valid\n");
+	return returnVal;
 	}
 
 /* This function use to check direction from user
@@ -125,7 +83,6 @@ int checkDirection(int direction)
 */
 int checkAltitude(int height)
 	{
-	int height = 0;	/*height of plane*/
 	if ((height >= 3000) && (height <= 6000))
 		return 1;
 	else 
