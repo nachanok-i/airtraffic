@@ -74,7 +74,10 @@ int getCommand()
 	return returnVal;
 	}
 
+int runCycle()
+	{
 
+	}
 
 /* return pointer 
  NULL if not found */
@@ -113,6 +116,7 @@ int main()
 	plane = generateFlight(100);
 	displayColumnDetail();
 	command = getCommand();
+	runCycle();
 	searchFlight();
 	// if (plane != NULL)
 	// 	{
