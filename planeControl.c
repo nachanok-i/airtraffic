@@ -17,6 +17,8 @@
 
 #define MAXSIZE 128
 
+enum command{UPDATE,SEARCH,COMMAND,LANDING,HELP};
+
 void setup(int* genSpeed,int* maxPlane)
 	{
 	char input[32];
@@ -50,6 +52,30 @@ void setup(int* genSpeed,int* maxPlane)
 		}
 	}
 
+int getCommand()
+	{
+	char input[MAXSIZE];
+	int returnVal = 0;
+	printf("Enter command (Type \"help\" to see command) : ");
+	fgets(input,MAXSIZE,stdin);
+	sscanf(input,"%s",stdin);
+	if (strlen(input)==1)
+		returnVal = UPDATE;
+	else if (strcmp(input,"search")==0)
+		returnVal = SEARCH;
+	else if (strcmp(input,"command")==0)
+		returnVal = COMMAND;
+	else if (strcmp(input,"landing")==0)
+		returnVal = LANDING;
+	else if (strcmp(input,"help")==0)
+		returnVal = HELP;
+	else
+		returnVal = -1;
+	return returnVal;
+	}
+
+
+
 /* return pointer 
  NULL if not found */
 int searchFlight()
@@ -81,10 +107,12 @@ int main()
 	PLANE_T* plane = NULL;
 	int genSpeed = 10;
 	int maxPlane = 10;
+	int command = 0;
 	srand(time(NULL));
 	setup(&genSpeed,&maxPlane);
 	plane = generateFlight(100);
 	displayColumnDetail();
+	command = getCommand();
 	searchFlight();
 	// if (plane != NULL)
 	// 	{
