@@ -52,7 +52,7 @@ void setup(int* genSpeed,int* maxPlane)
 
 /* return pointer 
  NULL if not found */
-int searchPlane()
+int searchFlight()
 	{
 	char input[MAXSIZE];
 	char target[7];
@@ -84,8 +84,8 @@ int main()
 	srand(time(NULL));
 	setup(&genSpeed,&maxPlane);
 	plane = generateFlight(100);
-	printPlane(plane);
-	searchPlane();
+	displayColumnDetail();
+	searchFlight();
 	// if (plane != NULL)
 	// 	{
 
