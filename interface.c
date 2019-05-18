@@ -5,11 +5,6 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-void displayMatrixPlane()
-	{
-
-	}
-
 void displayColumnDetail()
 	{
 	int i = 0;
