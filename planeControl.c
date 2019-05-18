@@ -109,6 +109,20 @@ PLANE_T * searchFlight()
 	return plane;
 	}
 
+void helpMenu()
+	{
+	printf("How to use command\n");
+	printf("- hit enter to update current plane (without any command)\n");
+	printf("- \"search\" to search specific plane and print out the data\n");
+	printf("- \"command [flight number] [input command]\" to enter command to specific plane\n");
+	printf("\t Command list:\n");
+	printf("\t1.\"landing\" to command the plane to land\n");
+	printf("\t2.\"circle:[radius]\" to command plane to fly in circle\n");
+	printf("\t3.\"takeoff\" to command the plane to takeoff\n");
+	printf("\t4.\"alti:[altitude]\" to command the plane to change altitude\n");
+	printf("\t5.\"direc:[direction]\" to change the direction of the plane (N,NE,S,W,ect)\n");
+	}
+
 int main()
 	{
 	PLANE_T* plane = NULL;
