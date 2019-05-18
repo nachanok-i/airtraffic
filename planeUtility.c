@@ -120,6 +120,19 @@ PLANENODE_T * searchPlane(char * flightName)
 	return foundFlight;
 	}
 
+
+/* Clear all data
+ * @param	PLANENODE_T * pCurrent
+ */
+void printTree(PLANENODE_T * pCurrent)
+	{
+	if(pCurrent->left != NULL)
+		printTree(pCurrent->left);
+	if(pCurrent->right != NULL)
+		printTree(pCurrent->right);
+	free(pCurrent);
+	}
+
 int count = 0;
 /* Printing all plane in the tree
  * using in-order traversal
