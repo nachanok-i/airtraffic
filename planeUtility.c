@@ -1,6 +1,7 @@
 /* planeUtility.c was made for gathering each plane
  * in binary tree and printing them out
- * Made by Siradanai Sutin (Cartoon) ID 3437 
+ * Made by Siradanai Sutin (Cartoon) ID 3437
+ * Modified by Nachanok Issarapruk (Tap) ID 61070503410
  */
 #include<stdio.h>
 #include<stdlib.h>
@@ -10,6 +11,45 @@
 
 PLANETREE_T * pTree;
 PLANE_T * planeArray[10];
+
+/* This function will print plane information from structure
+ * input PLANE_T structure */
+void printPlane(PLANE_T* input)
+	{
+	printf("Flight: %s\n", input->flight);
+	printf("Position: x %d y %d z %d\n", input->position.x, input->position.y, input->position.z);
+	switch (input->heading)
+		{
+		case N:
+			printf("Heading: N\n");
+			break;
+		case NE:
+			printf("Heading: NE\n");
+			break;
+		case E:
+			printf("Heading: E\n");
+			break;
+		case SE:
+			printf("Heading: SE\n");
+			break;
+		case S:
+			printf("Heading: S\n");
+			break;
+		case SW:
+			printf("Heading: SW\n");
+			break;
+		case W:
+			printf("Heading: W\n");
+			break;
+		case NW:
+			printf("Heading: NW\n");
+			break;
+		/* normally this would not happen */
+		default:
+			printf("Heading direction error\n");
+			exit(0);
+		}
+	}
 
 /* This function use to print planes 10 in 10 columns */
 void displayColumnDetail()

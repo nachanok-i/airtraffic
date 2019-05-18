@@ -1,5 +1,10 @@
 #ifndef PLANEUTILITY_H
 #define PLANEUTILITY_H
+
+/* This function will print plane information from structure
+ * input PLANE_T structure */
+void printPlane(PLANE_T* input);
+
 /* This function use to print planes 10 in 10 columns */
 void displayColumnDetail();
 
