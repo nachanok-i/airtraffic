@@ -218,6 +218,18 @@ void resetCount()
 	count = 0;
 	}
 
+/* Free all plane in tree
+ * 
+ */
+void freeTree(PLANENODE_T * pCurrent)
+	{
+	if(pCurrent->left != NULL)
+		printTree(pCurrent->left);
+	if(pCurrent->right != NULL)
+		printTree(pCurrent->right);
+	free(pCurrent);
+	}
+
 /* Temporary main function
  * Use for testing running flight number air planes
  * Tree management, etc.
