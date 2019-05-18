@@ -9,15 +9,12 @@
 #include<stdlib.h>
 #include<string.h>
 #include<time.h>
-#include"planeInformation.h"
 #include"futureCollision.h"
 #include"planeUtility.h"
 #include"flightGenerator.h"
 #include"validate.h"
 
 #define MAXSIZE 128
-
-enum command{UPDATE,SEARCH,COMMAND,LANDING,HELP};
 
 void setup(int* genSpeed,int* maxPlane)
 	{
@@ -58,15 +55,13 @@ int getCommand()
 	int returnVal = 0;
 	printf("Enter command (Type \"help\" to see command) : ");
 	fgets(input,MAXSIZE,stdin);
-	sscanf(input,"%s",stdin);
+	sscanf(input,"%s",input);
 	if (strlen(input)==1)
 		returnVal = UPDATE;
 	else if (strcmp(input,"search")==0)
 		returnVal = SEARCH;
 	else if (strcmp(input,"command")==0)
 		returnVal = COMMAND;
-	else if (strcmp(input,"landing")==0)
-		returnVal = LANDING;
 	else if (strcmp(input,"help")==0)
 		returnVal = HELP;
 	else
@@ -74,18 +69,22 @@ int getCommand()
 	return returnVal;
 	}
 
-int runCycle()
+void runCycle()
 	{
-
+	if(updatePlane())
+		{
+		callPrintTree();
+		}
 	}
 
 /* return pointer 
  NULL if not found */
-int searchFlight()
+PLANE_T * searchFlight()
 	{
 	char input[MAXSIZE];
 	char target[7];
 	int returnVal = 0;
+	PLANE_T * plane = NULL;
 	while(1)
 		{
 		printf("Enter flight number : ");
@@ -97,12 +96,17 @@ int searchFlight()
 		sscanf(input,"%s",target);
 		if (checkFlightCode(target) == 0)
 			{
-			printf("Error - flight doesn't exist\n");
+			printf("Error - last 4 digits must be number\n");
 			}
 		else
 			break;
 		}
-	return returnVal;
+	plane = searchPlane(input);
+	if (plane == NULL)
+		{
+		printf("The plane %s was not found\n",input);
+		}
+	return plane;
 	}
 
 int main()
@@ -114,12 +118,24 @@ int main()
 	srand(time(NULL));
 	setup(&genSpeed,&maxPlane);
 	plane = generateFlight(100);
-	displayColumnDetail();
 	command = getCommand();
-	runCycle();
-	searchFlight();
-	// if (plane != NULL)
-	// 	{
-
-	// 	}
+	switch (command)
+		{
+		case UPDATE:
+			runCycle();
+			break;
+		case SEARCH:
+			{
+			PLANE_T * plane = NULL;
+			plane = searchFlight();
+			if (plane != NULL)
+				printPlane(plane);
+			}
+			break;
+		case COMMAND:
+			break;
+		default:
+			printf("Error - invalid command\n");
+			break;
+		}
 	}

@@ -11,7 +11,7 @@ else
 	PLATFORM	=linux
 endif
 
-EXECUTABLES= menu$(EXECEXT)
+EXECUTABLES= planeControl$(EXECEXT)
 
 all : $(EXECUTABLES)
 
@@ -27,11 +27,14 @@ futureCollision.o : futureCollision.c futureCollision.h flightGenerator.h
 planeUtility.o : planeUtility.c flightGenerator.h
 	gcc -c planeUtility.c flightGenerator.c
 
-menu.o : menu.c planeInformation.h futureCollision.h flightGenerator.h planeUtility.h datatype.h
-	gcc -c menu.c planeInformation.c futureCollision.c flightGenerator.c planeUtility.c
+validate.o : validate.c validate.h
+	gcc -c validate.c
 
-menu$(EXECEXT) : menu.o planeInformation.o futureCollision.o flightGenerator.o planeUtility.o
-	gcc -o menu$(EXECEXT) menu.o planeInformation.o futureCollision.o flightGenerator.o planeUtility.o
+planeControl.o : planeControl.c futureCollision.h flightGenerator.h planeUtility.h validate.h datatype.h
+	gcc -c planeControl.c futureCollision.c flightGenerator.c planeUtility.c validate.c
+
+planeControl$(EXECEXT) : planeControl.o futureCollision.o flightGenerator.o planeUtility.o validate.o
+	gcc -o planeControl$(EXECEXT) planeControl.o futureCollision.o flightGenerator.o planeUtility.o validate.o
 
 
 clean : 

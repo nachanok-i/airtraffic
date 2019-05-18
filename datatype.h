@@ -21,19 +21,9 @@
 #ifndef DATATYPE_H
 #define DATATYPE_H
 
-#define AIRSPEED 500	/* 500 knots = 926 km/h */
-#define N 1
-#define NE 2
-#define E 3
-#define SE 4
-#define S 5
-#define SW 6
-#define W 7
-#define NW 8
-
-#define LANDING 1
-#define CIRCLE 2
-#define TAKEOFF 3
+enum direction{N,NE,E,SE,S,SW,W,NW};
+enum choice{UPDATE,SEARCH,COMMAND,HELP};
+enum command{LANDING,CIRCLE,TAKEOFF};
 
 typedef struct _position
 	{

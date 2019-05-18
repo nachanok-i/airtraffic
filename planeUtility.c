@@ -8,8 +8,9 @@
 #include<string.h>
 #include<time.h>
 #include "flightGenerator.h"
+#include "futureCollision.h"
 
-PLANETREE_T * pTree;
+PLANETREE_T * pTree = NULL;
 PLANE_T * planeArray[10];
 
 /* This function will print plane information from structure
@@ -64,10 +65,20 @@ void traverseUpdatePlane(PLANENODE_T * pCurrent)
 	}
 
 /* Updating active plane
+ * return 1 for success, 0 there is no plane
  */
-void updatePlane()
+int updatePlane()
 	{
-	traverseUpdatePlane(pTree->root);
+	if(pTree != NULL)
+		{
+		traverseUpdatePlane(pTree->root);
+		return 1;
+		}
+	else
+		{
+		printf("The sky is clear (there is no plane)\n");
+		return 0;
+		}
 	}
 
 /* This function use to print planes 10 in 10 columns */
@@ -132,11 +143,13 @@ void doesExist(PLANENODE_T * pCurrent, char * flightName, PLANENODE_T * foundFli
  * @param	- flightName : Name of flight user type in
  * return found flight (can be NULL if not found)
  */
-PLANENODE_T * searchPlane(char * flightName)
+PLANE_T * searchPlane(char * flightName)
 	{
 	PLANENODE_T * foundFlight = NULL;
+	if (pTree == NULL)
+		return NULL;
 	doesExist(pTree->root, flightName, foundFlight);
-	return foundFlight;
+		return foundFlight->data;
 	}
 
 int count = 0;
