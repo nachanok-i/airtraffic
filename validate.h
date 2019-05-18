@@ -36,29 +36,10 @@ int checkDirection(int direction);
 */
 int checkAltitude(int height);
 
-
-/* This function use to check if user give valid command for
- * "order" command
- * commands could be "landing","circle","takeoff"
- * return 1 - if it is valid
- * return 0 - if it is invalid
-*/
-int checkOrder(char command[]);
-
-
-/* This function use to check command from user
+/* This function use to check input command from user
  * commands must be "direction","altitude","order"
- * return 1 - if command is correct
- * return 0 - if command is invalid
+ * return command value (emun value)
+ * return -1 - if command is invalid
 */
-int checkCommand(char input[]);
-
-
-/* This function use to check command from user
- * return 1 - if it is "status"
- * return 2 - if it is "command"
- * return 0 - if it is no match
-*/
-int checkAgru(char input[]);
-	
+int checkInputCommand(char input[]);
 #endif

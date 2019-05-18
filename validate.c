@@ -26,7 +26,7 @@ int checkNumber(int choice)
 
 /* This function use to check flight code if it is valid code 
  * return 1 - if flight code is correct
- * return 0 - if flight is unvalid
+ * return 0 - if flight is invalid
 */
 int checkFlightCode(char input[])
 	{
@@ -53,13 +53,10 @@ int checkFlightCode(char input[])
 			if (isdigit(input[i]) == 0)
 				{
 				returnVal = 0;
-				printf("number %c\n",input[i]);
 				break;
 				}
 			}
 		}
-	else
-		printf("code not valid\n");
 	return returnVal;
 	}
 
@@ -89,52 +86,33 @@ int checkAltitude(int height)
 		return 0;
 	}
 
-/* This function use to check if user give valid command for
- * "order" command
- * commands could be "landing","circle","takeoff"
- * return 1 - if it is valid
- * return 0 - if it is invalid
-*/
-int checkOrder(char command[])
-	{
-	if (strcmp(command,"landing") == 1)
-		return 1;
-	else if (strcmp(command,"circle") == 1)
-		return 1;
-	else if (strcmp(command,"takeoff") == 1)
-		return 1;
-	else 
-		return 0;
-	}
-
-/* This function use to check command from user
+/* This function use to check input command from user
  * commands must be "direction","altitude","order"
- * return 1 - if command is correct
- * return 0 - if command is invalid
+ * return command value (emun value)
+ * return -1 - if command is invalid
 */
-int checkCommand(char input[])
+int checkInputCommand(char input[])
 	{
-	if (strcmp(input,"direction") == 1)
-		return 1;
-	else if (strcmp(input,"altitude") == 1)
-		return 1;
-	else if (strcmp(input,"order") == 1)
-		return 1;
+	if (strcmp(input,"landing") == 0)
+		{
+		return LANDING;
+		}
+	else if (strcmp(input,"takeoff") == 0)
+		{
+		return TAKEOFF;
+		}
+	else if (strncmp(input,"cir",3) == 0)
+		{
+		return CIRCLE;
+		}
+	else if (strncmp(input,"dir",3) == 0)
+		{
+		return DIRECTION;
+		}
+	else if (strncmp(input,"alt",3) == 0)
+		{
+		return ALTITUDE;
+		}
 	else
-		return 0;
-	}
-
-/* This function use to check command from user
- * return 1 - if it is "status"
- * return 2 - if it is "command"
- * return 0 - if it is no match
-*/
-int checkAgru(char input[])
-	{
-	if (strcmp(input,"status") == 0)
-		return 1;
-	else if (strcmp(input,"command") == 0)
-		return 2;
-	else 
-		return 0;
+		return -1;
 	}

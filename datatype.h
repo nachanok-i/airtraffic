@@ -23,7 +23,7 @@
 
 enum direction{N,NE,E,SE,S,SW,W,NW};
 enum choice{UPDATE,SEARCH,COMMAND,HELP};
-enum command{LANDING,CIRCLE,TAKEOFF};
+enum command{LANDING,CIRCLE,TAKEOFF,ALTITUDE,DIRECTION};
 
 typedef struct _position
 	{
