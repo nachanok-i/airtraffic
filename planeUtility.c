@@ -1,6 +1,7 @@
 /* planeUtility.c was made for gathering each plane
  * in binary tree and printing them out
- * Made by Siradanai Sutin (Cartoon) ID 3437 
+ * Made by Siradanai Sutin (Cartoon) ID 3437
+ * 	Modified 18 MAY 2019
  */
 #include<stdio.h>
 #include<stdlib.h>
@@ -10,6 +11,19 @@
 
 PLANETREE_T * pTree;
 PLANE_T * planeArray[10];
+
+/* Free all plane in tree
+ * 
+ */
+void freeTree(PLANENODE_T * pCurrent)
+	{
+	if(pCurrent->left != NULL)
+		printTree(pCurrent->left);
+	if(pCurrent->right != NULL)
+		printTree(pCurrent->right);
+	free(pCurrent);
+	}
+
 
 /* This function use to print planes 10 in 10 columns */
 void displayColumnDetail()
@@ -89,9 +103,6 @@ void printTree(PLANENODE_T * pCurrent)
 	{
 	if(pCurrent->left != NULL)
 		printTree(pCurrent->left);
-	// count++;
-	// printf("\t#%d Flight Code : '%s'\n", count,pCurrent->data->flight);
-	// printf("\tposition %d %d %d\n\n", pCurrent->data->position.x,pCurrent->data->position.y,pCurrent->data->position.z);
 	planeArray[count] = pCurrent->data;
 	count++;
 	if(pCurrent->right != NULL)
@@ -115,7 +126,6 @@ void insertChild(PLANENODE_T * pCurrent, PLANENODE_T * pNode, int * sortStatus)
 		{
 		if(pCurrent->left == NULL)
 			{
-			//printf("1add |%s| to left child of |%s|\n", pNode->data->flight, pCurrent->data->flight);
 			pCurrent->left = pNode;
 			}
 		else
@@ -125,7 +135,6 @@ void insertChild(PLANENODE_T * pCurrent, PLANENODE_T * pNode, int * sortStatus)
 		{
 		if(pCurrent->right == NULL)
 			{
-			//printf("2add |%s| to right child of |%s|\n", pNode->data->flight, pCurrent->data->flight);
 			pCurrent->right = pNode;
 			}
 		else
@@ -161,8 +170,6 @@ int insertNode(PLANE_T * pAPlane)
 			printf("root is NULL\n");
 		else
 			{
-			// printf("ad here\n");
-			//printf("\t root id :%s\n", pTree->root->data->flight);
 			insertChild(pTree->root, pNode, &sortStatus);
 			}
 		}
@@ -177,113 +184,3 @@ void resetCount()
 	{
 	count = 0;
 	}
-
-/* Temporary main function
- * Use for testing running flight number air planes
- * Tree management, etc.
- */
-// int main()
-// {
-// 	int i=0;
-// 	int buildStatus = 0;
-// 	srand(time(NULL));
-// 	PLANE_T* pAPlane = NULL;
-// 	for (i=0;i<10;i++)
-// 		{
-// 		pAPlane = generateFlight();
-// 		//printf("|%s| pos: %d,%d,%d\n",pAPlane->flight, pAPlane->position.x, pAPlane->position.y, pAPlane->position.z);
-// 		buildStatus = insertNode(pAPlane);
-// 		switch(buildStatus)
-// 			{
-// 		case 0:
-// 			printf("Error to access file\n");
-// 			break;
-// 		case 1:
-// 			//wait for next progressing
-// 			printf("Success add %s\n", pAPlane->flight);
-// 			break;
-// 		case 2:
-// 			printf("dynamic allocate error\n");
-// 			break;
-// 		case 3:
-// 			printf("Found the duplicated flight\n");
-// 			break;	
-// 			}
-// 		}
-// 	count = 0;
-// 	printTree(pTree->root);
-// 	displayColumnDetail();
-// }
-
-// int readFile(char * filename)
-// 	{
-// 	int i = 0;
-// 	int makeTreeStatus = 0;
-// 	char input[128];
-// 	PLANE_T * pAPlane = NULL;
-// 	FILE * pRead = NULL;
-	
-// 	memset(input, 0, sizeof(input));
-// 	printf("%s\n", filename);
-// 	pRead = fopen(filename, "r");
-// 	if(pRead == NULL)
-// 		return 0;
-// 	while(fgets(input, sizeof(input), pRead) != NULL)
-// 		{
-// 		printf("\t%d\n", i+1);
-// 		input[strlen(input)-1] = '\0';
-// 		pAPlane = (PLANE_T *)calloc(1, sizeof(PLANE_T));
-// 		if(pAPlane == NULL)
-// 			return 2;
-// 		printf("\tat string copy\n");
-// 		strcpy(pAPlane->flight, input);
-// 		printf("\tat make tree\n");
-// 		makeTreeStatus = makeTreePlane(pAPlane);
-// 		switch(makeTreeStatus)
-// 			{
-// 			case 0:
-// 				return 0;
-// 				break;
-// 			case 3:
-// 				return 3;
-// 				break;
-// 			}
-
-// 		printf("%s\n", input);
-// 		i++;
-// 		}
-// 	fclose(pRead);
-// 	return 1;
-// 	}
-// main funtion
-// int main(int argc , char * argv[])
-// 	{
-// 	char filename[32];
-// 	char input[128];
-// 	int readStatus = 0;
-	
-// 	if(argc < 2)
-// 		{
-// 		printf("Not enought Information\n");
-// 		return 0;
-// 		}
-	
-	// strcpy(filename,argv[1]);
-	//readStatus = readFile(filename);
-	// switch(readStatus)
-	// 	{
-	// 	case 0:
-	// 		printf("Error to access file\n");
-	// 		break;
-	// 	case 1:
-	// 		//wait for next progressing
-	// 		printTree(pTree->root);
-	// 		break;
-	// 	case 2:
-	// 		printf("dynamic allocate error\n");
-	// 		break;
-	// 	case 3:
-	// 		printf("Found the duplicated flight\n");
-	// 		break;
-	// 	}	
-	//}
