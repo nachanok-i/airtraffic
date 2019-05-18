@@ -7,44 +7,24 @@
  * 26 Mar 2019 */
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
+#include<time.h>
+#include"planeInformation.h"
+#include"futureCollision.h"
+#include"planeUtility.h"
+#include"flightGenerator.h"
 
-/* this function will move all the plane in continuously to the direction
- * that the plane is heading to */
-void movePlane(PLANE_T* airPlane)
+int main()
 	{
-	switch (airPlane->heading)
-		{
-		case N:
-			airPlane->position->y -= 1;
-			break;
-		case NE:
-			airPlane->position->y -= 1;
-			airPlane->position->x += 1;
-			break;
-		case E:
-			airPlane->position->x += 1;
-			break;
-		case SE:
-			airPlane->position->x += 1;
-			airPlane->position->y += 1;
-			break;
-		case S:
-			airPlane->position->y += 1;
-			break;
-		case SW:
-			airPlane->position->x -= 1;
-			airPlane->position->y += 1;
-			break;
-		case W:
-			airPlane->position->x -= 1;
-			break;
-		case NW:
-			airPlane->position->x -= 1;
-			airPlane->position->y -= 1;
-			break;
-		/* normally this would not happen */
-		default:
-			printf("Heading direction error\n");
-			exit(0);
-		}
+	PLANE_T* plane = NULL;
+	int genSpeed = 10;
+	int maxPlane = 10;
+	srand(time(NULL));
+	// setup(&genSpeed,maxPlane);
+	plane = generateFlight(100);
+	printPlane(plane);
+	// if (plane != NULL)
+	// 	{
+
+	// 	}
 	}

@@ -37,45 +37,70 @@ void generateNumber(char flightCode[])
  * return direction of the plane */
 int generatePosition(int* x, int* y,int* z)
  	{
- 	int side = 0; /* side of the plane arrive information */
- 	*x = (rand() % 100 + 1);
+ 	int heading = 0;
+ 	/* assume this airport have incoming plane only from wast */
+ 	/**x = (rand() % 100 + 1);*/
+ 	*x = 0;
  	*y = (rand() % 100 + 1);
 	*z = (rand() % (6 - 3 +1) + 3) * 1000;
-	side = (rand() % 2);
-	if (side == 0)
+	if (*x == 0)
 		{
-		if (*x <= 50)
-			*x=0;
+		if (*y < 20)
+			heading = SE;
+		else if (*y > 70)
+			heading = NE;
 		else
-			*x=100;
+			heading = E;
 		}
-	else
-		{
-		if (*y <= 50)
-			{
-			*y=0;
-			}
-		else
-			{
-			*y=100;
-			}
-		}
-	return E;
+	// else if (*x == 100)
+	// 	{
+	// 	if (*y < 20)
+	// 		heading = SW;
+	// 	else if (*y > 70)
+	// 		heading = NW;
+	// 	else
+	// 		heading = W;
+	// 	}
+	// else if (*y == 0)
+	// 	{
+	// 	if (*x < 20)
+	// 		heading = SE;
+	// 	else if (*x > 70)
+	// 		heading = SW;
+	// 	else
+	// 		heading = S;
+	// 	}
+	// else if (*y == 100)
+	// 	{
+	// 	if (*x < 20)
+	// 		heading = NW;
+	// 	else if (*x > 70)
+	// 		heading = NE;
+	// 	else
+	// 		heading = N;
+	// 	}
+	return heading;
  	}
+
 /* This function will generate all require data of the plane
  * and return as PLANE_T structure */
-PLANE_T* generateFlight()
-{
-	PLANE_T* plane = NULL; 
-	plane = (PLANE_T*) calloc(1,sizeof(PLANE_T));
-	/* This condition is use to check that plane generator work ok or not */
-	if (plane == NULL)
+PLANE_T* generateFlight(int genSpeed)
+	{
+	PLANE_T* plane = NULL;
+	int x;
+	x = (rand() % 100 + 1);
+	if (x < genSpeed)
 		{
-		printf("Calloc generated flight error!\n");
-		exit(0);
+		plane = (PLANE_T*) calloc(1,sizeof(PLANE_T));
+		/* This condition is use to check that plane generator work ok or not */
+		if (plane == NULL)
+			{
+			printf("Calloc generated flight error!\n");
+			exit(0);
+			}
+		generateNumber(plane->flight);
+		plane->heading = generatePosition(&plane->position.x,&plane->position.y,&plane->position.z);
+		plane->order = LANDING;
 		}
-	generateNumber(plane->flight);
-	plane->heading = generatePosition(&plane->position.x,&plane->position.y,&plane->position.z);
-	plane->order = LANDING;
 	return plane;
-}
+	}

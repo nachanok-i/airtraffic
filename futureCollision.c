@@ -11,7 +11,7 @@
 #define WHITE 0
 #define GRAY  1
 #define BLACK 2
-#define MAXAREA 100				/* max area of the airport */
+#define MAXAREA 20				/* max area of the airport (example as 20)*/
 #define SAFEAREA 3				/* safe area around each plane (in coordinate) */
 #define MAXHIGH 4				/* max number of altitude level (3000 - 6000) */
 
@@ -67,7 +67,10 @@ void printTable()
 			{
 			for(j=0;j<MAXAREA;j++)
 				{
-				printf("%d", edges[j][i][k]);
+				if (edges[j][i][k] == 0)
+					printf("*");
+				else
+					printf("%d", edges[j][i][k]);
 				}
 			printf("\n");
 			}
@@ -80,7 +83,7 @@ void setPosition(PLANE_T* data)
 	int x = data->position.x;
 	int y = data->position.y;
 	int z = data->position.z;
-	printf("%d %d %d\n",x,y,z );
+	printf("%s position: %d %d %d\n",data->flight,x,y,z );
 	edges[x][y][z] = data->ID;
 	setRadius(data->position);
 }
@@ -117,23 +120,44 @@ void setRadius(POSITION_T data)
 			}
 		}
 }
-void movePlane(PLANE_T* plane)
+/* this function will move all the plane in continuously to the direction
+ * that the plane is heading to */
+void movePlane(PLANE_T* airPlane)
 {
-	if (plane->heading == E)
+	switch (airPlane->heading)
 		{
-		plane->position.x += 1;
-		}
-	else if (plane->heading == N)
-		{
-		plane->position.y += 1;
-		}
-	else if (plane->heading == W)
-		{
-		plane->position.x -= 1;
-		}
-	else if (plane->heading == S)
-		{
-		plane->position.y -= 1;
+		case N:
+			airPlane->position.y -= 1;
+			break;
+		case NE:
+			airPlane->position.y -= 1;
+			airPlane->position.x += 1;
+			break;
+		case E:
+			airPlane->position.x += 1;
+			break;
+		case SE:
+			airPlane->position.x += 1;
+			airPlane->position.y += 1;
+			break;
+		case S:
+			airPlane->position.y += 1;
+			break;
+		case SW:
+			airPlane->position.x -= 1;
+			airPlane->position.y += 1;
+			break;
+		case W:
+			airPlane->position.x -= 1;
+			break;
+		case NW:
+			airPlane->position.x -= 1;
+			airPlane->position.y -= 1;
+			break;
+		/* normally this would not happen */
+		default:
+			printf("Heading direction error\n");
+			exit(0);
 		}
 }
 int checkCollision()
