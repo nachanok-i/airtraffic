@@ -240,7 +240,21 @@ void removePlane(PLANENODE_T * pNode)
 		}
 	}
 
-/* use to call printTree function from outside */
+/* delete plane
+ * @param	- flightName : Name of flight from other function
+ */
+void deletePlane(char * flightName)
+	{
+	PLANENODE_T * pDelete = NULL;
+	pDelete = searchPlane(flightName);
+	if(pDelete != NULL)
+		removePlane(pDelete);
+	else
+		printf("/tPlane is not found!\n", );
+	}
+
+
+/* To call printTree function from outside */
 void callPrintTree()
 	{
 	gatherPlaneInTree(pTree);
