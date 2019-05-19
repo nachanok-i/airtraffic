@@ -10,7 +10,6 @@
 #include "flightGenerator.h"
 #include "futureCollision.h"
 
-int maxPlane = 10;
 PLANENODE_T * pTree = NULL;
 PLANE_T ** planeArray;
 
@@ -187,15 +186,41 @@ void gatherPlaneInTree(PLANENODE_T * pCurrent)
 		gatherPlaneInTree(pCurrent->right);
 	}
 
+/*set counting to zero */
+void resetCount()
+	{
+	count = 0;
+	}
+
 /* Removing plane 
  * @param	-	PLANENODE_T * pNode
  */
 void removePlane(PLANENODE_T * pNode)
 	{
+	PLANENODE_T * pTemp = NULL;
 	int i = 0;
-	for(i = 0; i < maxPlane; i++)
+	if((pNode->left == NULL) && (pNode->right == NULL))
 		{
-		/**/
+		free(pNode->data);
+		free(pNode);
+		}
+	else if((pNode->left == NULL) && (pNode->right != NULL))
+		{
+		pTemp = pNode;
+		pNode = pNode->right;
+		free(pTemp->data);
+		free(pTemp);
+		}
+	else if((pNode->left != NULL) && (pNode->right == NULL))
+		{
+		pTemp = pNode;
+		pNode = pNode->left;
+		free(pTemp->data);
+		free(pTemp);
+		}
+	else
+		{
+		/*	node has two children	INPROCESS*/
 		}
 	}
 
@@ -269,11 +294,6 @@ int insertNode(PLANE_T * pAPlane)
 		return 3;
 		}
 	return 1;
-	}
-
-void resetCount()
-	{
-	count = 0;
 	}
 
 /* Free all plane in tree
