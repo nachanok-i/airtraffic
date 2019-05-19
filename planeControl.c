@@ -17,11 +17,12 @@
 #define MAXSIZE 128
 #define STOP 10
 
-void setup(int* genSpeed,int* maxPlane)
+int genSpeed = 10;
+int maxPlane = 10;
+
+void setup()
 	{
 	char input[32];
-	*genSpeed = 10;
-	*maxPlane = 10;
 	printf("Welcome\n");
 	printf("1. Generate speed (default 10 percents)\n");
 	printf("2. Maximum plane (default 10 planes)\n");
@@ -33,10 +34,10 @@ void setup(int* genSpeed,int* maxPlane)
 			{
 			printf("1. Gen Speed\n");
 			fgets(input,sizeof(input),stdin);
-			sscanf(input,"%d",genSpeed);
+			sscanf(input,"%d",&genSpeed);
 			printf("2. Max plane\n");
 			fgets(input,sizeof(input),stdin);
-			sscanf(input,"%d",maxPlane);
+			sscanf(input,"%d",&maxPlane);
 			break;
 			}
 		else if (strncasecmp(input,"n",1) == 0)
@@ -76,6 +77,7 @@ int getCommand()
 
 void runCycle()
 	{
+
 	if(updatePlane())
 		{
 		callPrintTree();
@@ -143,11 +145,8 @@ void helpMenu()
 int main()
 	{
 	PLANE_T* plane = NULL;
-	int genSpeed = 10;
-	int maxPlane = 10;
 	int command = 0;
 	srand(time(NULL));
-	setup(&genSpeed,&maxPlane);
 	plane = generateFlight(100);
 	while(1)
 		{
@@ -168,6 +167,9 @@ int main()
 			case SHOW:
 				callPrintTree();
 			case COMMAND:
+				break;
+			case SETUP:
+				setup();
 				break;
 			case HELP:
 				helpMenu();

@@ -22,7 +22,7 @@
 #define DATATYPE_H
 
 enum direction{N,NE,E,SE,S,SW,W,NW};
-enum choice{UPDATE,SEARCH,SHOW,COMMAND,HELP};
+enum choice{UPDATE,SEARCH,SHOW,COMMAND,SETUP,HELP};
 enum command{LANDING,CIRCLE,TAKEOFF,ALTITUDE,DIRECTION};
 
 typedef struct _position
