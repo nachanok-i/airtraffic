@@ -11,7 +11,7 @@
 #include "futureCollision.h"
 
 
-PLANETREE_T * pTree = NULL;
+PLANENODE_T * pTree = NULL;
 PLANE_T ** planeArray;
 
 void callocPlaneArray(int maxPlane)
@@ -83,7 +83,7 @@ int updatePlane()
 	{
 	if(pTree != NULL)
 		{
-		traverseUpdatePlane(pTree->root);
+		traverseUpdatePlane(pTree);
 		return 1;
 		}
 	else
@@ -160,8 +160,16 @@ PLANE_T * searchPlane(char * flightName)
 	PLANENODE_T * foundFlight = NULL;
 	if (pTree == NULL)
 		return NULL;
-	doesExist(pTree->root, flightName, foundFlight);
+	if(strcmp(pTree->data->flight, flightName) == 0)
+		{	
+		foundFlight = pTree->data;
+		return foundFlight;
+		}
+	else
+		{
+		doesExist(pTree, flightName, foundFlight);
 		return foundFlight->data;
+		}
 	}
 
 int count = 0;
@@ -188,14 +196,14 @@ void removePlane(PLANENODE_T * pNode)
 	int i = 0;
 	for(i = 0; i < maxPlane; i++)
 		{
-		str
+		/**/
 		}
 	}
 
 /* use to call printTree function from outside */
 void callPrintTree()
 	{
-	gatherPlaneInTree(pTree->root);
+	gatherPlaneInTree(pTree);
 	displayColumnDetail();
 	}
 
@@ -245,16 +253,16 @@ int insertNode(PLANE_T * pAPlane)
 	
 	if(pTree == NULL)
 		{
-		pTree = (PLANETREE_T*) calloc(1, sizeof(PLANETREE_T));
-		pTree->root = pNode;
+		pTree = (PLANENODE_T*) calloc(1, sizeof(PLANENODE_T));
+		pTree = pNode;
 		}
 	else
 		{
-		if(pTree->root == NULL)
+		if(pTree == NULL)
 			printf("root is NULL\n");
 		else
 			{
-			insertChild(pTree->root, pNode, &sortStatus);
+			insertChild(pTree, pNode, &sortStatus);
 			}
 		}
 	if(sortStatus == 3)

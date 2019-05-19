@@ -48,9 +48,4 @@ typedef struct _planenode
     struct _planenode * right;	/* right child of a focused plane */
     }PLANENODE_T;
 
-typedef struct
-    {
-    struct _planenode * root;			/* a root plane of a tree */
-    int planeCount;				/* counting number of plane in the tree */
-    }PLANETREE_T;
  #endif
