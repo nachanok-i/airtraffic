@@ -18,8 +18,6 @@
 #define STOP 10
 
 int genSpeed = 10;
-int maxPlane = 10;
-
 void setup()
 	{
 	char input[32];

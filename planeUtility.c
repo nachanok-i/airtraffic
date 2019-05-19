@@ -10,7 +10,7 @@
 #include "flightGenerator.h"
 #include "futureCollision.h"
 
-
+int maxPlane = 10;
 PLANENODE_T * pTree = NULL;
 PLANE_T ** planeArray;
 
@@ -135,18 +135,18 @@ void displayColumnDetail()
  *    flightName   -   a string for comparing
  *    foundFlight  -   for checking found node
  */
-void doesExist(PLANENODE_T * pCurrent, char * flightName, PLANENODE_T * foundFlight)
+void doesExist(PLANENODE_T * pCurrent, char * flightName, PLANE_T * foundFlight)
 	{
 	if(pCurrent->left != NULL)
 		{
 		if(strcmp(pCurrent->left->data->flight, flightName) == 0)
-			foundFlight = pCurrent->left;
+			foundFlight = pCurrent->left->data;
 		doesExist(pCurrent->left, flightName, foundFlight);
 		}
 	if(pCurrent->right != NULL)
 		{
 		if(strcmp(pCurrent->right->data->flight, flightName) == 0)
-			foundFlight = pCurrent->right;
+			foundFlight = pCurrent->right->data;
 		doesExist(pCurrent->right, flightName, foundFlight);
 		}
 	}
@@ -157,7 +157,7 @@ void doesExist(PLANENODE_T * pCurrent, char * flightName, PLANENODE_T * foundFli
  */
 PLANE_T * searchPlane(char * flightName)
 	{
-	PLANENODE_T * foundFlight = NULL;
+	PLANE_T * foundFlight = NULL;
 	if (pTree == NULL)
 		return NULL;
 	if(strcmp(pTree->data->flight, flightName) == 0)
@@ -168,7 +168,7 @@ PLANE_T * searchPlane(char * flightName)
 	else
 		{
 		doesExist(pTree, flightName, foundFlight);
-		return foundFlight->data;
+		return foundFlight;
 		}
 	}
 
@@ -192,7 +192,6 @@ void gatherPlaneInTree(PLANENODE_T * pCurrent)
  */
 void removePlane(PLANENODE_T * pNode)
 	{
-	PLANE_T
 	int i = 0;
 	for(i = 0; i < maxPlane; i++)
 		{

@@ -1,5 +1,8 @@
 #ifndef PLANEUTILITY_H
 #define PLANEUTILITY_H
+#include "flightGenerator.h"
+#include "futureCollision.h"
+int maxPlane = 10;
 
 /* This function will print plane information from structure
  * input PLANE_T structure */
@@ -17,13 +20,13 @@ int updatePlane();
  *    flightName   -   a string for comparing
  *    foundFlight  -   for checking found node
  */
-void doesExist(PLANENODE_T * pCurrent, char * flightName, PLANENODE_T * foundFlight);
+void doesExist(PLANENODE_T * pCurrent, char * flightName, PLANE_T * foundFlight);
 
 /* Searching plane
  * @param	- flightName : Name of flight user type in
  * return found flight (can be NULL if not found)
  */
-PLANENODE_T * searchPlane(char * flightName);
+PLANE_T * searchPlane(char * flightName);
 
 /* Printing all plane in the tree
  * using in-order traversal
