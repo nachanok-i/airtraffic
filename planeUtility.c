@@ -250,7 +250,7 @@ void deletePlane(char * flightName)
 	if(pDelete != NULL)
 		removePlane(pDelete);
 	else
-		printf("/tPlane is not found!\n", );
+		printf("\tPlane is not found!\n");
 	}
 
 
