@@ -75,7 +75,6 @@ int getCommand()
 
 void runCycle()
 	{
-
 	if(updatePlane())
 		{
 		callPrintTree();
