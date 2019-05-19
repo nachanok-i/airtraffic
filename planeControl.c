@@ -23,32 +23,27 @@ int maxPlane = 10;
 void setup()
 	{
 	char input[32];
-	printf("Welcome\n");
-	printf("1. Generate speed (default 10 percents)\n");
-	printf("2. Maximum plane (default 10 planes)\n");
-	printf("Do you want to change?\n");
+	printf("SETUP MENU\n");
 	while(1)
 		{
+		printf("1. Generate speed (default 10 percents)\n");
 		fgets(input,sizeof(input),stdin);
-		if (strncasecmp(input,"y",1) == 0)
-			{
-			printf("1. Gen Speed\n");
-			fgets(input,sizeof(input),stdin);
-			sscanf(input,"%d",&genSpeed);
-			printf("2. Max plane\n");
-			fgets(input,sizeof(input),stdin);
-			sscanf(input,"%d",&maxPlane);
-			setMaxPlane(maxPlane);
+		sscanf(input,"%d",&genSpeed);
+		if (genSpeed > 0 && genSpeed <= 100)
 			break;
-			}
-		else if (strncasecmp(input,"n",1) == 0)
-			{
-			break;
-			}
 		else
-			{
-			printf("Error - invalid answer\n");
-			}
+			printf("Error - Gen speed have to be 1-100\n");
+		}
+	while(2)
+		{
+		printf("2. Maximum plane (default 10 planes)\n");
+		fgets(input,sizeof(input),stdin);
+		sscanf(input,"%d",&maxPlane);
+		setMaxPlane(maxPlane);
+		if (maxPlane > 0 && maxPlane <= 100)
+			break;
+		else
+			printf("Error - Max plane have to be 1-100\n");
 		}
 	}
 
@@ -67,6 +62,8 @@ int getCommand()
 		returnVal = SHOW;
 	else if (strcmp(input,"command")==0)
 		returnVal = COMMAND;
+	else if (strcmp(input,"setup")==0)
+		returnVal = SETUP;
 	else if (strcmp(input,"help")==0)
 		returnVal = HELP;
 	else if (strcmp(input,"stop")==0)
@@ -140,6 +137,7 @@ void helpMenu()
 	printf("\t\t3.\"takeoff\" to command the plane to takeoff.\n");
 	printf("\t\t4.\"alt:[altitude]\" to command the plane to change altitude.\n");
 	printf("\t\t5.\"dir:[direction]\" to change the direction of the plane (N,NE,S,W,ect).\n");
+	printf("\t\"setup\" to set plane's generation speed and maximum plane in the sky.\n");
 	printf("\t- \"help\" to print help menu.\n");
 	}
 
