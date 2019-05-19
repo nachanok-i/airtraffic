@@ -10,10 +10,8 @@
 #include "flightGenerator.h"
 #include "futureCollision.h"
 
-<<<<<<< HEAD
-=======
 int maxPlane2 = 10;
->>>>>>> 3f70d49ec941422bb182100cc9f16f92c0188b57
+
 PLANENODE_T * pTree = NULL;
 PLANE_T ** planeArray;
 
@@ -208,7 +206,6 @@ void removePlane(PLANENODE_T * pNode)
 	{
 	PLANENODE_T * pTemp = NULL;
 	int i = 0;
-<<<<<<< HEAD
 	if((pNode->left == NULL) && (pNode->right == NULL))
 		{
 		free(pNode->data);
@@ -222,9 +219,6 @@ void removePlane(PLANENODE_T * pNode)
 		free(pTemp);
 		}
 	else if((pNode->left != NULL) && (pNode->right == NULL))
-=======
-	for(i = 0; i < maxPlane2; i++)
->>>>>>> 3f70d49ec941422bb182100cc9f16f92c0188b57
 		{
 		pTemp = pNode;
 		pNode = pNode->left;
