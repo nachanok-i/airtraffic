@@ -10,8 +10,20 @@
 #include "flightGenerator.h"
 #include "futureCollision.h"
 
+
 PLANETREE_T * pTree = NULL;
-PLANE_T * planeArray[10];
+PLANE_T ** planeArray;
+
+void callocPlaneArray(int maxPlane)
+	{
+	planeArray = (PLANE_T**) calloc(maxPlane, sizeof(PLANE_T*));
+	if(planeArray == NULL)
+		{
+		printf("\t Allocation error\n");
+		exit(0);
+		}
+	printf(">>> Maximum amout is %d\n", maxPlane);
+	}
 
 /* This function will print plane information from structure
  * input PLANE_T structure */
@@ -81,35 +93,35 @@ int updatePlane()
 		}
 	}
 
-/* This function use to print planes 10 in 10 columns */
+/* This function use to print planes in columns */
 void displayColumnDetail()
 	{
 	int i = 0;
 	printf("\n");
 	/* sequence of plane */
 	printf("%10s :","SEQUENCE");
-	for(i = 0; i < 10; i++)
+	for(i = 0; i < maxPlane; i++)
 		{
 		printf("%5s%2d|", "PLANE", i+1);
 		}
 	printf("\n");
 	/* plane's flight */
 	printf("%10s :","FLIGHT");
-	for(i = 0; i < 10; i++)
+	for(i = 0; i < maxPlane; i++)
 		{
 		printf("%7s|", planeArray[i]->flight);
 		}
 	printf("\n");
 	/* plane's altitude */
 	printf("%10s :","ALTITUDE");
-	for(i = 0; i < 10; i++)
+	for(i = 0; i < maxPlane; i++)
 		{
 		printf("%5d%2s|", planeArray[i]->position.z, "ft");
 		}
 	printf("\n");
 	/* plane's coordinate */
 	printf("%10s :","X-Y COOR");
-	for(i = 0; i < 10; i++)
+	for(i = 0; i < maxPlane; i++)
 		{
 		printf("%3d,%3d|", planeArray[i]->position.x, planeArray[i]->position.y);
 		}
@@ -165,6 +177,19 @@ void gatherPlaneInTree(PLANENODE_T * pCurrent)
 	count++;
 	if(pCurrent->right != NULL)
 		gatherPlaneInTree(pCurrent->right);
+	}
+
+/* Removing plane 
+ * @param	-	PLANENODE_T * pNode
+ */
+void removePlane(PLANENODE_T * pNode)
+	{
+	PLANE_T
+	int i = 0;
+	for(i = 0; i < maxPlane; i++)
+		{
+		str
+		}
 	}
 
 /* use to call printTree function from outside */
@@ -253,5 +278,6 @@ void freeTree(PLANENODE_T * pCurrent)
 		freeTree(pCurrent->left);
 	if(pCurrent->right != NULL)
 		freeTree(pCurrent->right);
+	free(pCurrent->data);
 	free(pCurrent);
 	}
