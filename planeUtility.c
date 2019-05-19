@@ -82,19 +82,14 @@ void traverseUpdatePlane(PLANENODE_T * pCurrent)
 	}
 
 /* Updating active plane
- * return 1 for success, 0 there is no plane
+ *
  */
-int updatePlane()
+void updatePlane()
 	{
 	if(pTree != NULL)
 		{
+		printf("5\n");
 		traverseUpdatePlane(pTree);
-		return 1;
-		}
-	else
-		{
-		printf("The sky is clear (there is no plane)\n");
-		return 0;
 		}
 	}
 
@@ -257,8 +252,15 @@ void deletePlane(char * flightName)
 /* To call printTree function from outside */
 void callPrintTree()
 	{
-	gatherPlaneInTree(pTree);
-	displayColumnDetail();
+	if (pTree == NULL)
+		{
+		printf("The sky is clear (there is no plane)\n");
+		}
+	else
+		{	
+		gatherPlaneInTree(pTree);
+		displayColumnDetail();
+		}
 	}
 
 /* insert each plane in the tree
@@ -323,6 +325,7 @@ int insertNode(PLANE_T * pAPlane)
 		{
 		return 3;
 		}
+	printf("insert %s complete\n", pAPlane->flight);
 	return 1;
 	}
 
