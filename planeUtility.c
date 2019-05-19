@@ -10,18 +10,27 @@
 #include "flightGenerator.h"
 #include "futureCollision.h"
 
+<<<<<<< HEAD
+=======
+int maxPlane2 = 10;
+>>>>>>> 3f70d49ec941422bb182100cc9f16f92c0188b57
 PLANENODE_T * pTree = NULL;
 PLANE_T ** planeArray;
 
-void callocPlaneArray(int maxPlane)
+void setMaxPlane(int inputMaxPlane)
 	{
-	planeArray = (PLANE_T**) calloc(maxPlane, sizeof(PLANE_T*));
+	maxPlane2 = inputMaxPlane;
+	}
+
+void callocPlaneArray(int maxPlane2)
+	{
+	planeArray = (PLANE_T**) calloc(maxPlane2, sizeof(PLANE_T*));
 	if(planeArray == NULL)
 		{
 		printf("\t Allocation error\n");
 		exit(0);
 		}
-	printf(">>> Maximum amout is %d\n", maxPlane);
+	printf(">>> Maximum amout is %d\n", maxPlane2);
 	}
 
 /* This function will print plane information from structure
@@ -99,28 +108,28 @@ void displayColumnDetail()
 	printf("\n");
 	/* sequence of plane */
 	printf("%10s :","SEQUENCE");
-	for(i = 0; i < maxPlane; i++)
+	for(i = 0; i < maxPlane2; i++)
 		{
 		printf("%5s%2d|", "PLANE", i+1);
 		}
 	printf("\n");
 	/* plane's flight */
 	printf("%10s :","FLIGHT");
-	for(i = 0; i < maxPlane; i++)
+	for(i = 0; i < maxPlane2; i++)
 		{
 		printf("%7s|", planeArray[i]->flight);
 		}
 	printf("\n");
 	/* plane's altitude */
 	printf("%10s :","ALTITUDE");
-	for(i = 0; i < maxPlane; i++)
+	for(i = 0; i < maxPlane2; i++)
 		{
 		printf("%5d%2s|", planeArray[i]->position.z, "ft");
 		}
 	printf("\n");
 	/* plane's coordinate */
 	printf("%10s :","X-Y COOR");
-	for(i = 0; i < maxPlane; i++)
+	for(i = 0; i < maxPlane2; i++)
 		{
 		printf("%3d,%3d|", planeArray[i]->position.x, planeArray[i]->position.y);
 		}
@@ -199,6 +208,7 @@ void removePlane(PLANENODE_T * pNode)
 	{
 	PLANENODE_T * pTemp = NULL;
 	int i = 0;
+<<<<<<< HEAD
 	if((pNode->left == NULL) && (pNode->right == NULL))
 		{
 		free(pNode->data);
@@ -212,6 +222,9 @@ void removePlane(PLANENODE_T * pNode)
 		free(pTemp);
 		}
 	else if((pNode->left != NULL) && (pNode->right == NULL))
+=======
+	for(i = 0; i < maxPlane2; i++)
+>>>>>>> 3f70d49ec941422bb182100cc9f16f92c0188b57
 		{
 		pTemp = pNode;
 		pNode = pNode->left;
