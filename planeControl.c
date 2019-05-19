@@ -82,11 +82,9 @@ void runCycle()
 	if (plane != NULL)
 		insertNode(plane);
 	printf("3\n");
-	if(updatePlane())
-		{
-		printf("4\n");
-		callPrintTree();
-		}
+	updatePlane();
+	printf("4\n");
+	callPrintTree();
 	}
 
 /* return pointer 

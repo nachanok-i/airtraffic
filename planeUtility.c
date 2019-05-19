@@ -19,7 +19,7 @@ void setMaxPlane(int inputMaxPlane)
 	maxPlane2 = inputMaxPlane;
 	}
 
-void callocPlaneArray(int maxPlane2)
+void callocPlaneArray()
 	{
 	planeArray = (PLANE_T**) calloc(maxPlane2, sizeof(PLANE_T*));
 	if(planeArray == NULL)
@@ -82,7 +82,7 @@ void traverseUpdatePlane(PLANENODE_T * pCurrent)
 	}
 
 /* Updating active plane
- *
+ * return 1 for success, 0 there is no plane
  */
 void updatePlane()
 	{
@@ -252,14 +252,17 @@ void deletePlane(char * flightName)
 /* To call printTree function from outside */
 void callPrintTree()
 	{
-	if (pTree == NULL)
+	if(pTree != NULL)
 		{
-		printf("The sky is clear (there is no plane)\n");
+		callocPlaneArray();
+		printf("6\n");
+		gatherPlaneInTree(pTree);
+		printf("7\n");
+		displayColumnDetail();
 		}
 	else
-		{	
-		gatherPlaneInTree(pTree);
-		displayColumnDetail();
+		{
+		printf("The sky is clear (there is no plane)\n");
 		}
 	}
 
@@ -311,6 +314,7 @@ int insertNode(PLANE_T * pAPlane)
 		{
 		pTree = (PLANENODE_T*) calloc(1, sizeof(PLANENODE_T));
 		pTree = pNode;
+		printf("add root\n");
 		}
 	else
 		{
