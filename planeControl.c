@@ -92,6 +92,7 @@ PLANE_T * searchFlight()
 	char target[7];
 	int returnVal = 0;
 	PLANE_T * plane = NULL;
+	PLANENODE_T * node = NULL;
 	while(1)
 		{
 		printf("Enter flight number : ");
@@ -109,7 +110,8 @@ PLANE_T * searchFlight()
 		else
 			break;
 		}
-	plane = searchPlane(input);
+	node = searchPlane(input);
+	plane = node->data
 	if (plane == NULL)
 		{
 		printf("The plane %s was not found\n",input);
@@ -124,7 +126,6 @@ void inputCommand(PLANE_T * plane,int choice)
 		
 		}
 	}
-
 
 void helpMenu()
 	{
