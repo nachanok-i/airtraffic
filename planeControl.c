@@ -111,7 +111,7 @@ PLANE_T * searchFlight()
 			break;
 		}
 	node = searchPlane(input);
-	plane = node->data
+	plane = node->data;
 	if (plane == NULL)
 		{
 		printf("The plane %s was not found\n",input);
