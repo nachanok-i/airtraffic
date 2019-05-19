@@ -15,6 +15,7 @@
 #include"validate.h"
 
 #define MAXSIZE 128
+#define STOP 10
 
 void setup(int* genSpeed,int* maxPlane)
 	{
@@ -60,10 +61,14 @@ int getCommand()
 		returnVal = UPDATE;
 	else if (strcmp(input,"search")==0)
 		returnVal = SEARCH;
+	else if (strcmp(input,"show")==0)
+		returnVal = SHOW;
 	else if (strcmp(input,"command")==0)
 		returnVal = COMMAND;
 	else if (strcmp(input,"help")==0)
 		returnVal = HELP;
+	else if (strcmp(input,"stop")==0)
+		returnVal = STOP;
 	else
 		returnVal = -1;
 	return returnVal;
@@ -89,6 +94,7 @@ PLANE_T * searchFlight()
 		{
 		printf("Enter flight number : ");
 		fgets(input,MAXSIZE,stdin);
+		sscanf(input,"%s",input);
 		if (strlen(input) > 7)
 			{
 			printf("Error - maximum digit is 6\n");
@@ -121,16 +127,17 @@ void inputCommand(PLANE_T * plane,int choice)
 void helpMenu()
 	{
 	printf("How to use command\n");
-	printf("- hit enter to update current plane (without any command)\n");
-	printf("- \"search\" to search specific plane and print out the data\n");
-	printf("- \"command [flight number] [input command]\" to enter command to specific plane\n");
-	printf("\t Command list:\n");
-	printf("\t1.\"landing\" to command the plane to land\n");
-	printf("\t2.\"cir:[radius]\" to command plane to fly in circle\n");
-	printf("\t3.\"takeoff\" to command the plane to takeoff\n");
-	printf("\t4.\"alt:[altitude]\" to command the plane to change altitude\n");
-	printf("\t5.\"dir:[direction]\" to change the direction of the plane (N,NE,S,W,ect)\n");
-	printf("- \"help\" to print help menu\n");
+	printf("\t- hit enter to update current plane (without any command).\n");
+	printf("\t- \"search\" to search specific plane and print out the data.\n");
+	printf("\t- \"show\" to show current plane active on the sky.\n");
+	printf("\t- \"command [flight number] [input command]\" to enter command to specific plane.\n");
+	printf("\t\tCommand list:\n");
+	printf("\t\t1.\"landing\" to command the plane to land.\n");
+	printf("\t\t2.\"cir:[radius]\" to command plane to fly in circle.\n");
+	printf("\t\t3.\"takeoff\" to command the plane to takeoff.\n");
+	printf("\t\t4.\"alt:[altitude]\" to command the plane to change altitude.\n");
+	printf("\t\t5.\"dir:[direction]\" to change the direction of the plane (N,NE,S,W,ect).\n");
+	printf("\t- \"help\" to print help menu.\n");
 	}
 
 int main()
@@ -142,27 +149,34 @@ int main()
 	srand(time(NULL));
 	setup(&genSpeed,&maxPlane);
 	plane = generateFlight(100);
-	command = getCommand();
-	switch (command)
+	while(1)
 		{
-		case UPDATE:
-			runCycle();
-			break;
-		case SEARCH:
+		command = getCommand();
+		switch (command)
 			{
-			PLANE_T * plane = NULL;
-			plane = searchFlight();
-			if (plane != NULL)
-				printPlane(plane);
+			case UPDATE:
+				runCycle();
+				break;
+			case SEARCH:
+				{
+				PLANE_T * plane = NULL;
+				plane = searchFlight();
+				if (plane != NULL)
+					printPlane(plane);
+				}
+				break;
+			case SHOW:
+				callPrintTree();
+			case COMMAND:
+				break;
+			case HELP:
+				helpMenu();
+				break;
+			case STOP:
+				exit(1);
+			default:
+				printf("Error - invalid command\n");
+				break;
 			}
-			break;
-		case COMMAND:
-			break;
-		case HELP:
-			helpMenu();
-			break;
-		default:
-			printf("Error - invalid command\n");
-			break;
 		}
 	}
