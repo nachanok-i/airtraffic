@@ -1,0 +1,1 @@
+"AA", "AC", "AZ", "AF", "SB", "NZ", "AI", "AM", "NH", "TN", "OS", "FJ", "LD", "SU", "PX", "EL", "OZ", "CA", "BA", "CO", "CX", "CV", "CI", "MU", "CZ", "DL", "H8", "MS", "EK", "BR", "FX", "AY", "GA", "KA", "IR", "JL", "EG", "KL", "KE", "LH", "MH", "OM", "NW", "KZ", "PR", "PK", "PO", "QF", "RA", "SK", "UL", "SQ", "LX", "FM", "TG", "TK", "UA", "HY", "5X", "VN", "VS", 
