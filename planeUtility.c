@@ -10,19 +10,24 @@
 #include "flightGenerator.h"
 #include "futureCollision.h"
 
-int maxPlane = 10;
+int maxPlane2 = 10;
 PLANENODE_T * pTree = NULL;
 PLANE_T ** planeArray;
 
-void callocPlaneArray(int maxPlane)
+void setMaxPlane(int inputMaxPlane)
 	{
-	planeArray = (PLANE_T**) calloc(maxPlane, sizeof(PLANE_T*));
+	maxPlane2 = inputMaxPlane;
+	}
+
+void callocPlaneArray(int maxPlane2)
+	{
+	planeArray = (PLANE_T**) calloc(maxPlane2, sizeof(PLANE_T*));
 	if(planeArray == NULL)
 		{
 		printf("\t Allocation error\n");
 		exit(0);
 		}
-	printf(">>> Maximum amout is %d\n", maxPlane);
+	printf(">>> Maximum amout is %d\n", maxPlane2);
 	}
 
 /* This function will print plane information from structure
@@ -100,28 +105,28 @@ void displayColumnDetail()
 	printf("\n");
 	/* sequence of plane */
 	printf("%10s :","SEQUENCE");
-	for(i = 0; i < maxPlane; i++)
+	for(i = 0; i < maxPlane2; i++)
 		{
 		printf("%5s%2d|", "PLANE", i+1);
 		}
 	printf("\n");
 	/* plane's flight */
 	printf("%10s :","FLIGHT");
-	for(i = 0; i < maxPlane; i++)
+	for(i = 0; i < maxPlane2; i++)
 		{
 		printf("%7s|", planeArray[i]->flight);
 		}
 	printf("\n");
 	/* plane's altitude */
 	printf("%10s :","ALTITUDE");
-	for(i = 0; i < maxPlane; i++)
+	for(i = 0; i < maxPlane2; i++)
 		{
 		printf("%5d%2s|", planeArray[i]->position.z, "ft");
 		}
 	printf("\n");
 	/* plane's coordinate */
 	printf("%10s :","X-Y COOR");
-	for(i = 0; i < maxPlane; i++)
+	for(i = 0; i < maxPlane2; i++)
 		{
 		printf("%3d,%3d|", planeArray[i]->position.x, planeArray[i]->position.y);
 		}
@@ -193,7 +198,7 @@ void gatherPlaneInTree(PLANENODE_T * pCurrent)
 void removePlane(PLANENODE_T * pNode)
 	{
 	int i = 0;
-	for(i = 0; i < maxPlane; i++)
+	for(i = 0; i < maxPlane2; i++)
 		{
 		/**/
 		}

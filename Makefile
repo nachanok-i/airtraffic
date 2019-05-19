@@ -30,7 +30,7 @@ planeUtility.o : planeUtility.c flightGenerator.h
 validate.o : validate.c validate.h
 	gcc -c validate.c
 
-planeControl.o : planeControl.c planeControl.h futureCollision.h flightGenerator.h planeUtility.h validate.h datatype.h
+planeControl.o : planeControl.c futureCollision.h flightGenerator.h planeUtility.h validate.h datatype.h
 	gcc -c planeControl.c futureCollision.c flightGenerator.c planeUtility.c validate.c
 
 planeControl$(EXECEXT) : planeControl.o futureCollision.o flightGenerator.o planeUtility.o validate.o

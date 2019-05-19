@@ -2,7 +2,6 @@
 #define PLANEUTILITY_H
 #include "flightGenerator.h"
 #include "futureCollision.h"
-int maxPlane = 10;
 
 /* This function will print plane information from structure
  * input PLANE_T structure */
