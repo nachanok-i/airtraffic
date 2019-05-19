@@ -140,18 +140,18 @@ void displayColumnDetail()
  *    flightName   -   a string for comparing
  *    foundFlight  -   for checking found node
  */
-void doesExist(PLANENODE_T * pCurrent, char * flightName, PLANE_T * foundFlight)
+void doesExist(PLANENODE_T * pCurrent, char * flightName, PLANENODE_T * foundFlight)
 	{
 	if(pCurrent->left != NULL)
 		{
 		if(strcmp(pCurrent->left->data->flight, flightName) == 0)
-			foundFlight = pCurrent->left->data;
+			foundFlight = pCurrent->left;
 		doesExist(pCurrent->left, flightName, foundFlight);
 		}
 	if(pCurrent->right != NULL)
 		{
 		if(strcmp(pCurrent->right->data->flight, flightName) == 0)
-			foundFlight = pCurrent->right->data;
+			foundFlight = pCurrent->right;
 		doesExist(pCurrent->right, flightName, foundFlight);
 		}
 	}
@@ -160,14 +160,14 @@ void doesExist(PLANENODE_T * pCurrent, char * flightName, PLANE_T * foundFlight)
  * @param	- flightName : Name of flight user type in
  * return found flight (can be NULL if not found)
  */
-PLANE_T * searchPlane(char * flightName)
+PLANENODE_T * searchPlane(char * flightName)
 	{
-	PLANE_T * foundFlight = NULL;
+	PLANENODE_T * foundFlight = NULL;
 	if (pTree == NULL)
 		return NULL;
 	if(strcmp(pTree->data->flight, flightName) == 0)
 		{	
-		foundFlight = pTree->data;
+		foundFlight = pTree;
 		return foundFlight;
 		}
 	else
