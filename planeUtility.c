@@ -198,12 +198,13 @@ void resetCount()
 	count = 0;
 	}
 
-/* Removing plane 
- * @param	-	PLANENODE_T * pNode
+/* Removing plane
+ * @param	-	pNode : the node wanted to remove
  */
 void removePlane(PLANENODE_T * pNode)
 	{
-	PLANENODE_T * pTemp = NULL;
+	PLANENODE_T * pRemove = NULL; /* removing node */
+	PLANENODE_T * pSucc = NULL; /* Successor for deleting node which has 2 child */
 	int i = 0;
 	if((pNode->left == NULL) && (pNode->right == NULL))
 		{
@@ -212,21 +213,30 @@ void removePlane(PLANENODE_T * pNode)
 		}
 	else if((pNode->left == NULL) && (pNode->right != NULL))
 		{
-		pTemp = pNode;
+		pRemove = pNode;
 		pNode = pNode->right;
-		free(pTemp->data);
-		free(pTemp);
+		free(pRemove->data);
+		free(pRemove);
 		}
 	else if((pNode->left != NULL) && (pNode->right == NULL))
 		{
-		pTemp = pNode;
+		pRemove = pNode;
 		pNode = pNode->left;
-		free(pTemp->data);
-		free(pTemp);
+		free(pRemove->data);
+		free(pRemove);
 		}
 	else
 		{
-		/*	node has two children	INPROCESS*/
+		pRemove = pNode;
+		pSucc = pNode->right;
+		while(pSucc->left != NULL)
+			{
+			pSucc = pSucc->left;
+			}
+		pNode = pSucc;
+		pSucc = NULL;
+		free(pRemove->data);
+		free(pRemove);
 		}
 	}
 
