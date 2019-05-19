@@ -3,6 +3,9 @@
 #include "flightGenerator.h"
 #include "futureCollision.h"
 
+
+void setMaxPlane(int inputMaxPlane);
+
 /* This function will print plane information from structure
  * input PLANE_T structure */
 void printPlane(PLANE_T* input);

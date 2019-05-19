@@ -38,6 +38,7 @@ void setup()
 			printf("2. Max plane\n");
 			fgets(input,sizeof(input),stdin);
 			sscanf(input,"%d",&maxPlane);
+			setMaxPlane(maxPlane);
 			break;
 			}
 		else if (strncasecmp(input,"n",1) == 0)
