@@ -30,7 +30,7 @@ void resetCurrentAmount()
 	{
 	currentAmount = 0;
 	}
-
+/* this function is use to stored the plane information for display */
 void makePlaneArray()
 	{
 	planeArray = (PLANE_T**) calloc(maxPlane2, sizeof(PLANE_T*));
