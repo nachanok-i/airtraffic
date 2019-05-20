@@ -81,9 +81,7 @@ void printTable()
 
 void setPosition(PLANE_T* data)
 {
-	int x = data->position.x;
-	int y = data->position.y;
-	int z = data->position.z;
+	int x = data->position.x; /* x coordinate of the plane position variable */
 	printf("%s position: %d %d %d\n",data->flight,x,y,z );
 	edges[x][y][z] = data->ID;
 	setRadius(data->position);
@@ -124,6 +122,7 @@ void setRadius(POSITION_T data)
 			}
 		}
 }
+
 /* this function will move all the plane in continuously to the direction
  * that the plane is heading to */
 void movePlane(PLANENODE_T* node)
