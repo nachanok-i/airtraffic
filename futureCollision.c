@@ -95,7 +95,7 @@ void setPosition(PLANE_T* data)
 	setRadius(data->position);
 }
 
-/* This function is use to setting the safety are for a plane */
+/* This function is use to setting the safety area for a plane */
 void setRadius(POSITION_T data)
 {
 	int i=0;    /* loop varialbe */
