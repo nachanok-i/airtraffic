@@ -15,11 +15,15 @@ int currentAmount = 0; /* number of plane */
 PLANENODE_T * pTree = NULL;
 PLANE_T ** planeArray;
 
+/* this function is use to get plane informtion 
+ * from planeControl.c to planeUtility.c */
 void setMaxPlane(int inputMaxPlane)
 	{
 	maxPlane2 = inputMaxPlane;
 	}
 
+/* this function is use to check the current amount 
+ * of plane in the systmem */
 int getCurrentAmount()
 	{
 	return currentAmount;
@@ -30,6 +34,7 @@ void resetCurrentAmount()
 	{
 	currentAmount = 0;
 	}
+
 /* this function is use to stored the plane information for display */
 void makePlaneArray()
 	{
