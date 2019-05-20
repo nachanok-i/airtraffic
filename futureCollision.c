@@ -44,7 +44,7 @@ int getCommand();
 
 /* This function is use to clean the table */
 void cleanTable()
-{
+	{
 	int i=0; /* loop varialbe */
 	int j=0; /* loop varialbe */
 	int k=0; /* loop varialbe */
@@ -58,11 +58,11 @@ void cleanTable()
 				}
 			}
 		}
-}
+	}
 
 /* This function is use to display the table */
 void printTable()
-{
+	{
 	int count = 0;
 	int count2 = 0;
 	int i=0; /* x-axis loop varialbe */
@@ -93,23 +93,44 @@ void printTable()
 			}
 		printf("\n");
 		//}
-}
+	}
+
+void printPlanePosition()
+	{
+	int i=0;
+	int j=0;
+	for (i = 0; i < MAXAREA; i++)
+	{
+		printf("%2d", i);
+	}
+	for (j=0;j<MAXAREA;j++)
+		{
+		for (i=0;i<MAXAREA;i++)
+			{
+			if (edges[i][j][0])
+				printf("%2d", edges[i][j][0]);
+			else
+				printf("  ");
+			}
+			printf("\n");
+		}
+	}
 
 /* This function is use to set position of a plane that use to 
  * insert in the table */ 
 void setPosition(PLANE_T* data)
-{
+	{
 	int x = data->position.x; /* x coordinate of the plane position variable */
 	int y = data->position.y; /* y coordinate of the plane position variable */
 	int z = data->position.z; /* z coordinate of the plane position variable */
 	printf("%s position: %d %d %d\n",data->flight,x,y,z );
 	edges[x][y][z] = data->ID;
 	setRadius(data->position);
-}
+	}
 
 /* This function is use to setting the safety area for a plane */
 void setRadius(POSITION_T data)
-{
+	{
 	int i=0;    /* loop varialbe for x axis */
 	int j=0;    /* loop varialbe for y axis*/
 	int startX; /* start point at x axis */
@@ -186,12 +207,12 @@ void setRadius(POSITION_T data)
 				}
 			}
 		}
-}
+	}
 
 /* this function will move all the plane in continuously to the direction
  * that the plane is heading to */
 void movePlane(PLANE_T* airPlane)
-{
+	{
 	// PLANE_T * airPlane = NULL;
 	// airPlane = node->data;
 	switch (airPlane->heading)
@@ -263,11 +284,11 @@ void movePlane(PLANE_T* airPlane)
 			printf("Heading direction error\n");
 			exit(0);
 		}
-}
+	}
 
 /* this function is use to check collision */
 int checkCollision()
-{
+	{
 	int bColli = 0; /* return value */ 
 	int i=0; /* loop variable */
 	int j=0; /* loop variable */
@@ -289,4 +310,4 @@ int checkCollision()
 		}
 	bColli = 1;
 	return bColli;
-}
+	}

@@ -301,7 +301,7 @@ void printDetail()
 		// resetCurrentAmount();
 		// traverseInOrder(pTree,&gatherPlaneInTree);
 		setPlaneMatrix();
-		printTable();
+		printPlanePosition();
 		displayColumnDetail();
 		cleanTable();
 		}

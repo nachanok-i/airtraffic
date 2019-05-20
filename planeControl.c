@@ -33,7 +33,7 @@ void setup()
 	printf("\t\tWelcome to Air Traffic Control System Simulation\t\t\n\n");
 	printf("------------------------------------------------------------------------>\n\n");	
 	printf("SETUP MENU\n");
-	printf("1. Plane Generate Speed (default 10%)\n");
+	printf("1. Plane Generate Speed (default 10 percents)\n");
 	printf("2. Maximum Plane in the sky (default 10 planes)\n");
 	printf("Do you want to change setup? (Y/N) : ");
 	fgets(input,sizeof(input),stdin);
