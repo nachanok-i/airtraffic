@@ -85,9 +85,9 @@ void printTable()
 			for(i = MARGIN; i < MAXAREA + (2*MARGIN); i++)
 				{
 				if (edges[i][j][k] == 0)
-					printf(" ");
+					printf("%2d",i);
 				else
-					printf("*");
+					printf("  ");
 				}
 			printf("\n");
 			}
