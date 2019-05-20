@@ -39,6 +39,8 @@ void setRadius(POSITION_T data);
 int checkCollision();
 void movePlane(PLANENODE_T* node);
 int getCommand();
+
+/* This function is use to clean the table */
 void cleanTable()
 {
 	int i=0; /* loop varialbe */
@@ -55,6 +57,8 @@ void cleanTable()
 			}
 		}
 }
+
+/* This function is use to display the table */
 void printTable()
 {
 	int i=0; /* loop varialbe */
@@ -79,6 +83,8 @@ void printTable()
 		//}
 }
 
+/* This function is use to set position of a plane that use to 
+ * insert in the table */ 
 void setPosition(PLANE_T* data)
 {
 	int x = data->position.x; /* x coordinate of the plane position variable */
@@ -89,6 +95,7 @@ void setPosition(PLANE_T* data)
 	setRadius(data->position);
 }
 
+/* This function is use to setting the safety are for a plane */
 void setRadius(POSITION_T data)
 {
 	int i=0;    /* loop varialbe */
