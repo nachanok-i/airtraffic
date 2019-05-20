@@ -62,12 +62,13 @@ void printTable()
 			{
 			for(i = MARGIN; i < MAXAREA; i++)
 				{
-					if (edges[i][j] == 0)
-						printf("%2d",i);
-					else if (edges[i][j] == 9)
-						printf("**");
-					else
-						printf("  ");
+					// if (edges[i][j] == 0)
+					// 	printf("%2d",i);
+					// else if (edges[i][j] == 9)
+					// 	printf("**");
+					// else
+					// 	printf("  ");
+					printf("%d", edges[i][j]);
 				}
 			printf("\n");
 			}
@@ -83,6 +84,7 @@ void setPosition(PLANE_T* data)
 	int y = data->position.y; /* y coordinate of the plane position variable */
 	printf("%s position: %d %d\n",data->flight,x,y);
 	edges[x][y] = 9 /*data->ID*/;
+	printf("edges: %d\n", edges[x][y]);
 	// for (j=0;j<MAXAREA;j++)
 	// 	{
 	// 	for (i=0;i<MAXAREA;i++)
@@ -268,14 +270,14 @@ int checkCollision()
 	bColli = 1;
 	return bColli;
 	}
-void checkRunway()
-	{
-	int runwayPosition = MAXAREA/2;
-	int i=0;
-	int j=0;
-	for (i = 0; i < runwayPosition; i++)
-	{
+// void checkRunway()
+// 	{
+// 	int runwayPosition = MAXAREA/2;
+// 	int i=0;
+// 	int j=0;
+// 	for (i = 0; i < runwayPosition; i++)
+// 	{
 		
-	}
-	edges
-	}
+// 	}
+// 	edges
+// 	}

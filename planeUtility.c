@@ -221,7 +221,7 @@ PLANENODE_T * searchPlane(char * flightName)
 /* Removing plane
  * @param	-	pNode : the node wanted to remove
  */
-void removePlane(PLANENODE_T ** ppNode, PLANENODE_T * pNode)
+void removePlane(PLANENODE_T * pNode)
 	{
 	PLANENODE_T * pRemove = NULL; /* removing node */
 	PLANENODE_T * pSucc = NULL; /* Successor for deleting node which has 2 child */
@@ -281,16 +281,16 @@ void removePlane(PLANENODE_T ** ppNode, PLANENODE_T * pNode)
 			pSucc->right = pNode->right;
 			pNode = pSucc;
 			}
-		// if(pTree == pNode)
-		// 	{
-		// 	if(pSucc != pTree->right)
-		// 		{
-		// 		pSucc->right = pTree->right;
-		// 		pTree = pSucc;
-		// 		}
-		// 	else
-		// 		pTree = pTree->right;
-		// 	}
+		if(pTree == pNode)
+			{
+			if(pSucc != pTree->right)
+				{
+				pSucc->right = pTree->right;
+				pTree = pSucc;
+				}
+			else
+				pTree = pTree->right;
+			}
 		else
 			{
 			pNode = pSucc;
@@ -307,6 +307,12 @@ void removePlane(PLANENODE_T ** ppNode, PLANENODE_T * pNode)
 	if(pTree != NULL)
 		printf("Now %s is root\n",pTree->data->flight);
 	}
+
+// void removePlane(PLANE_T * pDelete)
+// 	{
+// 	int i=0;
+// 	for (i=0
+// 	}
 
 /* delete plane
  * @param	- flightName : Name of flight from other function
