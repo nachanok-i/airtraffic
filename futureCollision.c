@@ -37,7 +37,7 @@ int edges[MAXAREA][MAXAREA][MAXHIGH];
 void setPosition(PLANE_T* data);
 void setRadius(POSITION_T data);
 int checkCollision();
-void movePlane(PLANE_T* plane);
+void movePlane(PLANENODE_T* node);
 int getCommand();
 void cleanTable()
 {
@@ -122,8 +122,10 @@ void setRadius(POSITION_T data)
 }
 /* this function will move all the plane in continuously to the direction
  * that the plane is heading to */
-void movePlane(PLANE_T* airPlane)
+void movePlane(PLANENODE_T* node)
 {
+	PLANE_T * airPlane = NULL;
+	airPlane = node->data;
 	switch (airPlane->heading)
 		{
 		case N:

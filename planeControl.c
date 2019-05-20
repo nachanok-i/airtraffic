@@ -17,12 +17,13 @@
 #define MAXSIZE 128
 #define STOP 10
 
-int genSpeed = 10;
-int maxPlane = 10;
+int genSpeed = 10; /* plane generation speed */
+int maxPlane = 10; /* maximum amount of plane that can have */
 
 void setup()
 	{
-	char input[32];
+	char input[32];  /* input variable */
+	
 	printf("SETUP MENU\n");
 	while(1)
 		{
@@ -49,8 +50,9 @@ void setup()
 
 int getCommand()
 	{
-	char input[MAXSIZE];
-	int returnVal = 0;
+	char input[MAXSIZE]; /* input variable */
+	int returnVal = 0;   /* return value */
+	
 	printf("Enter command (Type \"help\" to see command) : ");
 	fgets(input,MAXSIZE,stdin);
 	sscanf(input,"%s",input);
@@ -73,6 +75,8 @@ int getCommand()
 	return returnVal;
 	}
 
+/* this function is use to start cycle 
+ when user don't want to enter command */
 void runCycle()
 	{
 	PLANE_T * plane = NULL;

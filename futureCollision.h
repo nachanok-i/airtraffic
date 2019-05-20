@@ -4,7 +4,7 @@
 void setPosition(PLANE_T* data);
 void setRadius(POSITION_T data);
 int checkCollision();
-void movePlane(PLANE_T* plane);
+void movePlane(PLANENODE_T* node);
 int getCommand();
 void cleanTable();
 void printTable();

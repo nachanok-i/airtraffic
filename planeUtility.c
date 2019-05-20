@@ -69,18 +69,6 @@ void printPlane(PLANE_T* input)
 		}
 	}
 
-/* Updating active plane
- * @param	-	PLANENODE_T * pCurrent
- */
-void traverseUpdatePlane(PLANENODE_T * pCurrent)
-	{
-	if(pCurrent->left != NULL)
-		traverseUpdatePlane(pCurrent->left);
-	movePlane(pCurrent->data);
-	if(pCurrent->right != NULL)
-		traverseUpdatePlane(pCurrent->right);
-	}
-
 /* Traverse a tree (in order traversal) and execute the
  * function 'nodeFunction' on each element
  * Argument
@@ -88,7 +76,7 @@ void traverseUpdatePlane(PLANENODE_T * pCurrent)
  *    nodeFunction -   function to execute on each node
  * Code from lab 6
  */
-void traverseInOrder(NODE_T* pCurrent,void (*nodeFunction)(NODE_T* pNode ))
+void traverseInOrder(PLANENODE_T* pCurrent,void (*nodeFunction)(PLANENODE_T* pNode ))
 {
     if (pCurrent->left != NULL)
        {
@@ -108,8 +96,8 @@ void updatePlane()
 	{
 	if(pTree != NULL)
 		{
-		printf("5\n");
-		traverseUpdatePlane(pTree);
+		printf("new update\n");
+		traverseInOrder(pTree,&movePlane);
 		}
 	}
 
