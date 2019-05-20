@@ -2,9 +2,10 @@
  *
  * control the plane position (moving) in the air and recieve command
  * from user and send it to control specific plane
- * Created by Nachanok Issarapruk (Tap) ID 61070503410
+ * Created by Nachanok Issarapruk (Tap) ID 61070503410 on 26 Mar 2019
  * Edited by Sahachok Prachaporn (Lion) ID 61070503436
- * 26 Mar 2019 */
+ * Edited by Sutinan Tadalimavad (Lion) ID 61070503443 on 20 May 2019
+ */
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
@@ -23,10 +24,12 @@ int maxPlane = 10; /* maximum amount of plane that can have */
 void setup()
 	{
 	char input[32];  /* input variable */
-	
+	printf("------------------------------------------------------------------------>\n\n");
+	printf("\t\tWelcome to Air Traffic Control System Simulation\t\t\n\n");
+	printf("------------------------------------------------------------------------>\n\n");	
 	printf("SETUP MENU\n");
-	printf("1. Plane Generate Speed (percents).\n");
-	printf("2. Maximum Plane in the sky.\n");
+	printf("1. Plane Generate Speed (default 10%)\n");
+	printf("2. Maximum Plane in the sky (default 10 planes)\n");
 	printf("Do you want to change setup? (Y/N) : ");
 	fgets(input,sizeof(input),stdin);
 	if (strncasecmp(input,"Y",1)==0)
@@ -44,7 +47,7 @@ void setup()
 			}
 		while(2)
 			{
-			printf("2. Maximum plane (default 10 planes)\n");
+			printf("2. Number of plane (Maximum of 10 planes)\n");
 			fgets(input,sizeof(input),stdin);
 			sscanf(input,"%d",&maxPlane);
 			if ((maxPlane > 0) && (maxPlane <= 10))
@@ -53,7 +56,7 @@ void setup()
 				break;
 				}
 			else
-				printf("\tError - Max plane have to be 1-10\n");
+				printf("\tError - Number of plane have to be 1-10\n");
 			}
 		}
 	printf("\n");
@@ -153,9 +156,11 @@ void helpMenu()
 	printf("\t\t2.\"cir:[radius]\" to command plane to fly in circle.\n");
 	printf("\t\t3.\"takeoff\" to command the plane to takeoff.\n");
 	printf("\t\t4.\"alt:[altitude]\" to command the plane to change altitude.\n");
-	printf("\t\t5.\"dir:[direction]\" to change the direction of the plane (N,NE,S,W,ect).\n");
+	printf("\t\t5.\"dir:[direction]\" to change the direction of the plane (N,NE,S,W,etc).\n");
 	printf("\t\"setup\" to set plane's generation speed and maximum plane in the sky.\n");
 	printf("\t- \"help\" to print help menu.\n");
+	printf("\t- \"stop\" to stop the program.\n");
+
 	}
 
 int main()
