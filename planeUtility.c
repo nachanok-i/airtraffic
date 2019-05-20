@@ -264,6 +264,7 @@ void deletePlane(char * flightName)
 		printf("\tPlane is not found!\n");
 	}
 
+/* this function use to clear the plane array */
 void clearPlaneArray()
 	{
 	int i = 0;
@@ -273,6 +274,7 @@ void clearPlaneArray()
 		}
 	}
 
+/* this function is use to set plane data to matrix */
 void setPlaneMatrix()
 	{
 	int i=0;
