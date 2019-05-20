@@ -161,7 +161,7 @@ void helpMenu()
 int main()
 	{
 	PLANE_T* plane = NULL;
-	int command = 0;
+	int command = 0; /* command variable*/
 	srand(time(NULL));
 	setup();
 	plane = generateFlight(100);
