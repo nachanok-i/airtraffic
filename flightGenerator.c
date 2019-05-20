@@ -12,9 +12,11 @@
 #include<stdlib.h>
 #include<string.h>
 #include"datatype.h"
+#include"validate.h"
+
 /* This function will generate flight code in form AA1234 2 alphabets and 4 digits
  * refer to real airline code input flightCode char array of length 7 */
-void generateNumber(char flightCode[])
+void generateFLightCode(char flightCode[])
 	{
 	char airline[61][3] = {"AA", "AC", "AZ", "AF", "SB", "NZ", "AI", "AM", "NH", "TN", "OS", "FJ", "LD", 
 							"SU", "PX", "EL", "OZ", "CA", "BA", "CO", "CX", "CV", "CI", "MU", "CZ", "DL", 
@@ -98,8 +100,18 @@ PLANE_T* generateFlight(int genSpeed)
 			printf("Calloc generated flight error!\n");
 			exit(0);
 			}
-		generateNumber(plane->flight);
-		plane->heading = generatePosition(&plane->position.x,&plane->position.y,&plane->position.z);
+		while(1)
+		{
+		generateFLightCode(plane->flight);
+		if(checkFlightCode(plane->flight))
+			break;
+		}
+		while(1)
+			{
+			plane->heading = generatePosition(&plane->position.x,&plane->position.y,&plane->position.z);
+			if(checkDirection(plane->heading))
+				break;
+			}
 		plane->order = LANDING;
 		}
 	return plane;

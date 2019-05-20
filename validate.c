@@ -67,7 +67,7 @@ int checkFlightCode(char input[])
 */
 int checkDirection(int direction)
 	{
-	if ((direction >= 1) && (direction <=8))
+	if ((direction >= 2) && (direction <=4))
 		return 1;
 	else
 		return 0;

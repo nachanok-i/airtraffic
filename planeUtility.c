@@ -11,7 +11,7 @@
 #include "futureCollision.h"
 
 int maxPlane2 = 10;
-int currentAmount = 0;
+int currentAmount = 0; /* number of plane */
 PLANENODE_T * pTree = NULL;
 PLANE_T ** planeArray;
 
@@ -20,19 +20,18 @@ void setMaxPlane(int inputMaxPlane)
 	maxPlane2 = inputMaxPlane;
 	}
 
-void countPlane()
+int getCurrentAmount()
 	{
-	currentAmount += 1;
-	printf("\tcurrentAmount : %d\n", currentAmount);
+	return currentAmount;
 	}
 
-/*set counting to zero */
-void resetCount()
+/*set currentAmount to zero */
+void resetCurrentAmount()
 	{
 	currentAmount = 0;
 	}
 
-void callocPlaneArray()
+void makePlaneArray()
 	{
 	planeArray = (PLANE_T**) calloc(maxPlane2, sizeof(PLANE_T*));
 	if(planeArray == NULL)
@@ -77,7 +76,7 @@ void printPlane(PLANE_T* input)
 			break;
 		/* normally this would not happen */
 		default:
-			printf("Heading direction error\n");
+			printf("Heading direction error '%d'\n",input->heading);
 			exit(0);
 		}
 	}
@@ -89,7 +88,7 @@ void printPlane(PLANE_T* input)
  *    nodeFunction -   function to execute on each node
  * Code from lab 6
  */
-void traverseInOrder(PLANENODE_T* pCurrent,void (*nodeFunction)(PLANENODE_T* pNode ))
+void traverseInOrder(PLANENODE_T* pCurrent,void (*nodeFunction)(PLANENODE_T* pNode))
 {
     if (pCurrent->left != NULL)
        {
@@ -110,7 +109,7 @@ void updatePlane()
 	if(pTree != NULL)
 		{
 		printf("new update\n");
-		resetCount();
+		resetCurrentAmount();
 		traverseInOrder(pTree,&movePlane);
 		}
 	}
@@ -128,6 +127,7 @@ void gatherPlaneInTree(PLANENODE_T * pCurrent)
 /* This function use to print planes in columns */
 void displayColumnDetail()
 	{
+	printf("\t currentAmount : %d\n", currentAmount);
 	int i = 0;
 	printf("\n");
 	/* sequence of plane */
@@ -259,13 +259,23 @@ void deletePlane(char * flightName)
 		printf("\tPlane is not found!\n");
 	}
 
+void clearPlaneArray()
+	{
+	int i = 0;
+	for(i = 0; i < currentAmount ;i++)
+		{
+		planeArray[i] = NULL;
+		}
+	}
 
 /* To call printTree function from outside */
 void callPrintTree()
 	{
 	if(pTree != NULL)
 		{
-		callocPlaneArray();
+		if(planeArray == NULL)
+			makePlaneArray();
+		resetCurrentAmount();
 		traverseInOrder(pTree,&gatherPlaneInTree);
 		displayColumnDetail();
 		}

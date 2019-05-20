@@ -15,6 +15,9 @@ void printPlane(PLANE_T* input);
  */
 int updatePlane();
 
+
+int getCurrentAmount();
+
 /* Traverse a tree (pre order traversal)
  * for find(Plane) and comparing the node
  * Argument
@@ -28,7 +31,7 @@ void doesExist(PLANENODE_T * pCurrent, char * flightName, PLANE_T * foundFlight)
  * @param	- flightName : Name of flight user type in
  * return found flight (can be NULL if not found)
  */
-PLANE_T * searchPlane(char * flightName);
+PLANENODE_T * searchPlane(char * flightName);
 
 /* Printing all plane in the tree
  * using in-order traversal

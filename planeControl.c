@@ -33,18 +33,20 @@ void setup()
 		if (genSpeed > 0 && genSpeed <= 100)
 			break;
 		else
-			printf("Error - Gen speed have to be 1-100\n");
+			printf("\tError - Gen speed have to be 1-100\n");
 		}
 	while(2)
 		{
 		printf("2. Maximum plane (default 10 planes)\n");
 		fgets(input,sizeof(input),stdin);
 		sscanf(input,"%d",&maxPlane);
-		setMaxPlane(maxPlane);
-		if (maxPlane > 0 && maxPlane <= 100)
+		if ((maxPlane > 0) && (maxPlane <= 10))
+			{
+			setMaxPlane(maxPlane);
 			break;
+			}
 		else
-			printf("Error - Max plane have to be 1-100\n");
+			printf("\tError - Max plane have to be 1-10\n");
 		}
 	}
 
@@ -79,8 +81,10 @@ int getCommand()
  when user don't want to enter command */
 void runCycle()
 	{
+	int currentAmount = getCurrentAmount();
 	PLANE_T * plane = NULL;
-	plane = generateFlight(genSpeed);
+	if(currentAmount < maxPlane)
+		plane = generateFlight(genSpeed);
 	if (plane != NULL)
 		insertNode(plane);
 	updatePlane();
@@ -103,12 +107,12 @@ PLANE_T * searchFlight()
 		sscanf(input,"%s",input);
 		if (strlen(input) > 7)
 			{
-			printf("Error - maximum digit is 6\n");
+			printf("\tError - maximum digit is 6\n");
 			}
 		sscanf(input,"%s",target);
 		if (checkFlightCode(target) == 0)
 			{
-			printf("Error - invalid flight number\n");
+			printf("\tError - invalid flight number\n");
 			}
 		else
 			break;
@@ -117,7 +121,7 @@ PLANE_T * searchFlight()
 	plane = node->data;
 	if (plane == NULL)
 		{
-		printf("The plane %s was not found\n",input);
+		printf("\tThe plane %s was not found\n",input);
 		}
 	return plane;
 	}
@@ -182,7 +186,7 @@ int main()
 			case STOP:
 				exit(1);
 			default:
-				printf("Error - invalid command\n");
+				printf("\tError - invalid command\n");
 				break;
 			}
 		}

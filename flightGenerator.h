@@ -8,6 +8,7 @@
 #define FLIGHTGENERATOR_H
 
 #include"datatype.h"
+#include"validate.h"
 /* This function will generate flight code in form AA1234 2 alphabets and 4 digits
  * refer to real airline code input flightCode char array of length 7 */
 void generateNumber(char flightCode[]);

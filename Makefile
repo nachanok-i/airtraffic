@@ -18,6 +18,9 @@ all : $(EXECUTABLES)
 flightGenerator.o : flightGenerator.c flightGenerator.h
 	gcc -c flightGenerator.c
 
+validate.o : validate.c validate.h
+	gcc -c validate.c
+
 planeInformation.o : planeInformation.c planeInformation.h flightGenerator.h
 	gcc -c planeInformation.c flightGenerator.c
 
@@ -27,8 +30,7 @@ futureCollision.o : futureCollision.c futureCollision.h flightGenerator.h
 planeUtility.o : planeUtility.c flightGenerator.h
 	gcc -c planeUtility.c flightGenerator.c
 
-validate.o : validate.c validate.h
-	gcc -c validate.c
+
 
 planeControl.o : planeControl.c futureCollision.h flightGenerator.h planeUtility.h validate.h datatype.h
 	gcc -c planeControl.c futureCollision.c flightGenerator.c planeUtility.c validate.c
