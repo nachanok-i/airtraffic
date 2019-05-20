@@ -166,6 +166,8 @@ void movePlane(PLANENODE_T* node)
 			exit(0);
 		}
 }
+
+/* this function is use to check collision */
 int checkCollision()
 {
 	int bColli = 0; /* return value */ 
