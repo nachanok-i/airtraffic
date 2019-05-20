@@ -364,8 +364,8 @@ int insertNode(PLANE_T * pAPlane)
 	return 1;
 	}
 
-/* Free all plane in tree
- * 
+/* This function is use to 
+ * free all plane in tree 
  */
 void freeTree(PLANENODE_T * pCurrent)
 	{
