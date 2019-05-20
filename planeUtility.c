@@ -53,7 +53,7 @@ void makePlaneArray()
 void printPlane(PLANE_T* input)
 	{
 	printf("Flight: %s\n", input->flight);
-	printf("Position: x %d y %d z %d\n", input->position.x, input->position.y, input->position.z);
+	printf("Position: x %d y %d\n", input->position.x, input->position.y);
 	switch (input->heading)
 		{
 		case N:
@@ -162,7 +162,7 @@ void displayColumnDetail()
 	printf("%10s :","ALTITUDE");
 	for(i = 0; i < currentAmount; i++)
 		{
-		printf("%5d%2s|", planeArray[i]->position.z, "ft");
+		printf("%5d%2s|", planeArray[i]->altitude, "ft");
 		}
 	printf("\n");
 	/* plane's coordinate */

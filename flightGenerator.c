@@ -108,7 +108,7 @@ PLANE_T* generateFlight(int genSpeed)
 		}
 		while(1)
 			{
-			plane->heading = generatePosition(&plane->position.x,&plane->position.y,&plane->position.z);
+			plane->heading = generatePosition(&plane->position.x,&plane->position.y,&plane->altitude);
 			if(checkDirection(plane->heading))
 				break;
 			}
