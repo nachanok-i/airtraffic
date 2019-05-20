@@ -3,7 +3,7 @@
  * control the plane position (moving) in the air and recieve command
  * from user and send it to control specific plane
  * Created by Nachanok Issarapruk (Tap) ID 61070503410
- * Edited by Sahachok Prachaporn (Lion) ID 61070503436
+ * Modified by Sahachok Prachaporn (Lion) ID 61070503436
  * 26 Mar 2019 */
 #include<stdio.h>
 #include<stdlib.h>
