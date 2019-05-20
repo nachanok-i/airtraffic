@@ -23,7 +23,7 @@ void setMaxPlane(int inputMaxPlane)
 void countPlane()
 	{
 	currentAmount += 1;
-	printf("currentAmount %d\n", currentAmount);
+	printf("\tcurrentAmount : %d\n", currentAmount);
 	}
 
 /*set counting to zero */
@@ -116,20 +116,10 @@ void updatePlane()
 		}
 	}
 
-// /* Printing all plane in the tree
-//  * using in-order traversal
-//  * @param	- pCurrent : refer to a current plane
-//  */
-// void gatherPlaneInTree(PLANENODE_T * pCurrent,int * count)
-// 	{
-// 	if(pCurrent->left != NULL)
-// 		gatherPlaneInTree(pCurrent->left,count);
-// 	planeArray[*count] = pCurrent->data;
-// 	*count += 1;
-// 	if(pCurrent->right != NULL)
-// 		gatherPlaneInTree(pCurrent->right,count);
-// 	}
-
+/* Printing all plane in the tree
+ * using in-order traversal
+ * @param	- pCurrent : refer to a current plane
+ */
 void gatherPlaneInTree(PLANENODE_T * pCurrent)
 	{
 	planeArray[currentAmount] = pCurrent->data;
