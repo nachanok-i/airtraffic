@@ -24,7 +24,9 @@ int maxPlane = 10; /* maximum amount of plane that can have */
 void setup()
 	{
 	char input[32];  /* input variable */
-	
+	printf("------------------------------------------------------------------------>\n\n");
+	printf("\t\tWelcome to Air Traffic Control System Simulation\t\t\n\n");
+	printf("------------------------------------------------------------------------>\n\n");	
 	printf("SETUP MENU\n");
 	printf("1. Plane Generate Speed (percents).\n");
 	printf("2. Maximum Plane in the sky.\n");
@@ -45,7 +47,7 @@ void setup()
 			}
 		while(2)
 			{
-			printf("2. Maximum plane (default 10 planes)\n");
+			printf("2. Number of plane (Maximum of 10 planes)\n");
 			fgets(input,sizeof(input),stdin);
 			sscanf(input,"%d",&maxPlane);
 			if ((maxPlane > 0) && (maxPlane <= 10))
@@ -54,7 +56,7 @@ void setup()
 				break;
 				}
 			else
-				printf("\tError - Max plane have to be 1-10\n");
+				printf("\tError - Number of plane have to be 1-10\n");
 			}
 		}
 	printf("\n");
