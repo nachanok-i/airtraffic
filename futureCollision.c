@@ -166,7 +166,7 @@ void setRadius(POSITION_T data)
 			else
 				{
 				edges[i][j] += 1;
-				printf("edges %d\n", edges[i][j]);
+				// printf("edges %d\n", edges[i][j]);
 				}
 			}
 		}
