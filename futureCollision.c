@@ -11,8 +11,8 @@
 #define WHITE 0
 #define GRAY  1
 #define BLACK 2
-#define MAXAREA 20				/* max area of the airport (example as 20)*/
-#define SAFEAREA 3				/* safe area around each plane (in coordinate) */
+#define MAXAREA 50				/* max area of the airport (example as 20)*/
+#define SAFEAREA 2				/* safe area around each plane (in coordinate) */
 #define MAXHIGH 4				/* max number of altitude level (3000 - 6000) */
 
 char* colorName[] = {"WHITE", "GRAY", "BLACK"};
@@ -63,12 +63,13 @@ void printTable()
 	// for(k=0;k<MAXHIGH;k++)
 	// 	{
 	// 	printf("Table #%d\n", k);
+	printf("---------------------------------\n");
 		for(i=0;i<MAXAREA;i++)
 			{
 			for(j=0;j<MAXAREA;j++)
 				{
 				if (edges[j][i][k] == 0)
-					printf("*");
+					printf(" ");
 				else
 					printf("%d", edges[j][i][k]);
 				}
@@ -96,17 +97,20 @@ void setRadius(POSITION_T data)
 	int endX;   /* end point at x axis */
 	int endY;   /* end point at y axis */
 	startX = data.x - SAFEAREA;
+	printf("startX %d\n",startX);
 	startY = data.y - SAFEAREA;
+	printf("startY %d\n",startY);
 	endX = data.x + SAFEAREA;
 	endY = data.y + SAFEAREA;
-	if (startX < 0)
-		startX = 0;
-	if (startY < 0)
-		startY = 0;
-	if (endX > 100)
-		endX = 100;
-	if (endY > 100)
-		endX = 100;
+	if (startX <= 0)
+		startX = 1;
+	printf("startX %d\n",startX);
+	if (startY <= 0)
+		startY = 1;
+	if (endX > MAXAREA)
+		endX = MAXAREA;
+	if (endY > MAXAREA)
+		endX = MAXAREA;
 	for (i=startX;i<=endX;i++)
 		{
 		for (j=startY;j<=endY;j++)

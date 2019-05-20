@@ -268,6 +268,15 @@ void clearPlaneArray()
 		}
 	}
 
+void setPlaneMatrix()
+	{
+	int i=0;
+	for (i=0;i<currentAmount;i++)
+		{
+		setPosition(planeArray[i]);
+		}
+	}
+
 /* To call printTree function from outside */
 void callPrintTree()
 	{
@@ -277,7 +286,10 @@ void callPrintTree()
 			makePlaneArray();
 		resetCurrentAmount();
 		traverseInOrder(pTree,&gatherPlaneInTree);
+		setPlaneMatrix();
+		printTable();
 		displayColumnDetail();
+		cleanTable();
 		}
 	else
 		{
