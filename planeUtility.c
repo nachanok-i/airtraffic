@@ -81,6 +81,26 @@ void traverseUpdatePlane(PLANENODE_T * pCurrent)
 		traverseUpdatePlane(pCurrent->right);
 	}
 
+/* Traverse a tree (in order traversal) and execute the
+ * function 'nodeFunction' on each element
+ * Argument
+ *    pCurrent     -   current node
+ *    nodeFunction -   function to execute on each node
+ * Code from lab 6
+ */
+void traverseInOrder(NODE_T* pCurrent,void (*nodeFunction)(NODE_T* pNode ))
+{
+    if (pCurrent->left != NULL)
+       {
+       traverseInOrder(pCurrent->left,nodeFunction); 
+       }
+    (*nodeFunction)(pCurrent);
+    if (pCurrent->right != NULL)
+       {
+       traverseInOrder(pCurrent->right,nodeFunction); 
+       }
+}
+
 /* Updating active plane
  * return 1 for success, 0 there is no plane
  */
@@ -180,11 +200,11 @@ int count = 0;
 void gatherPlaneInTree(PLANENODE_T * pCurrent,int * count)
 	{
 	if(pCurrent->left != NULL)
-		gatherPlaneInTree(pCurrent->left);
+		gatherPlaneInTree(pCurrent->left,count);
 	planeArray[*count] = pCurrent->data;
-	*count++;
+	*count += 1;
 	if(pCurrent->right != NULL)
-		gatherPlaneInTree(pCurrent->right);
+		gatherPlaneInTree(pCurrent->right,count);
 	}
 
 /*set counting to zero */
@@ -256,9 +276,7 @@ void callPrintTree()
 	if(pTree != NULL)
 		{
 		callocPlaneArray();
-		printf("6\n");
 		gatherPlaneInTree(pTree,&count);
-		printf("7\n");
 		displayColumnDetail(count);
 		}
 	else

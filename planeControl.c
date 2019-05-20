@@ -76,14 +76,10 @@ int getCommand()
 void runCycle()
 	{
 	PLANE_T * plane = NULL;
-	printf("1\n");
 	plane = generateFlight(genSpeed);
-	printf("2\n");
 	if (plane != NULL)
 		insertNode(plane);
-	printf("3\n");
 	updatePlane();
-	printf("4\n");
 	callPrintTree();
 	}
 
