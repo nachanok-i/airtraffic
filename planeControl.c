@@ -154,7 +154,7 @@ void helpMenu()
 	printf("\t\t2.\"cir:[radius]\" to command plane to fly in circle.\n");
 	printf("\t\t3.\"takeoff\" to command the plane to takeoff.\n");
 	printf("\t\t4.\"alt:[altitude]\" to command the plane to change altitude.\n");
-	printf("\t\t5.\"dir:[direction]\" to change the direction of the plane (N,NE,S,W,ect).\n");
+	printf("\t\t5.\"dir:[direction]\" to change the direction of the plane (N,NE,S,W,etc).\n");
 	printf("\t\"setup\" to set plane's generation speed and maximum plane in the sky.\n");
 	printf("\t- \"help\" to print help menu.\n");
 	}
