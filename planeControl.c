@@ -33,7 +33,7 @@ void setup()
 	printf("\t\tWelcome to Air Traffic Control System Simulation\t\t\n\n");
 	printf("------------------------------------------------------------------------>\n\n");	
 	printf("SETUP MENU\n");
-	printf("1. Plane Generate Speed (default 10%)\n");
+	printf("1. Plane Generate Speed (default 10 percents)\n");
 	printf("2. Maximum Plane in the sky (default 10 planes)\n");
 	printf("Do you want to change setup? (Y/N) : ");
 	fgets(input,sizeof(input),stdin);
@@ -142,11 +142,58 @@ PLANE_T * searchFlight()
 	return plane;
 	}
 
-void inputCommand(PLANE_T * plane,int choice)
+void changeAltitude(char * input, int altitude)
 	{
+	PLANENODE_T * plane = NULL;
+	plane = searchPlane(input);
+	if (plane != NULL)
+		plane->data->altitude = altitude;
+	else
+		printf("Plane %s doesn't exist\n", input);
+	}
+
+int getInputCommand(char * plane)
+	{
+	char input[MAXSIZE]; /* input variable */
+	int returnVal = 0;   /* return value */
+	
+	printf("Enter [flight-number] [inputCommand] : ");
+	fgets(input,MAXSIZE,stdin);
+	sscanf(input,"%s %s",plane,input);
+	if (strcmp(input,"alt")==0)
+		{
+		returnVal = ALTITUDE;
+		}
+	else if (strcmp(input,"dir")==0)
+		returnVal = DIRECTION;
+	else
+		returnVal = -1;
+	return returnVal;
+	}
+
+void inputCommand()
+	{
+	int choice = -1;
+	char flight[32];
+	choice = getInputCommand(flight);
 	switch (choice)
 		{
-		
+		case ALTITUDE:
+			{
+			int altitude = 0;
+			char input[32];
+			do
+				{
+				printf("Which altitude do you want to change? (3000 - 6000 ft : \n");
+				fgets(input,sizeof(input),stdin);
+				sscanf(input,"%d",&altitude);
+				}
+			while(checkAltitude);
+			changeAltitude(flight,altitude);
+			break;
+			}
+		case DIRECTION:
+			break;
 		}
 	}
 
@@ -157,7 +204,7 @@ void helpMenu()
 	printf("\t- hit enter to update current plane (without any command).\n");
 	printf("\t- \"search\" to search specific plane and print out the data.\n");
 	printf("\t- \"show\" to show current plane active on the sky.\n");
-	printf("\t- \"command [flight number] [input command]\" to enter command to specific plane.\n");
+	printf("\t- \"command\" to enter command to specific plane.\n");
 	printf("\t\tCommand list:\n");
 	printf("\t\t1.\"landing\" to command the plane to land.\n");
 	printf("\t\t2.\"cir:[radius]\" to command plane to fly in circle.\n");
@@ -196,6 +243,7 @@ int main()
 			case SHOW:
 				printDetail();
 			case COMMAND:
+				inputCommand();
 				break;
 			case HELP:
 				helpMenu();

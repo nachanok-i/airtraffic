@@ -91,28 +91,28 @@ int checkAltitude(int height)
  * return command value (emun value)
  * return -1 - if command is invalid
 */
-int checkInputCommand(char input[])
-	{
-	if (strcmp(input,"landing") == 0)
-		{
-		return LANDING;
-		}
-	else if (strcmp(input,"takeoff") == 0)
-		{
-		return TAKEOFF;
-		}
-	else if (strncmp(input,"cir",3) == 0)
-		{
-		return CIRCLE;
-		}
-	else if (strncmp(input,"dir",3) == 0)
-		{
-		return DIRECTION;
-		}
-	else if (strncmp(input,"alt",3) == 0)
-		{
-		return ALTITUDE;
-		}
-	else
-		return -1;
-	}
+// int checkInputCommand(char input[])
+// 	{
+// 	if (strcmp(input,"landing") == 0)
+// 		{
+// 		return LANDING;
+// 		}
+// 	else if (strcmp(input,"takeoff") == 0)
+// 		{
+// 		return TAKEOFF;
+// 		}
+// 	else if (strncmp(input,"cir",3) == 0)
+// 		{
+// 		return CIRCLE;
+// 		}
+// 	else if (strncmp(input,"dir",3) == 0)
+// 		{
+// 		return DIRECTION;
+// 		}
+// 	else if (strncmp(input,"alt",3) == 0)
+// 		{
+// 		return ALTITUDE;
+// 		}
+// 	else
+// 		return -1;
+// 	}

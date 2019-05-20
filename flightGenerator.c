@@ -112,7 +112,6 @@ PLANE_T* generateFlight(int genSpeed)
 			if(checkDirection(plane->heading))
 				break;
 			}
-		plane->order = LANDING;
 		}
 	return plane;
 	}

@@ -23,7 +23,7 @@
 
 enum direction{N,NE,E,SE,S,SW,W,NW};
 enum choice{UPDATE,SEARCH,SHOW,COMMAND,HELP};
-enum command{LANDING,CIRCLE,TAKEOFF,ALTITUDE,DIRECTION};
+enum command{ALTITUDE,DIRECTION};
 
 typedef struct _position
 	{
@@ -35,7 +35,6 @@ typedef struct _plane
 	{
 	int ID;				/* plane ID for controling (in this program there are possibility that flight code are same) */
 	char flight[7];		/* flight code refer to real airline code */
-	int order;			/* current order */
 	int heading;		/* heading direction (N NE S SE W E) */
 	int altitude;
 	struct _position position;	/* current position x and y cordinate*/
