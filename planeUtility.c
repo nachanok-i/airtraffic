@@ -298,12 +298,10 @@ void printDetail()
 	{
 	if(pTree != NULL)
 		{
-		// resetCurrentAmount();
-		// traverseInOrder(pTree,&gatherPlaneInTree);
 		setPlaneMatrix();
-		printPlanePosition();
-		displayColumnDetail();
 		cleanTable();
+		printTable();
+		displayColumnDetail();
 		}
 	else
 		{

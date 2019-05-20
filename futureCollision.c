@@ -95,27 +95,6 @@ void printTable()
 		//}
 	}
 
-void printPlanePosition()
-	{
-	int i=0;
-	int j=0;
-	for (i = 0; i < MAXAREA; i++)
-	{
-		printf("%2d", i);
-	}
-	for (j=0;j<MAXAREA;j++)
-		{
-		for (i=0;i<MAXAREA;i++)
-			{
-			if (edges[i][j][0])
-				printf("%2d", edges[i][j][0]);
-			else
-				printf("  ");
-			}
-			printf("\n");
-		}
-	}
-
 /* This function is use to set position of a plane that use to 
  * insert in the table */ 
 void setPosition(PLANE_T* data)
@@ -213,8 +192,6 @@ void setRadius(POSITION_T data)
  * that the plane is heading to */
 void movePlane(PLANE_T* airPlane)
 	{
-	// PLANE_T * airPlane = NULL;
-	// airPlane = node->data;
 	switch (airPlane->heading)
 		{
 		case N:
