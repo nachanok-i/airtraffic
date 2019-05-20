@@ -111,7 +111,6 @@ void updatePlane()
 		{
 		printf("new update\n");
 		resetCount();
-		countPlane();
 		traverseInOrder(pTree,&movePlane);
 		}
 	}
@@ -123,6 +122,7 @@ void updatePlane()
 void gatherPlaneInTree(PLANENODE_T * pCurrent)
 	{
 	planeArray[currentAmount] = pCurrent->data;
+	currentAmount += 1;
 	}
 
 /* This function use to print planes in columns */
