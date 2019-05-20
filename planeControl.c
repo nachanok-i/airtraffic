@@ -25,29 +25,38 @@ void setup()
 	char input[32];  /* input variable */
 	
 	printf("SETUP MENU\n");
-	while(1)
+	printf("1. Plane Generate Speed (percents).\n");
+	printf("2. Maximum Plane in the sky.\n");
+	printf("Do you want to change setup? (Y/N) : ");
+	fgets(input,sizeof(input),stdin);
+	if (strncasecmp(input,"Y",1)==0)
 		{
-		printf("1. Generate speed (default 10 percents)\n");
-		fgets(input,sizeof(input),stdin);
-		sscanf(input,"%d",&genSpeed);
-		if (genSpeed > 0 && genSpeed <= 100)
-			break;
-		else
-			printf("\tError - Gen speed have to be 1-100\n");
-		}
-	while(2)
-		{
-		printf("2. Maximum plane (default 10 planes)\n");
-		fgets(input,sizeof(input),stdin);
-		sscanf(input,"%d",&maxPlane);
-		if ((maxPlane > 0) && (maxPlane <= 10))
+		printf("\n");
+		while(1)
 			{
-			setMaxPlane(maxPlane);
-			break;
+			printf("1. Generate speed (default 10 percents)\n");
+			fgets(input,sizeof(input),stdin);
+			sscanf(input,"%d",&genSpeed);
+			if (genSpeed > 0 && genSpeed <= 100)
+				break;
+			else
+				printf("\tError - Gen speed have to be 1-100\n");
 			}
-		else
-			printf("\tError - Max plane have to be 1-10\n");
+		while(2)
+			{
+			printf("2. Maximum plane (default 10 planes)\n");
+			fgets(input,sizeof(input),stdin);
+			sscanf(input,"%d",&maxPlane);
+			if ((maxPlane > 0) && (maxPlane <= 10))
+				{
+				setMaxPlane(maxPlane);
+				break;
+				}
+			else
+				printf("\tError - Max plane have to be 1-10\n");
+			}
 		}
+	printf("\n");
 	}
 
 int getCommand()
@@ -66,8 +75,6 @@ int getCommand()
 		returnVal = SHOW;
 	else if (strcmp(input,"command")==0)
 		returnVal = COMMAND;
-	else if (strcmp(input,"setup")==0)
-		returnVal = SETUP;
 	else if (strcmp(input,"help")==0)
 		returnVal = HELP;
 	else if (strcmp(input,"stop")==0)
@@ -156,6 +163,7 @@ int main()
 	PLANE_T* plane = NULL;
 	int command = 0;
 	srand(time(NULL));
+	setup();
 	plane = generateFlight(100);
 	while(1)
 		{
@@ -176,9 +184,6 @@ int main()
 			case SHOW:
 				callPrintTree();
 			case COMMAND:
-				break;
-			case SETUP:
-				setup();
 				break;
 			case HELP:
 				helpMenu();
