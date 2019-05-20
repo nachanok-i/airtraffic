@@ -10,7 +10,7 @@
 #include "flightGenerator.h"
 #include "futureCollision.h"
 
-int maxPlane2 = 10;
+int maxPlane2 = 10;    /* maximum amount of plane*/
 int currentAmount = 0; /* number of plane */
 PLANENODE_T * pTree = NULL;
 PLANE_T ** planeArray;
