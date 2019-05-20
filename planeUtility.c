@@ -53,7 +53,7 @@ void makePlaneArray()
 void printPlane(PLANE_T* input)
 	{
 	printf("Flight: %s\n", input->flight);
-	printf("Position: x %d y %d z %d\n", input->position.x, input->position.y, input->position.z);
+	printf("Position: x %d y %d\n", input->position.x, input->position.y);
 	switch (input->heading)
 		{
 		case N:
@@ -162,7 +162,7 @@ void displayColumnDetail()
 	printf("%10s :","ALTITUDE");
 	for(i = 0; i < currentAmount; i++)
 		{
-		printf("%5d%2s|", planeArray[i]->position.z, "ft");
+		printf("%5d%2s|", planeArray[i]->altitude, "ft");
 		}
 	printf("\n");
 	/* plane's coordinate */
@@ -221,43 +221,91 @@ PLANENODE_T * searchPlane(char * flightName)
 /* Removing plane
  * @param	-	pNode : the node wanted to remove
  */
-void removePlane(PLANENODE_T * pNode)
+void removePlane(PLANENODE_T ** ppNode, PLANENODE_T * pNode)
 	{
 	PLANENODE_T * pRemove = NULL; /* removing node */
 	PLANENODE_T * pSucc = NULL; /* Successor for deleting node which has 2 child */
+	PLANENODE_T * pParentSucc = NULL; /* Parent Successor for deleting node which has 2 child */
 	int i = 0;
+	printf("\t Remove plane %s\n", pNode->data->flight);
 	if((pNode->left == NULL) && (pNode->right == NULL))
 		{
-		free(pNode->data);
-		free(pNode);
+		if(pTree == pNode)
+			{
+			free(pTree->data);
+			free(pTree);
+			pTree = NULL;
+			}
+		else
+			{
+			free(pNode->data);
+			free(pNode);
+			}
 		}
 	else if((pNode->left == NULL) && (pNode->right != NULL))
 		{
 		pRemove = pNode;
-		pNode = pNode->right;
+		if(pTree == pNode)
+			pTree = pTree->right;
+		else
+			pNode = pNode->right;
 		free(pRemove->data);
 		free(pRemove);
 		}
 	else if((pNode->left != NULL) && (pNode->right == NULL))
 		{
 		pRemove = pNode;
-		pNode = pNode->left;
+		if(pTree == pNode)
+			pTree = pTree->left;
+		else
+			pNode = pNode->left;
 		free(pRemove->data);
 		free(pRemove);
 		}
 	else
 		{
+		printf("at remove root\n");
 		pRemove = pNode;
 		pSucc = pNode->right;
 		while(pSucc->left != NULL)
 			{
+			pParentSucc = pSucc;
 			pSucc = pSucc->left;
 			}
-		pNode = pSucc;
+		if(pNode->right == pSucc)
+			{
+			pNode->right = pSucc;
+			}
+		else
+			{
+			pSucc->right = pNode->right;
+			pNode = pSucc;
+			}
+		// if(pTree == pNode)
+		// 	{
+		// 	if(pSucc != pTree->right)
+		// 		{
+		// 		pSucc->right = pTree->right;
+		// 		pTree = pSucc;
+		// 		}
+		// 	else
+		// 		pTree = pTree->right;
+		// 	}
+		else
+			{
+			pNode = pSucc;
+			if(pNode != pRemove->right)
+				pNode->right = pRemove->right;
+			}
+		if(pParentSucc != NULL)
+			pParentSucc->left = NULL;
 		pSucc = NULL;
 		free(pRemove->data);
 		free(pRemove);
 		}
+	printf("remove finish\n");
+	if(pTree != NULL)
+		printf("Now %s is root\n",pTree->data->flight);
 	}
 
 /* delete plane
@@ -298,6 +346,8 @@ void printDetail()
 	{
 	if(pTree != NULL)
 		{
+		resetCurrentAmount();
+		traverseInOrder(pTree,&gatherPlaneInTree);
 		setPlaneMatrix();
 		cleanTable();
 		printTable();

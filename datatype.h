@@ -29,7 +29,6 @@ typedef struct _position
 	{
 	int x;				/* x coordinate of the plane */
 	int y;				/* y coordinate of the plane */
-	int z;				/* y coordinate of the plane */
 	}POSITION_T;
 
 typedef struct _plane
@@ -38,6 +37,7 @@ typedef struct _plane
 	char flight[7];		/* flight code refer to real airline code */
 	int order;			/* current order */
 	int heading;		/* heading direction (N NE S SE W E) */
+	int altitude;
 	struct _position position;	/* current position x and y cordinate*/
 	}PLANE_T;
 
