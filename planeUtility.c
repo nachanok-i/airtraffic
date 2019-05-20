@@ -111,6 +111,9 @@ void traverseInOrder(PLANENODE_T* pCurrent,void (*nodeFunction)(PLANENODE_T* pNo
  */
 void updatePlane()
 	{
+	printf("update plane\n");
+	if (pTree != NULL)
+		printf("root %s\n", pTree->data->flight);
 	int i = 0;
 	if(planeArray == NULL)
 		{
@@ -223,6 +226,7 @@ PLANENODE_T * searchPlane(char * flightName)
  */
 void removePlane(PLANENODE_T * pNode)
 	{
+	printf("removePlane\n");
 	PLANENODE_T * pRemove = NULL; /* removing node */
 	PLANENODE_T * pSucc = NULL; /* Successor for deleting node which has 2 child */
 	int i = 0;
@@ -230,6 +234,17 @@ void removePlane(PLANENODE_T * pNode)
 		{
 		free(pNode->data);
 		free(pNode);
+		if (pNode == pTree)
+			{
+			pNode = NULL;
+			pTree = NULL;
+			}
+		else if (pNode != pTree)
+			{
+			pNode = NULL;
+			}
+		else
+			printf("Error - can't delete node %s\n",pNode->data->flight);
 		}
 	else if((pNode->left == NULL) && (pNode->right != NULL))
 		{
@@ -265,12 +280,16 @@ void removePlane(PLANENODE_T * pNode)
  */
 void deletePlane(char * flightName)
 	{
+	printf("delete plane\n");
 	PLANENODE_T * pDelete = NULL;
 	pDelete = searchPlane(flightName);
+	printf("delete node %s\n", pDelete->data->flight);
 	if(pDelete != NULL)
 		removePlane(pDelete);
 	else
 		printf("\tPlane is not found!\n");
+	if (pDelete == NULL)
+		printf("delete plane success\n");
 	}
 
 /* this function use to clear the plane array */
@@ -296,10 +315,11 @@ void setPlaneMatrix()
 /* To call printTree function from outside */
 void printDetail()
 	{
+	printf("printDetail\n");
 	if(pTree != NULL)
 		{
-		// resetCurrentAmount();
-		// traverseInOrder(pTree,&gatherPlaneInTree);
+		resetCurrentAmount();
+		traverseInOrder(pTree,&gatherPlaneInTree);
 		setPlaneMatrix();
 		printTable();
 		displayColumnDetail();

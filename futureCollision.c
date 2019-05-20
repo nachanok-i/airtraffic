@@ -17,19 +17,6 @@
 #define SAFEAREA 2	/* safe area around each plane (in coordinate) */
 #define MAXHIGH 4	/* max number of altitude level (3000 - 6000) */
 
-char* colorName[] = {"WHITE", "GRAY", "BLACK"};
-
-typedef struct
-	{
-	struct _plane* plane;		/* PLANE_T strucuture */
-	int color;					/* use for traversal */
-	} VERTEX_T;
-
-VERTEX_T vertices[MAXAREA];		/* this is our vertex array */
-int lastUsed = -1;				/* this keeps track of the last used 
-                                 * item in the vertex array, for adding
-                                 */
-
 int edges[MAXAREA+(2*MARGIN)][MAXAREA+(2*MARGIN)][MAXHIGH];
                             	/* track position of the plane */
 								/* the location of the plane and safty area
@@ -44,7 +31,7 @@ int getCommand();
 
 /* This function is use to clean the table */
 void cleanTable()
-{
+	{
 	int i=0; /* loop varialbe */
 	int j=0; /* loop varialbe */
 	int k=0; /* loop varialbe */
@@ -58,11 +45,11 @@ void cleanTable()
 				}
 			}
 		}
-}
+	}
 
 /* This function is use to display the table */
 void printTable()
-{
+	{
 	int count = 0;
 	int count2 = 0;
 	int i=0; /* x-axis loop varialbe */
@@ -80,36 +67,36 @@ void printTable()
 			}
 		}
 		printf("\n");
-		for(j = MARGIN; j < MAXAREA + (2*MARGIN); j++)
+	for(j = MARGIN; j < MAXAREA + (2*MARGIN); j++)
+		{
+		for(i = MARGIN; i < MAXAREA + (2*MARGIN); i++)
 			{
-			for(i = MARGIN; i < MAXAREA + (2*MARGIN); i++)
-				{
-				if (edges[i][j][k] == 0)
-					printf(" ");
-				else
-					printf("*");
-				}
-			printf("\n");
+			if (edges[i][j][k] == 0)
+				printf(" ");
+			else
+				printf("*");
 			}
 		printf("\n");
-		//}
-}
+		}
+	printf("\n");
+	//}
+	}
 
 /* This function is use to set position of a plane that use to 
  * insert in the table */ 
 void setPosition(PLANE_T* data)
-{
+	{
 	int x = data->position.x; /* x coordinate of the plane position variable */
 	int y = data->position.y; /* y coordinate of the plane position variable */
 	int z = data->position.z; /* z coordinate of the plane position variable */
 	printf("%s position: %d %d %d\n",data->flight,x,y,z );
 	edges[x][y][z] = data->ID;
 	setRadius(data->position);
-}
+	}
 
 /* This function is use to setting the safety area for a plane */
 void setRadius(POSITION_T data)
-{
+	{
 	int i=0;    /* loop varialbe for x axis */
 	int j=0;    /* loop varialbe for y axis*/
 	int startX; /* start point at x axis */
@@ -120,6 +107,12 @@ void setRadius(POSITION_T data)
 	if(data.x == 0)
 		{
 		startX = data.x+1;
+		printf("radius startX %d\n",startX);
+		endX = data.x + SAFEAREA;
+		}
+	else if (data.x == 1)
+		{
+		startX = data.x - SAFEAREA + 1;
 		printf("startX %d\n",startX);
 		endX = data.x + SAFEAREA;
 		}
@@ -186,12 +179,12 @@ void setRadius(POSITION_T data)
 				}
 			}
 		}
-}
+	}
 
 /* this function will move all the plane in continuously to the direction
  * that the plane is heading to */
 void movePlane(PLANE_T* airPlane)
-{
+	{
 	// PLANE_T * airPlane = NULL;
 	// airPlane = node->data;
 	switch (airPlane->heading)
@@ -263,11 +256,11 @@ void movePlane(PLANE_T* airPlane)
 			printf("Heading direction error\n");
 			exit(0);
 		}
-}
+	}
 
 /* this function is use to check collision */
 int checkCollision()
-{
+	{
 	int bColli = 0; /* return value */ 
 	int i=0; /* loop variable */
 	int j=0; /* loop variable */
@@ -289,4 +282,4 @@ int checkCollision()
 		}
 	bColli = 1;
 	return bColli;
-}
+	}

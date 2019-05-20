@@ -54,6 +54,8 @@ int generatePosition(int* x, int* y,int* z)
 		else
 			heading = E;
 		}
+	else
+		printf("Error x!=0\n");
 	// else if (*x == 100)
 	// 	{
 	// 	if (*y < 20)

@@ -99,10 +99,16 @@ void runCycle()
 	{
 	int currentAmount = getCurrentAmount();
 	PLANE_T * plane = NULL;
+	printf("currentAmount: %d\n", currentAmount);
 	if(currentAmount < maxPlane)
 		plane = generateFlight(genSpeed);
+	printf("printPlane\n");
+	
 	if (plane != NULL)
+		{
 		insertNode(plane);
+		printPlane(plane);
+		}
 	updatePlane();
 	printDetail();
 	}
@@ -150,6 +156,21 @@ void inputCommand(PLANE_T * plane,int choice)
 		}
 	}
 
+void testPosition()
+	{
+	PLANE_T * testPlane = NULL;
+	PLANE_T * plane = generateFlight(100);
+	testPlane = (PLANE_T*) calloc(1,sizeof(PLANE_T));
+	strcpy(testPlane->flight,"AA1234");
+	testPlane->position.x = 40;
+	testPlane->position.y = 50;
+	testPlane->heading = SE;
+	if (plane != NULL)
+		insertNode(plane);
+	updatePlane();
+	printDetail();
+	}
+
 /* this function is use to display list of command for the user */
 void helpMenu()
 	{
@@ -183,7 +204,8 @@ int main()
 		switch (command)
 			{
 			case UPDATE:
-				runCycle();
+				//runCycle();
+				testPosition();
 				break;
 			case SEARCH:
 				{
