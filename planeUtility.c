@@ -1,7 +1,8 @@
 /* planeUtility.c was made for gathering each plane
  * in binary tree and printing them out
- * Made by Siradanai Sutin (Cartoon) ID 61070503437
+ * Created by Siradanai Sutin (Cartoon) ID 61070503437
  * Modified by Nachanok Issarapruk (Tap) ID 61070503410
+ * Modified by Sahachok Prachaporn (Lion) ID 61070503436
  */
 #include<stdio.h>
 #include<stdlib.h>
