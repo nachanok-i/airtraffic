@@ -26,7 +26,7 @@ int checkFlightCode(char input[]);
  * return 1 - if it is valid
  * return 0 - if it is invalid
 */
-int checkDirection(int direction);
+int checkDirection(char direction[]);
 
 
 /* This functionuse to check if user give the correct height

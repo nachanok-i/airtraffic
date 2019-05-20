@@ -152,6 +152,16 @@ void changeAltitude(char * input, int altitude)
 		printf("Plane %s doesn't exist\n", input);
 	}
 
+void changeDirection(char * input, int direction)
+	{
+	PLANENODE_T * plane = NULL;
+	plane = searchPlane(input);
+	if (plane != NULL)
+		plane->data->heading = direction;
+	else
+		printf("Plane %s doesn't exist\n", input);
+	}
+
 int getInputCommand(char * plane)
 	{
 	char input[MAXSIZE]; /* input variable */
@@ -184,16 +194,37 @@ void inputCommand()
 			char input[32];
 			do
 				{
-				printf("Which altitude do you want to change? (3000 - 6000 ft : \n");
+				printf("Which altitude do you want to change? (3000 - 6000 ft) : \n");
 				fgets(input,sizeof(input),stdin);
 				sscanf(input,"%d",&altitude);
 				}
-			while(checkAltitude);
+			while(!checkAltitude(altitude));
 			changeAltitude(flight,altitude);
 			break;
 			}
 		case DIRECTION:
+			{
+			int direction = 0;
+			char input[32];
+			while(1)
+				{
+				printf("Which direction do you want to change? (N,NE,S,W,etc) : \n");
+				fgets(input,sizeof(input),stdin);
+				sscanf(input,"%s",input);
+				direction = checkDirection(input);
+				printf("Direction %d\n", direction);
+				if (direction >= 0)
+					break;
+				else
+					printf("Error - invalid direction.\n");
+				}
+			changeDirection(flight,direction);
 			break;
+		default:
+			printf("Error - wrong command\n");
+			choice = getInputCommand(flight);
+			break;
+			}
 		}
 	}
 
@@ -206,12 +237,8 @@ void helpMenu()
 	printf("\t- \"show\" to show current plane active on the sky.\n");
 	printf("\t- \"command\" to enter command to specific plane.\n");
 	printf("\t\tCommand list:\n");
-	printf("\t\t1.\"landing\" to command the plane to land.\n");
-	printf("\t\t2.\"cir:[radius]\" to command plane to fly in circle.\n");
-	printf("\t\t3.\"takeoff\" to command the plane to takeoff.\n");
-	printf("\t\t4.\"alt:[altitude]\" to command the plane to change altitude.\n");
-	printf("\t\t5.\"dir:[direction]\" to change the direction of the plane (N,NE,S,W,etc).\n");
-	printf("\t\"setup\" to set plane's generation speed and maximum plane in the sky.\n");
+	printf("\t\t1.\"alt:[altitude]\" to command the plane to change altitude.\n");
+	printf("\t\t2.\"dir:[direction]\" to change the direction of the plane (N,NE,S,W,etc).\n");
 	printf("\t- \"help\" to print help menu.\n");
 	printf("\t- \"stop\" to stop the program.\n");
 
@@ -242,6 +269,7 @@ int main()
 				break;
 			case SHOW:
 				printDetail();
+				break;
 			case COMMAND:
 				inputCommand();
 				break;

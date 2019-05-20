@@ -65,12 +65,27 @@ int checkFlightCode(char input[])
  * return 1 - if it is valid
  * return 0 - if it is invalid
 */
-int checkDirection(int direction)
+int checkDirection(char direction[])
 	{
-	if ((direction >= 2) && (direction <=4))
-		return 1;
+	int returnVal = -1;
+	if (strcasecmp(direction,"N")==0)
+		returnVal = N;
+	else if (strcasecmp(direction,"NE")==0)
+		returnVal = NE;
+	else if (strcasecmp(direction,"E")==0)
+		returnVal = E;
+	else if (strcasecmp(direction,"SE")==0)
+		returnVal = SE;
+	else if (strcasecmp(direction,"S")==0)
+		returnVal = S;
+	else if (strcasecmp(direction,"SW")==0)
+		returnVal = SW;
+	else if (strcasecmp(direction,"W")==0)
+		returnVal = W;
+	else if (strcasecmp(direction,"NW")==0)
+		returnVal = NW;
 	else
-		return 0;
+		return -1;
 	}
 
 /* This functionuse to check if user give the correct height
@@ -80,7 +95,7 @@ int checkDirection(int direction)
 */
 int checkAltitude(int height)
 	{
-	if ((height >= 3000) && (height <= 6000))
+	if ((height >= 3000) && (height <= 6000) && height % 1000 == 0)
 		return 1;
 	else 
 		return 0;

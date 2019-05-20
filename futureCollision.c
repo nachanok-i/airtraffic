@@ -27,7 +27,6 @@ void setPosition(PLANE_T* data);
 void setRadius(POSITION_T data);
 int checkCollision();
 void movePlane(PLANE_T* airPlane);
-int getCommand();
 
 /* This function is use to clean the table */
 void cleanTable()
