@@ -15,6 +15,9 @@ EXECUTABLES= planeControl$(EXECEXT)
 
 all : $(EXECUTABLES)
 
+futureCollision.o : futureCollision.c futureCollision.h flightGenerator.h
+	gcc -c futureCollision.c flightGenerator.c
+
 flightGenerator.o : flightGenerator.c flightGenerator.h
 	gcc -c flightGenerator.c
 
@@ -24,8 +27,7 @@ validate.o : validate.c validate.h
 planeInformation.o : planeInformation.c planeInformation.h flightGenerator.h
 	gcc -c planeInformation.c flightGenerator.c
 
-futureCollision.o : futureCollision.c futureCollision.h flightGenerator.h
-	gcc -c futureCollision.c flightGenerator.c
+
 
 planeUtility.o : planeUtility.c flightGenerator.h
 	gcc -c planeUtility.c flightGenerator.c

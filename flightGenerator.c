@@ -43,13 +43,13 @@ int generatePosition(int* x, int* y,int* z)
  	/* assume this airport have incoming plane only from wast */
  	/**x = (rand() % 100 + 1);*/
  	*x = 0;
- 	*y = (rand() % 100 + 1);
+ 	*y = (rand() % 54 + 1);
 	*z = (rand() % (6 - 3 +1) + 3) * 1000;
 	if (*x == 0)
 		{
-		if (*y < 20)
+		if (*y < (54)/3)
 			heading = SE;
-		else if (*y > 70)
+		else if (*y > (2*54)/3)
 			heading = NE;
 		else
 			heading = E;

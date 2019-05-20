@@ -102,15 +102,23 @@ void traverseInOrder(PLANENODE_T* pCurrent,void (*nodeFunction)(PLANENODE_T* pNo
 }
 
 /* Updating active plane
- * return 1 for success, 0 there is no plane
  */
 void updatePlane()
 	{
+	int i = 0;
+	if(planeArray == NULL)
+		{
+		makePlaneArray();
+		}
 	if(pTree != NULL)
 		{
 		printf("new update\n");
 		resetCurrentAmount();
-		traverseInOrder(pTree,&movePlane);
+		traverseInOrder(pTree,&gatherPlaneInTree);
+		for(i = 0; i < currentAmount; i++)
+			{
+			movePlane(planeArray[i]);
+			}
 		}
 	}
 
@@ -271,21 +279,19 @@ void clearPlaneArray()
 void setPlaneMatrix()
 	{
 	int i=0;
-	for (i=0;i<currentAmount;i++)
+	for (i = 0; i < currentAmount; i++)
 		{
 		setPosition(planeArray[i]);
 		}
 	}
 
 /* To call printTree function from outside */
-void callPrintTree()
+void printDetail()
 	{
 	if(pTree != NULL)
 		{
-		if(planeArray == NULL)
-			makePlaneArray();
-		resetCurrentAmount();
-		traverseInOrder(pTree,&gatherPlaneInTree);
+		// resetCurrentAmount();
+		// traverseInOrder(pTree,&gatherPlaneInTree);
 		setPlaneMatrix();
 		printTable();
 		displayColumnDetail();

@@ -95,7 +95,7 @@ void runCycle()
 	if (plane != NULL)
 		insertNode(plane);
 	updatePlane();
-	callPrintTree();
+	printDetail();
 	}
 
 /* return pointer 
@@ -182,7 +182,7 @@ int main()
 				}
 				break;
 			case SHOW:
-				callPrintTree();
+				printDetail();
 			case COMMAND:
 				break;
 			case HELP:

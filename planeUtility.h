@@ -11,12 +11,22 @@ void setMaxPlane(int inputMaxPlane);
 void printPlane(PLANE_T* input);
 
 /* Updating active plane
- * return 1 for success, 0 there is no plane
  */
-int updatePlane();
+void updatePlane();
 
+
+/* delete plane
+ * @param	- flightName : Name of flight from other function
+ */
+void deletePlane(char * flightName);
 
 int getCurrentAmount();
+
+/* Printing all plane in the tree
+ * using in-order traversal
+ * @param	- pCurrent : refer to a current plane
+ */
+void gatherPlaneInTree(PLANENODE_T * pCurrent);
 
 /* Traverse a tree (pre order traversal)
  * for find(Plane) and comparing the node
@@ -25,7 +35,7 @@ int getCurrentAmount();
  *    flightName   -   a string for comparing
  *    foundFlight  -   for checking found node
  */
-void doesExist(PLANENODE_T * pCurrent, char * flightName, PLANE_T * foundFlight);
+void doesExist(PLANENODE_T * pCurrent, char * flightName, PLANENODE_T * foundFlight);
 
 /* Searching plane
  * @param	- flightName : Name of flight user type in
@@ -39,8 +49,11 @@ PLANENODE_T * searchPlane(char * flightName);
  */
 void printTree(PLANENODE_T * pCurrent);
 
+
+void clearPlaneArray();
+
 /* use to call printTree function from outside */
-void callPrintTree();
+void printDetail();
 
 /* insert each plane in the tree
  * @param	- pCurrent	 : refer to a current plane
