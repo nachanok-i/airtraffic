@@ -157,6 +157,8 @@ void helpMenu()
 	printf("\t\t5.\"dir:[direction]\" to change the direction of the plane (N,NE,S,W,etc).\n");
 	printf("\t\"setup\" to set plane's generation speed and maximum plane in the sky.\n");
 	printf("\t- \"help\" to print help menu.\n");
+	printf("\t- \"stop\" to stop the program.\n");
+
 	}
 
 int main()
