@@ -12,7 +12,7 @@
 #define WHITE 0
 #define GRAY  1
 #define BLACK 2
-#define MAXAREA 54	/* max area of the airport (example as 20)*/
+#define MAXAREA 54	/* max area of the airport (even number ONLY!!)*/
 #define MARGIN 0 	/* display is size */
 #define SAFEAREA 2	/* safe area around each plane (in coordinate) */
 #define MAXHIGH 4	/* max number of altitude level (3000 - 6000) */
@@ -267,4 +267,15 @@ int checkCollision()
 			}
 	bColli = 1;
 	return bColli;
+	}
+void checkRunway()
+	{
+	int runwayPosition = MAXAREA/2;
+	int i=0;
+	int j=0;
+	for (i = 0; i < runwayPosition; i++)
+	{
+		
+	}
+	edges
 	}
