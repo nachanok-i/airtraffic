@@ -5,7 +5,10 @@
  * Created by Nachanok Issarapruk (Tap) ID 61070503410 on 26 Mar 2019
  * Edited by Sahachok Prachaporn (Lion) ID 61070503436
  * Edited by Sutinan Tadalimavad (Lion) ID 61070503443 on 20 May 2019
- */
+ *
+ * Created by Nachanok Issarapruk (Tap) ID 61070503410
+ * Modified by Sahachok Prachaporn (Lion) ID 61070503436
+ * 26 Mar 2019 */
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
@@ -21,6 +24,8 @@
 int genSpeed = 10; /* plane generation speed */
 int maxPlane = 10; /* maximum amount of plane that can have */
 
+/* this function is use to allow the user to setup plane speed 
+ * and maximum amount of plane */
 void setup()
 	{
 	char input[32];  /* input variable */
@@ -62,6 +67,7 @@ void setup()
 	printf("\n");
 	}
 
+/* this function is use to get command from the user */
 int getCommand()
 	{
 	char input[MAXSIZE]; /* input variable */
@@ -105,9 +111,9 @@ void runCycle()
  NULL if not found */
 PLANE_T * searchFlight()
 	{
-	char input[MAXSIZE];
-	char target[7];
-	int returnVal = 0;
+	char input[MAXSIZE]; /* input variable */
+	char target[7]; /* target of the plane that user want to search variable */     
+	int returnVal = 0; /* return value variable */
 	PLANE_T * plane = NULL;
 	PLANENODE_T * node = NULL;
 	while(1)
@@ -144,6 +150,7 @@ void inputCommand(PLANE_T * plane,int choice)
 		}
 	}
 
+/* this function is use to display list of command for the user */
 void helpMenu()
 	{
 	printf("How to use command\n");
@@ -166,7 +173,7 @@ void helpMenu()
 int main()
 	{
 	PLANE_T* plane = NULL;
-	int command = 0;
+	int command = 0; /* command variable*/
 	srand(time(NULL));
 	setup();
 	plane = generateFlight(100);

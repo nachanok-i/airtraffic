@@ -12,9 +12,9 @@
 
 int main()
 	{
-	char stringInput[128];
-	int choice=0;
-	int i=0;
+	char stringInput[128]; /* input variable */
+	int choice=0; /* choices for the user variable */
+	int i=0; /* loop variable */
 	srand(time(NULL));
 	printf("------------------------------------------------------------------------>\n\n");
 	printf("\tWelcome to Air Traffic Control System simulation Program\t\t\n\n");

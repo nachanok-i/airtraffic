@@ -1,7 +1,8 @@
 /* planeUtility.c was made for gathering each plane
  * in binary tree and printing them out
- * Made by Siradanai Sutin (Cartoon) ID 3437
+ * Created by Siradanai Sutin (Cartoon) ID 61070503437
  * Modified by Nachanok Issarapruk (Tap) ID 61070503410
+ * Modified by Sahachok Prachaporn (Lion) ID 61070503436
  */
 #include<stdio.h>
 #include<stdlib.h>
@@ -15,11 +16,15 @@ int currentAmount = 0; /* number of plane */
 PLANENODE_T * pTree = NULL;
 PLANE_T ** planeArray;
 
+/* this function is use to get plane informtion 
+ * from planeControl.c to planeUtility.c */
 void setMaxPlane(int inputMaxPlane)
 	{
 	maxPlane2 = inputMaxPlane;
 	}
 
+/* this function is use to check the current amount 
+ * of plane in the systmem */
 int getCurrentAmount()
 	{
 	return currentAmount;
@@ -31,6 +36,7 @@ void resetCurrentAmount()
 	currentAmount = 0;
 	}
 
+/* this function is use to stored the plane information for display */
 void makePlaneArray()
 	{
 	planeArray = (PLANE_T**) calloc(maxPlane2, sizeof(PLANE_T*));
@@ -267,6 +273,7 @@ void deletePlane(char * flightName)
 		printf("\tPlane is not found!\n");
 	}
 
+/* this function use to clear the plane array */
 void clearPlaneArray()
 	{
 	int i = 0;
@@ -276,6 +283,7 @@ void clearPlaneArray()
 		}
 	}
 
+/* this function is use to set plane data to matrix */
 void setPlaneMatrix()
 	{
 	int i=0;
@@ -370,8 +378,8 @@ int insertNode(PLANE_T * pAPlane)
 	return 1;
 	}
 
-/* Free all plane in tree
- * 
+/* This function is use to 
+ * free all plane in tree 
  */
 void freeTree(PLANENODE_T * pCurrent)
 	{

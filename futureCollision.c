@@ -42,6 +42,7 @@ int checkCollision();
 void movePlane(PLANE_T* airPlane);
 int getCommand();
 
+/* This function is use to clean the table */
 void cleanTable()
 {
 	int i=0; /* loop varialbe */
@@ -59,7 +60,7 @@ void cleanTable()
 		}
 }
 
-
+/* This function is use to display the table */
 void printTable()
 {
 	int count = 0;
@@ -94,17 +95,19 @@ void printTable()
 		//}
 }
 
+/* This function is use to set position of a plane that use to 
+ * insert in the table */ 
 void setPosition(PLANE_T* data)
 {
-	int x = data->position.x;
-	int y = data->position.y;
-	int z = data->position.z;
+	int x = data->position.x; /* x coordinate of the plane position variable */
+	int y = data->position.y; /* y coordinate of the plane position variable */
+	int z = data->position.z; /* z coordinate of the plane position variable */
 	printf("%s position: %d %d %d\n",data->flight,x,y,z );
 	edges[x][y][z] = data->ID;
 	setRadius(data->position);
 }
 
-
+/* This function is use to setting the safety area for a plane */
 void setRadius(POSITION_T data)
 {
 	int i=0;    /* loop varialbe for x axis */
@@ -261,6 +264,8 @@ void movePlane(PLANE_T* airPlane)
 			exit(0);
 		}
 }
+
+/* this function is use to check collision */
 int checkCollision()
 {
 	int bColli = 0; /* return value */ 
