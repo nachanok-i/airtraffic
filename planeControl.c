@@ -20,6 +20,8 @@
 int genSpeed = 10; /* plane generation speed */
 int maxPlane = 10; /* maximum amount of plane that can have */
 
+/* this function is use to allow the user to setup plane speed 
+ * and maximum amount of plane */
 void setup()
 	{
 	char input[32];  /* input variable */
@@ -59,6 +61,7 @@ void setup()
 	printf("\n");
 	}
 
+/* this function is use to get command from the user */
 int getCommand()
 	{
 	char input[MAXSIZE]; /* input variable */
@@ -141,6 +144,7 @@ void inputCommand(PLANE_T * plane,int choice)
 		}
 	}
 
+/* this function is use to display list of command for the user */
 void helpMenu()
 	{
 	printf("How to use command\n");
