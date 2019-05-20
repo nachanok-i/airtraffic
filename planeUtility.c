@@ -94,34 +94,34 @@ void updatePlane()
 	}
 
 /* This function use to print planes in columns */
-void displayColumnDetail()
+void displayColumnDetail(int count)
 	{
 	int i = 0;
 	printf("\n");
 	/* sequence of plane */
 	printf("%10s :","SEQUENCE");
-	for(i = 0; i < maxPlane2; i++)
+	for(i = 0; i < count; i++)
 		{
 		printf("%5s%2d|", "PLANE", i+1);
 		}
 	printf("\n");
 	/* plane's flight */
 	printf("%10s :","FLIGHT");
-	for(i = 0; i < maxPlane2; i++)
+	for(i = 0; i < count; i++)
 		{
 		printf("%7s|", planeArray[i]->flight);
 		}
 	printf("\n");
 	/* plane's altitude */
 	printf("%10s :","ALTITUDE");
-	for(i = 0; i < maxPlane2; i++)
+	for(i = 0; i < count; i++)
 		{
 		printf("%5d%2s|", planeArray[i]->position.z, "ft");
 		}
 	printf("\n");
 	/* plane's coordinate */
 	printf("%10s :","X-Y COOR");
-	for(i = 0; i < maxPlane2; i++)
+	for(i = 0; i < count; i++)
 		{
 		printf("%3d,%3d|", planeArray[i]->position.x, planeArray[i]->position.y);
 		}
@@ -177,12 +177,12 @@ int count = 0;
  * using in-order traversal
  * @param	- pCurrent : refer to a current plane
  */
-void gatherPlaneInTree(PLANENODE_T * pCurrent)
+void gatherPlaneInTree(PLANENODE_T * pCurrent,int * count)
 	{
 	if(pCurrent->left != NULL)
 		gatherPlaneInTree(pCurrent->left);
-	planeArray[count] = pCurrent->data;
-	count++;
+	planeArray[*count] = pCurrent->data;
+	*count++;
 	if(pCurrent->right != NULL)
 		gatherPlaneInTree(pCurrent->right);
 	}
@@ -252,13 +252,14 @@ void deletePlane(char * flightName)
 /* To call printTree function from outside */
 void callPrintTree()
 	{
+	int count = 0;
 	if(pTree != NULL)
 		{
 		callocPlaneArray();
 		printf("6\n");
-		gatherPlaneInTree(pTree);
+		gatherPlaneInTree(pTree,&count);
 		printf("7\n");
-		displayColumnDetail();
+		displayColumnDetail(count);
 		}
 	else
 		{
