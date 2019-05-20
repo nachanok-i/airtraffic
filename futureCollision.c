@@ -17,8 +17,6 @@
 #define SAFEAREA 2	/* safe area around each plane (in coordinate) */
 #define MAXHIGH 4	/* max number of altitude level (3000 - 6000) */
 
-char* colorName[] = {"WHITE", "GRAY", "BLACK"};
-
 typedef struct
 	{
 	struct _plane* plane;		/* PLANE_T strucuture */
@@ -30,7 +28,7 @@ int lastUsed = -1;				/* this keeps track of the last used
                                  * item in the vertex array, for adding
                                  */
 
-int edges[MAXAREA+(2*MARGIN)][MAXAREA+(2*MARGIN)][MAXHIGH];
+int edges[MAXAREA][MAXAREA][MAXHIGH];
                             	/* track position of the plane */
 								/* the location of the plane and safty area
 								 * will be 1, blank space will be 0 */

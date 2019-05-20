@@ -14,9 +14,11 @@
 #include"datatype.h"
 #include"validate.h"
 
+int IDCount = 0;
+
 /* This function will generate flight code in form AA1234 2 alphabets and 4 digits
  * refer to real airline code input flightCode char array of length 7 */
-void generateFLightCode(char flightCode[])
+void generateFlightCode(char flightCode[])
 	{
 	char airline[61][3] = {"AA", "AC", "AZ", "AF", "SB", "NZ", "AI", "AM", "NH", "TN", "OS", "FJ", "LD", 
 							"SU", "PX", "EL", "OZ", "CA", "BA", "CO", "CX", "CV", "CI", "MU", "CZ", "DL", 
@@ -88,6 +90,7 @@ int generatePosition(int* x, int* y,int* z)
  * and return as PLANE_T structure */
 PLANE_T* generateFlight(int genSpeed)
 	{
+	printf("generate\n");
 	PLANE_T* plane = NULL;
 	int x;
 	x = (rand() % 100 + 1);
@@ -102,7 +105,8 @@ PLANE_T* generateFlight(int genSpeed)
 			}
 		while(1)
 		{
-		generateFLightCode(plane->flight);
+		printf("flight code\n");
+		generateFlightCode(plane->flight);
 		if(checkFlightCode(plane->flight))
 			break;
 		}
@@ -114,5 +118,8 @@ PLANE_T* generateFlight(int genSpeed)
 			}
 		plane->order = LANDING;
 		}
+	plane->ID = IDCount;
+	printf("ID: %d\n", plane->ID);
+	IDCount += 1;
 	return plane;
 	}
