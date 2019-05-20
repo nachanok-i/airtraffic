@@ -105,9 +105,9 @@ void runCycle()
  NULL if not found */
 PLANE_T * searchFlight()
 	{
-	char input[MAXSIZE];
-	char target[7];
-	int returnVal = 0;
+	char input[MAXSIZE]; /* input variable */
+	char target[7]; /* target of the plane that user want to search variable */     
+	int returnVal = 0; /* return value variable */
 	PLANE_T * plane = NULL;
 	PLANENODE_T * node = NULL;
 	while(1)
