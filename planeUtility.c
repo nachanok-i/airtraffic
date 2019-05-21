@@ -221,44 +221,102 @@ PLANENODE_T * searchPlane(char * flightName)
 /* Removing plane
  * @param	-	pNode : the node wanted to remove
  */
-void removePlane(PLANENODE_T * pNode)
-	{
-	PLANENODE_T * pRemove = NULL; /* removing node */
-	PLANENODE_T * pSucc = NULL; /* Successor for deleting node which has 2 child */
-	int i = 0;
-	if((pNode->left == NULL) && (pNode->right == NULL))
+// void removePlane(PLANENODE_T * pNode)
+// 	{
+// 	PLANENODE_T * pRemove = NULL; /* removing node */
+// 	PLANENODE_T * pSucc = NULL; /* Successor for deleting node which has 2 child */
+// 	int i = 0;
+// 	if((pNode->left == NULL) && (pNode->right == NULL))
+// 		{
+// 		free(pNode->data);
+// 		free(pNode);
+// 		}
+// 	else if((pNode->left == NULL) && (pNode->right != NULL))
+// 		{
+// 		pRemove = pNode;
+// 		pNode = pNode->right;
+// 		free(pRemove->data);
+// 		free(pRemove);
+// 		}
+// 	else if((pNode->left != NULL) && (pNode->right == NULL))
+// 		{
+// 		pRemove = pNode;
+// 		pNode = pNode->left;
+// 		free(pRemove->data);
+// 		free(pRemove);
+// 		}
+// 	else
+// 		{
+// 		pRemove = pNode;
+// 		pSucc = pNode->right;
+// 		while(pSucc->left != NULL)
+// 			{
+// 			pSucc = pSucc->left;
+// 			}
+// 		pNode = pSucc;
+// 		pSucc = NULL;
+// 		free(pRemove->data);
+// 		free(pRemove);
+// 		}
+// 	}
+		void removeNode(PLANENODE_T ** ppNode, PLANENODE_T * pNode)
 		{
-		free(pNode->data);
-		free(pNode);
-		}
-	else if((pNode->left == NULL) && (pNode->right != NULL))
-		{
-		pRemove = pNode;
-		pNode = pNode->right;
-		free(pRemove->data);
-		free(pRemove);
-		}
-	else if((pNode->left != NULL) && (pNode->right == NULL))
-		{
-		pRemove = pNode;
-		pNode = pNode->left;
-		free(pRemove->data);
-		free(pRemove);
-		}
-	else
-		{
-		pRemove = pNode;
-		pSucc = pNode->right;
-		while(pSucc->left != NULL)
+		PLANENODE_T * pRemove = NULL; /* removing node */
+		PLANENODE_T * pSucc = NULL; /* Successor for deleting node which has 2 child */
+		PLANENODE_T * pParentSucc = NULL; /* Parent Successor for deleting node which has 2 child */
+		int i = 0;
+		printf("\t Remove plane %s\n", pNode->data->flight);
+		if((pNode->left == NULL) && (pNode->right == NULL))
 			{
-			pSucc = pSucc->left;
+			free(pNode->data);
+			free(pNode);
+			//*ppNode = NULL;
+			//pTree = NULL;
 			}
-		pNode = pSucc;
-		pSucc = NULL;
-		free(pRemove->data);
-		free(pRemove);
+		else if((pNode->left != NULL) && (pNode->right == NULL))
+			{
+			pRemove = *ppNode;
+			*ppNode = pNode->left;
+			free(pRemove->data);
+			free(pRemove);
+			}	
+		else if((pNode->left == NULL) && (pNode->right != NULL))
+			{
+			pRemove = *ppNode;
+			*ppNode = pNode->right;
+			free(pRemove->data);
+			free(pRemove);
+			}
+		else
+			{
+			printf("at remove root\n");
+			pRemove = *ppNode;
+			pSucc = pNode->right;
+			while(pSucc->left != NULL)
+				{
+				pParentSucc = pSucc;
+				pSucc = pSucc->left;
+				}
+			if(pNode->right == pSucc)
+				{
+				pNode->right = pSucc;
+				}
+			else
+				{
+				pSucc->right = pNode->right;
+				pNode = pSucc;
+				}
+			if(pParentSucc != NULL)
+				pParentSucc->left = NULL;
+			pSucc = NULL;
+			free(pRemove->data);
+			free(pRemove);
+			}
+		currentAmount -= 1;
+		printf("remove finish\n");
+		if(pTree != NULL)
+			printf("Now %s is root\n",pTree->data->flight);
 		}
-	}
 
 /* delete plane
  * @param	- flightName : Name of flight from other function
