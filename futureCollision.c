@@ -79,13 +79,7 @@ void printTable()
 /* This function is use to set position of a plane that use to 
  * insert in the table */ 
 void setPosition(PLANE_T* data)
-<<<<<<< HEAD
-{
-	printf("in set position\n");
-	int i,j;
-=======
 	{
->>>>>>> 7ae736234924af1f78ef784c3444373825bac6ec
 	int x = data->position.x; /* x coordinate of the plane position variable */
 	int y = data->position.y; /* y coordinate of the plane position variable */
 	printf("%s position: %d %d\n",data->flight,x,y);
@@ -106,12 +100,7 @@ void setPosition(PLANE_T* data)
 
 /* This function is use to setting the safety area for a plane */
 void setRadius(POSITION_T data)
-<<<<<<< HEAD
-{
-	printf("in set radius\n");
-=======
 	{
->>>>>>> 7ae736234924af1f78ef784c3444373825bac6ec
 	int i=0;    /* loop varialbe for x axis */
 	int j=0;    /* loop varialbe for y axis*/
 	int startX; /* start point at x axis */

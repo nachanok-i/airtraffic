@@ -414,7 +414,7 @@ void removePlane(PLANENODE_T * pNode)
 			}
 		else if(pParent == NULL)
 			{
-			pParent = getParent(pParent, pNode);
+			pParent = getParent(pTree, pNode);
 			if(pParent->left == pNode)
 				pParent->left = NULL;
 			if(pParent->right == pNode)
@@ -432,7 +432,7 @@ void removePlane(PLANENODE_T * pNode)
 		else
 			{
 			printf("Before get parent\n");
-			pParent = getParent(pParent, pNode);
+			pParent = getParent(pTree, pNode);
 			printf("After get parent\n");
 			if(pParent->left == pNode)
 				pParent->left = pNode->left;
@@ -450,7 +450,7 @@ void removePlane(PLANENODE_T * pNode)
 		else
 			{	
 			printf("Before get parent\n");
-			pParent = getParent(pParent, pNode);
+			pParent = getParent(pTree, pNode);
 			printf("After get parent\n");
 			if(pParent->left == pNode)
 				pParent->left = pNode->right;
