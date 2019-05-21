@@ -211,6 +211,7 @@ void inputCommand()
 				printf("Which direction do you want to change? (N,NE,S,W,etc) : \n");
 				fgets(input,sizeof(input),stdin);
 				sscanf(input,"%s",input);
+				printf("input %s\n", input);
 				direction = checkDirection(input);
 				printf("Direction %d\n", direction);
 				if (direction >= 0)
@@ -244,6 +245,17 @@ void helpMenu()
 
 	}
 
+void testDir()
+	{
+	char input [32];
+	printf("input direction: ");
+	fgets(input,sizeof(input),stdin);
+	printf("fget '%s'\n", input);
+	sscanf(input,"%s",input);
+	printf("sscanf '%s'\n", input);
+	printf("dir %d\n",checkDirection(input));
+	}
+
 int main()
 	{
 	PLANE_T* plane = NULL;
@@ -257,7 +269,8 @@ int main()
 		switch (command)
 			{
 			case UPDATE:
-				runCycle();
+				//runCycle();
+				testDir();
 				break;
 			case SEARCH:
 				{
