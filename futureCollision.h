@@ -17,4 +17,5 @@ void movePlane(PLANE_T* airPlane);
 int getCommand();
 void cleanTable();
 void printTable();
+void printPlanePosition();
 #endif

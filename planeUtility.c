@@ -558,9 +558,9 @@ void printDetail()
 		traverseInOrder(pTree,&gatherPlaneInTree);
 		printf("\t Plane gathered\n");
 		setPlaneMatrix();
+		cleanTable();
 		printTable();
 		displayColumnDetail();
-		cleanTable();
 		}
 	else
 		{

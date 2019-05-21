@@ -8,12 +8,14 @@
 #include<stdlib.h>
 #include<string.h>
 #include"datatype.h"
+#include"planeUtility.h"
 #define WHITE 0
 #define GRAY  1
 #define BLACK 2
-#define MAXAREA 20				/* max area of the airport (example as 20)*/
-#define SAFEAREA 3				/* safe area around each plane (in coordinate) */
-#define MAXHIGH 4				/* max number of altitude level (3000 - 6000) */
+#define MAXAREA 54	/* max area of the airport (example as 20)*/
+#define MARGIN 0 	/* display is size */
+#define SAFEAREA 2	/* safe area around each plane (in coordinate) */
+#define MAXHIGH 4	/* max number of altitude level (3000 - 6000) */
 
 char* colorName[] = {"WHITE", "GRAY", "BLACK"};
 
@@ -28,7 +30,7 @@ int lastUsed = -1;				/* this keeps track of the last used
                                  * item in the vertex array, for adding
                                  */
 
-int edges[MAXAREA][MAXAREA][MAXHIGH];
+int edges[MAXAREA+(2*MARGIN)][MAXAREA+(2*MARGIN)][MAXHIGH];
                             	/* track position of the plane */
 								/* the location of the plane and safty area
 								 * will be 1, blank space will be 0 */
@@ -37,129 +39,256 @@ int edges[MAXAREA][MAXAREA][MAXHIGH];
 void setPosition(PLANE_T* data);
 void setRadius(POSITION_T data);
 int checkCollision();
-void movePlane(PLANE_T* plane);
+void movePlane(PLANE_T* airPlane);
 int getCommand();
+
+/* This function is use to clean the table */
 void cleanTable()
-{
+	{
 	int i=0; /* loop varialbe */
 	int j=0; /* loop varialbe */
 	int k=0; /* loop varialbe */
 	for(k=0;k<MAXHIGH;k++)
 		{
-		for(j=0;j<MAXAREA;j++)
+		for(j=0;j<MAXAREA+MARGIN;j++)
 			{
-			for(i=0;i<MAXAREA;i++)
+			for(i=0;i<MAXAREA+MARGIN;i++)
 				{
 				edges[i][j][k] = 0;
 				}
 			}
 		}
-}
+	}
+
+/* This function is use to display the table */
 void printTable()
-{
-	int i=0; /* loop varialbe */
-	int j=0; /* loop varialbe */
+	{
+	int count = 0;
+	int count2 = 0;
+	int i=0; /* x-axis loop varialbe */
+	int j=0; /* y-axis loop varialbe */
 	int k=0; /* loop varialbe */
 	// for(k=0;k<MAXHIGH;k++)
 	// 	{
 	// 	printf("Table #%d\n", k);
-		for(i=0;i<MAXAREA;i++)
+	// printf("---------------------------------\n");
+	for(count2 = 0; count2 < 5; count2++)
+		{
+		for(count = 0; count <= 9; count++)
 			{
-			for(j=0;j<MAXAREA;j++)
+			printf("%d", count);
+			}
+		}
+		printf("\n");
+		for(j = MARGIN; j < MAXAREA + (2*MARGIN); j++)
+			{
+			for(i = MARGIN; i < MAXAREA + (2*MARGIN); i++)
 				{
-				if (edges[j][i][k] == 0)
-					printf("*");
+				if (edges[i][j][k] == 0)
+					printf(" ");
 				else
-					printf("%d", edges[j][i][k]);
+					printf("*");
 				}
 			printf("\n");
 			}
 		printf("\n");
 		//}
-}
+	}
 
+void printPlanePosition()
+	{
+	int i=0;
+	int j=0;
+	for (i = 0; i < MAXAREA; i++)
+	{
+		printf("%2d", i);
+	}
+	for (j=0;j<MAXAREA;j++)
+		{
+		for (i=0;i<MAXAREA;i++)
+			{
+			if (edges[i][j][0])
+				printf("%2d", edges[i][j][0]);
+			else
+				printf("  ");
+			}
+			printf("\n");
+		}
+	}
+
+/* This function is use to set position of a plane that use to 
+ * insert in the table */ 
 void setPosition(PLANE_T* data)
-{
-	int x = data->position.x;
-	int y = data->position.y;
-	int z = data->position.z;
+	{
+	int x = data->position.x; /* x coordinate of the plane position variable */
+	int y = data->position.y; /* y coordinate of the plane position variable */
+	int z = data->position.z; /* z coordinate of the plane position variable */
 	printf("%s position: %d %d %d\n",data->flight,x,y,z );
 	edges[x][y][z] = data->ID;
 	setRadius(data->position);
-}
+	}
+
+/* This function is use to setting the safety area for a plane */
 void setRadius(POSITION_T data)
-{
-	int i=0;    /* loop varialbe */
-	int j=0;    /* loop varialbe */
+	{
+	int i=0;    /* loop varialbe for x axis */
+	int j=0;    /* loop varialbe for y axis*/
 	int startX; /* start point at x axis */
 	int startY; /* start point at y axis */
 	int endX;   /* end point at x axis */
 	int endY;   /* end point at y axis */
-	startX = data.x - SAFEAREA;
-	startY = data.y - SAFEAREA;
-	endX = data.x + SAFEAREA;
-	endY = data.y + SAFEAREA;
-	if (startX < 0)
-		startX = 0;
-	if (startY < 0)
-		startY = 0;
-	if (endX > 100)
-		endX = 100;
-	if (endY > 100)
-		endX = 100;
-	for (i=startX;i<=endX;i++)
+	
+	if(data.x == 0)
 		{
-		for (j=startY;j<=endY;j++)
+		startX = data.x+1;
+		printf("startX %d\n",startX);
+		endX = data.x + SAFEAREA;
+		}
+	else if(data.x >= MAXAREA)
+		{
+		startX = data.x - SAFEAREA;
+		printf("startX %d\n",startX);
+		endX = data.x - 1;
+		}
+	else
+		{
+		startX = data.x - SAFEAREA;
+		printf("startX %d\n",startX);
+		endX = data.x + SAFEAREA;
+		}
+
+	if(data.y == 0)
+		{
+		startY = data.y + 1;
+		printf("startY %d\n",startY);
+		endY = data.y + SAFEAREA - 1;
+		}
+	else if(data.y >= MAXAREA)
+		{
+		startY = data.y - 1;
+		endY = data.y - 1;
+		}
+	else
+		{	
+		startY = data.y - SAFEAREA + 1;
+		printf("startY %d\n",startY);
+		endY = data.y + SAFEAREA - 1;
+		}
+
+	
+	// if (startX <= 0)
+	// 	startX = MARGIN;
+	// printf("startX %d\n",startX);
+	
+	// if (startY <= 0)
+	// 	startY = MARGIN;
+	// if (endX > MAXAREA)
+	// 	endX = MAXAREA;
+	// if (endY > MAXAREA)
+	// 	endX = MAXAREA;
+	
+	for(j = startY;j <= endY;j++)
+		{
+		for(i = startX;i <= endX;i++)
 			{
-			if (i == data.x && j == data.y)
+			if(i == data.x && j == data.y)
 				continue;
+			// if(i == data.x-2 && j == data.y-1)
+			// 	continue;
+			// if(i == data.x-2 && j == data.y+1)
+			// 	continue;
+			// if(i == data.x+2 && j == data.y-1)
+			// 	continue;
+			// if(i == data.x+2 && j == data.y+1)
+			// 	continue;
 			else
 				{
 				edges[i][j][data.z] += 1;
 				}
 			}
 		}
-}
+	}
+
+/* this function will move all the plane in continuously to the direction
+ * that the plane is heading to */
 void movePlane(PLANE_T* airPlane)
-{
+	{
+	// PLANE_T * airPlane = NULL;
+	// airPlane = node->data;
 	switch (airPlane->heading)
 		{
 		case N:
-			airPlane->position.y -= 1;
+			if(airPlane->position.y == 0)
+				deletePlane(airPlane->flight);
+			else
+				airPlane->position.y -= 1;
 			break;
 		case NE:
-			airPlane->position.y -= 1;
-			airPlane->position.x += 1;
+			if((airPlane->position.x == (MAXAREA - MARGIN)) || (airPlane->position.y == MARGIN))
+				deletePlane(airPlane->flight);
+			else
+				{
+				airPlane->position.y -= 1;
+				airPlane->position.x += 1;
+				}
 			break;
 		case E:
-			airPlane->position.x += 1;
+			if(airPlane->position.x == (MAXAREA - MARGIN))
+				deletePlane(airPlane->flight);
+			else
+				airPlane->position.x += 1;
 			break;
 		case SE:
-			airPlane->position.x += 1;
-			airPlane->position.y += 1;
+			if((airPlane->position.x == (MAXAREA - MARGIN)) || (airPlane->position.y == (MAXAREA - MARGIN)))
+				deletePlane(airPlane->flight);
+			else
+				{
+				airPlane->position.x += 1;
+				airPlane->position.y += 1;
+				}
 			break;
 		case S:
-			airPlane->position.y += 1;
+			if(airPlane->position.y == (MAXAREA - MARGIN))
+				deletePlane(airPlane->flight);
+			else
+				{
+				airPlane->position.y += 1;
+				}
 			break;
 		case SW:
-			airPlane->position.x -= 1;
-			airPlane->position.y += 1;
+			if((airPlane->position.x == MARGIN) || (airPlane->position.y == (MAXAREA - MARGIN)))
+				deletePlane(airPlane->flight);
+			else
+				{
+				airPlane->position.x -= 1;
+				airPlane->position.y += 1;
+				}
 			break;
 		case W:
-			airPlane->position.x -= 1;
+			if(airPlane->position.x == MARGIN)
+				deletePlane(airPlane->flight);
+			else
+				airPlane->position.x -= 1;
 			break;
 		case NW:
-			airPlane->position.x -= 1;
-			airPlane->position.y -= 1;
+			if((airPlane->position.x == MARGIN) || (airPlane->position.y == MARGIN))
+				deletePlane(airPlane->flight);
+			else
+				{
+				airPlane->position.x -= 1;
+				airPlane->position.y -= 1;
+				}
 			break;
 		/* normally this would not happen */
 		default:
 			printf("Heading direction error\n");
 			exit(0);
 		}
-}
+	}
+
+/* this function is use to check collision */
 int checkCollision()
-{
+	{
 	int bColli = 0; /* return value */ 
 	int i=0; /* loop variable */
 	int j=0; /* loop variable */
@@ -181,4 +310,4 @@ int checkCollision()
 		}
 	bColli = 1;
 	return bColli;
-}
+	}
