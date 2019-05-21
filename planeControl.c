@@ -186,9 +186,9 @@ void inputCommand()
 	int choice = -1;
 	char flight[32];
 	choice = getInputCommand(flight);
-	switch (choice)
+	while(choice>=0 && choice <=1)
 		{
-		case ALTITUDE:
+		if (choice == ALTITUDE)
 			{
 			int altitude = 0;
 			char input[32];
@@ -202,7 +202,7 @@ void inputCommand()
 			changeAltitude(flight,altitude);
 			break;
 			}
-		case DIRECTION:
+		else if (choice == DIRECTION)
 			{
 			int direction = 0;
 			char input[32];
@@ -211,6 +211,7 @@ void inputCommand()
 				printf("Which direction do you want to change? (N,NE,S,W,etc) : \n");
 				fgets(input,sizeof(input),stdin);
 				sscanf(input,"%s",input);
+				printf("input %s\n", input);
 				direction = checkDirection(input);
 				printf("Direction %d\n", direction);
 				if (direction >= 0)
@@ -220,10 +221,10 @@ void inputCommand()
 				}
 			changeDirection(flight,direction);
 			break;
-		default:
+			}
+		else
+			{
 			printf("Error - wrong command\n");
-			choice = getInputCommand(flight);
-			break;
 			}
 		}
 	}
@@ -244,6 +245,17 @@ void helpMenu()
 
 	}
 
+void testDir()
+	{
+	char input [32];
+	printf("input direction: ");
+	fgets(input,sizeof(input),stdin);
+	printf("fget '%s'\n", input);
+	sscanf(input,"%s",input);
+	printf("sscanf '%s'\n", input);
+	printf("dir %d\n",checkDirection(input));
+	}
+
 int main()
 	{
 	PLANE_T* plane = NULL;
@@ -258,6 +270,7 @@ int main()
 			{
 			case UPDATE:
 				runCycle();
+				//testDir();
 				break;
 			case SEARCH:
 				{

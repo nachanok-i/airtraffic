@@ -15,5 +15,5 @@ void setRadius(POSITION_T data);
 int checkCollision();
 void movePlane(PLANE_T* airPlane);
 void cleanTable();
-void printTable();
+int printTable();
 #endif

@@ -42,35 +42,63 @@ void cleanTable()
 		}
 }
 
-/* This function is use to display the table */
-void printTable()
+/* this function is use to check collision 
+ * return collision boolean: 
+ * 		1 if not collide 
+ *		0 if about to collide
+ * 		-1 if plane is collide*/
+int checkCollision()
+{
+	printf("in check collide\n");
+	int bColli = 1; /* return value */
+	int i=0; /* loop variable */
+	int j=0; /* loop variable */
+
+	for(j = MARGIN; j < MAXAREA; j++)
+			{
+			for(i = MARGIN; i < MAXAREA; i++)
+				{
+				if (edges[i][j] == 10)
+					{
+					bColli = -1;
+					return bColli;
+					}
+				else if (edges[i][j] == 2)
+					{
+					bColli = 0;
+					}
+				}
+			}
+	return bColli;
+}
+
+/* This function is use to display the table 
+ * * return collision boolean: 
+ * 		1 if not collide 
+ *		0 if about to collide
+ * 		-1 if plane is collide*/
+int printTable()
 {
 	int count = 0;
 	int count2 = 0;
 	int i=0; /* x-axis loop varialbe */
 	int j=0; /* y-axis loop varialbe */
-	for(count2 = 0; count2 < 5; count2++)
+	for(j = MARGIN; j < MAXAREA; j++)
 		{
-		for(count = 0; count <= 9; count++)
+		for(i = MARGIN; i < MAXAREA; i++)
 			{
-			printf("%d", count);
+				// if (edges[i][j] == 0)
+				// 	printf("%2d",i);
+				// else if (edges[i][j] == 9)
+				// 	printf("**");
+				// else
+				// 	printf("  ");
+			printf("%2d", edges[i][j]);
 			}
+		printf("\n");
 		}
-		printf("\n");
-		for(j = MARGIN; j < MAXAREA; j++)
-			{
-			for(i = MARGIN; i < MAXAREA; i++)
-				{
-					if (edges[i][j] == 0)
-						printf("%2d",i);
-					else if (edges[i][j] == 9)
-						printf("**");
-					else
-						printf("  ");
-				}
-			printf("\n");
-			}
-		printf("\n");
+	printf("\n");
+	return checkCollision();
 }
 
 /* This function is use to set position of a plane that use to 
@@ -165,7 +193,6 @@ void setRadius(POSITION_T data)
 			else
 				{
 				edges[i][j] += 1;
-				printf("edges %d\n", edges[i][j]);
 				}
 			}
 		}
@@ -246,26 +273,4 @@ void movePlane(PLANE_T* airPlane)
 			printf("Heading direction error\n");
 			exit(0);
 		}
-}
-
-/* this function is use to check collision */
-int checkCollision()
-{
-	int bColli = 0; /* return value */ 
-	int i=0; /* loop variable */
-	int j=0; /* loop variable */
-	for(j=0;j<MAXAREA;j++)
-		{
-		for(i=0;i<MAXAREA;i++)
-			{
-			if (edges[i][j] == 2)
-				{
-				printf("Collide!!!\n");
-				bColli = 0;
-				return bColli;
-				}
-			}
-			}
-	bColli = 1;
-	return bColli;
 }
