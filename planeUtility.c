@@ -120,6 +120,7 @@ void updatePlane()
 		{
 		printf("new update\n");
 		resetCurrentAmount();
+		cleanTable();
 		traverseInOrder(pTree,&gatherPlaneInTree);
 		for(i = 0; i < currentAmount; i++)
 			{
@@ -296,14 +297,23 @@ void setPlaneMatrix()
 /* To call printTree function from outside */
 void printDetail()
 	{
+	int bCollide = -2;
 	if(pTree != NULL)
 		{
 		// resetCurrentAmount();
 		// traverseInOrder(pTree,&gatherPlaneInTree);
 		setPlaneMatrix();
-		printTable();
+		bCollide = printTable();
+		if (bCollide == -1)
+			{
+			printf("There are planes collided\n");
+			exit(0);
+			}
+		else if (bCollide == 0)
+			{
+			printf("There are planes about to collide\n");
+			}
 		displayColumnDetail();
-		cleanTable();
 		}
 	else
 		{

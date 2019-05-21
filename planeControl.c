@@ -186,9 +186,9 @@ void inputCommand()
 	int choice = -1;
 	char flight[32];
 	choice = getInputCommand(flight);
-	switch (choice)
+	while(choice>=0 && choice <=1)
 		{
-		case ALTITUDE:
+		if (choice == ALTITUDE)
 			{
 			int altitude = 0;
 			char input[32];
@@ -202,7 +202,7 @@ void inputCommand()
 			changeAltitude(flight,altitude);
 			break;
 			}
-		case DIRECTION:
+		else if (choice == DIRECTION)
 			{
 			int direction = 0;
 			char input[32];
@@ -221,10 +221,10 @@ void inputCommand()
 				}
 			changeDirection(flight,direction);
 			break;
-		default:
+			}
+		else
+			{
 			printf("Error - wrong command\n");
-			choice = getInputCommand(flight);
-			break;
 			}
 		}
 	}
@@ -269,8 +269,8 @@ int main()
 		switch (command)
 			{
 			case UPDATE:
-				//runCycle();
-				testDir();
+				runCycle();
+				//testDir();
 				break;
 			case SEARCH:
 				{

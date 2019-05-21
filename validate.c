@@ -86,6 +86,7 @@ int checkDirection(char direction[])
 		returnVal = NW;
 	else
 		return -1;
+	return returnVal;
 	}
 
 /* This functionuse to check if user give the correct height
