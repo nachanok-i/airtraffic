@@ -502,8 +502,8 @@ void removePlane(PLANENODE_T * pNode)
 			}
 		free(pRemove->data);
 		free(pRemove);
-		currentAmount -= 1;
 		}
+	currentAmount -= 1;
 	}
 
 /* delete plane
