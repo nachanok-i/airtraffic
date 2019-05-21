@@ -35,7 +35,7 @@ void gatherPlaneInTree(PLANENODE_T * pCurrent);
  *    flightName   -   a string for comparing
  *    foundFlight  -   for checking found node
  */
-void doesExist(PLANENODE_T * pCurrent, char * flightName, PLANENODE_T * foundFlight);
+void doesExist(PLANENODE_T * pCurrent, char * flightName);
 
 /* Searching plane
  * @param	- flightName : Name of flight user type in

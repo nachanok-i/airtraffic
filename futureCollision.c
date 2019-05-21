@@ -3,6 +3,7 @@
  * checking if planes on the sky is about to collide
  * by their position on x,y coordinate and altitude.
  * Created by Nachanok Issarapruk (Tap) ID 61070503410
+ * Modified by Siradanai Sutin (Cartoon) ID 61070503437
  * 26 Mar 2019 */
 #include<stdio.h>
 #include<stdlib.h>
@@ -78,6 +79,7 @@ void printTable()
  * insert in the table */ 
 void setPosition(PLANE_T* data)
 {
+	printf("in set position\n");
 	int i,j;
 	int x = data->position.x; /* x coordinate of the plane position variable */
 	int y = data->position.y; /* y coordinate of the plane position variable */
@@ -100,6 +102,7 @@ void setPosition(PLANE_T* data)
 /* This function is use to setting the safety area for a plane */
 void setRadius(POSITION_T data)
 {
+	printf("in set radius\n");
 	int i=0;    /* loop varialbe for x axis */
 	int j=0;    /* loop varialbe for y axis*/
 	int startX; /* start point at x axis */
@@ -110,38 +113,38 @@ void setRadius(POSITION_T data)
 	if((data.x - SAFEAREA) <= 0)
 		{
 		startX = data.x;
-		printf("startX %d\n",startX);
+		printf("\tstartX %d\n",startX);
 		endX = data.x + SAFEAREA;
 		}
 	else if((data.x + SAFEAREA) >= MAXAREA)
 		{
 		startX = data.x - SAFEAREA;
-		printf("startX %d\n",startX);
+		printf("\tstartX %d\n",startX);
 		endX = data.x;
 		}
 	else
 		{
 		startX = data.x - SAFEAREA;
-		printf("startX %d\n",startX);
+		printf("\tstartX %d\n",startX);
 		endX = data.x + SAFEAREA;
 		}
 
 	if((data.y - SAFEAREA) <= 0)
 		{
 		startY = data.y;
-		printf("startY %d\n",startY);
+		printf("\tstartY %d\n",startY);
 		endY = data.y + SAFEAREA;
 		}
 	else if((data.y + SAFEAREA) >= MAXAREA)
 		{
 		startY = data.y - SAFEAREA;
-		printf("startY %d\n",startY);
+		printf("\tstartY %d\n",startY);
 		endY = data.y;
 		}
 	else
 		{	
 		startY = data.y - SAFEAREA;
-		printf("startY %d\n",startY);
+		printf("\tstartY %d\n",startY);
 		endY = data.y + SAFEAREA;
 		}
 
@@ -181,66 +184,51 @@ void movePlane(PLANE_T* airPlane)
 	switch (airPlane->heading)
 		{
 		case N:
+			airPlane->position.y -= 1;
 			if(airPlane->position.y == 0)
 				deletePlane(airPlane->flight);
-			else
-				airPlane->position.y -= 1;
 			break;
 		case NE:
-			if((airPlane->position.x == (MAXAREA - MARGIN)) || (airPlane->position.y == MARGIN))
+			airPlane->position.y -= 1;
+			airPlane->position.x += 1;
+			if(airPlane->position.x == MAXAREA || airPlane->position.y == 0)
 				deletePlane(airPlane->flight);
-			else
-				{
-				airPlane->position.y -= 1;
-				airPlane->position.x += 1;
-				}
 			break;
 		case E:
-			if(airPlane->position.x == (MAXAREA - MARGIN))
+			airPlane->position.x += 1;
+			if(airPlane->position.x == MAXAREA)
 				deletePlane(airPlane->flight);
-			else
-				airPlane->position.x += 1;
 			break;
 		case SE:
-			if((airPlane->position.x == (MAXAREA - MARGIN)) || (airPlane->position.y == (MAXAREA - MARGIN)))
-				deletePlane(airPlane->flight);
-			else
+			airPlane->position.x += 1;
+			airPlane->position.y += 1;
+			if(airPlane->position.x == MAXAREA || airPlane->position.y == MAXAREA)
 				{
-				airPlane->position.x += 1;
-				airPlane->position.y += 1;
+				printf("delete SE\n");
+				deletePlane(airPlane->flight);
 				}
 			break;
 		case S:
-			if(airPlane->position.y == (MAXAREA - MARGIN))
+			airPlane->position.y += 1;
+			if(airPlane->position.y == MAXAREA)
 				deletePlane(airPlane->flight);
-			else
-				{
-				airPlane->position.y += 1;
-				}
 			break;
 		case SW:
-			if((airPlane->position.x == MARGIN) || (airPlane->position.y == (MAXAREA - MARGIN)))
+			airPlane->position.x -= 1;
+			airPlane->position.y += 1;
+			if((airPlane->position.x == 0) || (airPlane->position.y == MAXAREA))
 				deletePlane(airPlane->flight);
-			else
-				{
-				airPlane->position.x -= 1;
-				airPlane->position.y += 1;
-				}
 			break;
 		case W:
-			if(airPlane->position.x == MARGIN)
+			airPlane->position.x -= 1;
+			if(airPlane->position.x == 0)
 				deletePlane(airPlane->flight);
-			else
-				airPlane->position.x -= 1;
 			break;
 		case NW:
-			if((airPlane->position.x == MARGIN) || (airPlane->position.y == MARGIN))
-				deletePlane(airPlane->flight);
-			else
-				{
-				airPlane->position.x -= 1;
-				airPlane->position.y -= 1;
-				}
+			airPlane->position.x -= 1;
+			airPlane->position.y -= 1;
+			if((airPlane->position.x == 0) || (airPlane->position.y == 0))
+				deletePlane(airPlane->flight);	
 			break;
 		/* normally this would not happen */
 		default:
